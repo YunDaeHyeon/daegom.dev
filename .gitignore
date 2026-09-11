@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+
+# AI coding-agent tool state (local machine config / installed skill packages,
+# not part of the site's product source; reproducible via skills-lock.json)
+.claude/
+.agents/
+.codex/
+
+# Impeccable local-only config (build-path choice etc. is machine-specific)
+.impeccable/config.local.json
