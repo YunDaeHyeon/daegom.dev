@@ -44,6 +44,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "mirroring-booth",
     title: "미러링부스",
+    icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
     summary:
       "Apple 기기를 연결해 어디서나 나만의 포토부스를 만드는 앱이에요. 촬영 결과물 공유 기능과 초기 스트리밍 파이프라인을 담당했습니다.",
@@ -82,9 +83,25 @@ export const workItems: WorkItem[] = [
     ],
     relatedDecisions: [
       "relentless-troubleshooting",
-      "defining-ai-review-scope",
       "choosing-which-feedback-to-take",
     ],
+  },
+  {
+    slug: "n8n-review-pipeline",
+    title: "AI 업무 자동화 파이프라인",
+    icon: "/icons/n8n-pipeline.png",
+    period: "2026.01 — 진행중",
+    summary:
+      "PR 리뷰 부담을 줄이기 위해 n8n 기반 자동 리뷰 파이프라인을 설계했어요. 미러링부스에서 하루 최대 12건까지 쌓이던 PR 리뷰를 위해 만들었습니다.",
+    stack: ["n8n", "AWS EC2", "GitHub REST API"],
+    sections: [],
+    links: [
+      {
+        label: "정리 노트",
+        href: "https://daegom.notion.site/n8n-3c61833ac003802e837be9f7c42945f0?source=copy_link",
+      },
+    ],
+    relatedDecisions: ["defining-ai-review-scope"],
   },
   {
     slug: "student-deals-map",
@@ -246,7 +263,7 @@ export const decisions: Decision[] = [
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
     ],
-    relatedWork: "mirroring-booth",
+    relatedWork: "n8n-review-pipeline",
   },
   {
     slug: "ar-anchor-validation",
