@@ -140,10 +140,13 @@ Each section is at least one viewport tall (`min-h-dvh`) with `scroll-margin-top
 
 ## Elevation & Depth
 
-Flat by design. No shadows anywhere in the current build — depth and grouping are carried entirely by the hairline border/divider system and background-tone steps (Paper → Surface → Wash). This is a deliberate reading of Minimalism & Swiss Style: structure through line and tone, not through simulated lighting.
+Flat at rest. Every static surface still carries depth and grouping entirely through the hairline border/divider system and background-tone steps (Paper → Surface → Wash) — a deliberate reading of Minimalism & Swiss Style: structure through line and tone, not simulated lighting. The one exception is the Modal (Components), which floats over dimmed content and earns the system's only shadow token, `--shadow-modal` (`0 20px 60px rgba(0,0,0,0.15)` light / `rgba(0,0,0,0.5)` dark).
+
+### Shadow Vocabulary
+- **Modal** (`shadow-modal`): the single floating-panel case. Nothing else in the system uses a shadow.
 
 ### Named Rules
-**The Flat-at-Rest Rule.** Surfaces do not cast shadows. If a future interactive surface (a modal, a dropdown) needs separation, that is the first legitimate use of a shadow in this system — introduce one shadow token then, not before.
+**The Flat-at-Rest Rule.** Surfaces do not cast shadows at rest. A modal is the one surface that isn't at rest relative to the page — see The One-Shadow Exception under Components.
 
 ## Shapes
 
@@ -178,12 +181,20 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 
 ### Detail Page (Work / Decisions)
 - Reached only by clicking a list-row title — never a route a visitor lands on directly from a nav link.
-- **Structure:** back-link to the section anchor (`← Work` / `← Decisions`) → title → meta (period, or date + Status Label) → one-line summary (same copy as the list) → stack tags / links row (Work) or links row (Decisions) → itemized sections → related cross-links.
+- **Structure:** title → meta (period, or date + Status Label) → one-line summary (same copy as the list) → stack tags / links row (Work) or links row (Decisions) → itemized sections → related cross-links.
 - **Itemized sections (Named Rule below) replace narrative paragraphs here.** Each section is a plain-text heading (e.g. "담당한 기능", "시도한 것", "판단과 발견") followed by a flat bullet list — terse, concrete, one fact per line, never a flowing story paragraph.
 - **Cross-links:** a Work item lists its `관련 Decisions`; a Decision lists its `관련 프로젝트` — plain underlined text links between the two content types, no card treatment.
+- **Presentation:** a Notion-card-style modal overlay when reached by clicking within the site (an intercepted route — the URL still updates, so it's shareable and the browser back button closes it); the same content renders as a full page with a `← Work` / `← Decisions` back-link when the URL is opened directly (a shared link, a hard refresh). One content component (`WorkDetailContent` / `DecisionDetailContent`) backs both presentations — only the wrapper differs.
+
+### Modal
+- **Chrome:** centered panel, `max-w-2xl`, 8px radius, 1px Hairline border, `shadow-modal` (the system's first and only shadow token — see The Flat-at-Rest Rule's exception below). Backdrop is 50%-opacity black regardless of theme.
+- **Dismissal:** click the backdrop, press Escape, click the small × in the top-right corner, or use the browser's back button — all equivalent, all resolve to `router.back()`.
+- **Never** a route the modal is the only way to reach; every modal route has a full-page equivalent for direct links.
 
 ### Named Rules
 **The Itemized-Detail Rule.** Detail-page content is bulleted facts under plain headings, not narrative prose. A bullet reads as "did X" or "found Y," not as a sentence building toward a moral. This is a deliberate departure from earlier narrative-paragraph drafts — bullets scan faster and resist embellishment better than a story arc does.
+
+**The One-Shadow Exception.** The Flat-at-Rest Rule (Elevation & Depth) anticipated exactly this: a modal is the system's first legitimate use of a shadow, because a floating panel over dimmed content needs the separation a border alone can't give it at this scale. No other component earns a shadow by this precedent.
 
 ## Do's and Don'ts
 

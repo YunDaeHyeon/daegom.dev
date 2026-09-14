@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-14T18:00:00.000Z",
+  "generatedAt": "2026-09-14T20:00:00.000Z",
   "title": "Design System: daegom.dev",
   "extensions": {
     "colorMeta": {
@@ -24,7 +24,9 @@
       "body": { "displayName": "Body", "purpose": "Paragraphs, descriptions, nav links." },
       "label": { "displayName": "Label / Mono", "purpose": "Status words, dates, stack tags — data only." }
     },
-    "shadows": [],
+    "shadows": [
+      { "name": "modal", "value": "0 20px 60px rgba(0,0,0,0.15) (light) / 0 20px 60px rgba(0,0,0,0.5) (dark)", "purpose": "The system's only shadow, reserved for the Modal panel floating over dimmed content." }
+    ],
     "motion": [
       { "name": "ease-standard", "value": "color 150ms ease, opacity 150ms ease", "purpose": "Link/hover color transitions; the only motion in the current build." }
     ],
@@ -33,6 +35,13 @@
     ]
   },
   "components": [
+    {
+      "name": "Modal",
+      "kind": "custom",
+      "description": "Notion-card-style overlay for Work/Decision detail content, opened via a Next.js intercepting route so the URL updates but the underlying page stays mounted. Dismiss via backdrop click, Escape, the × button, or browser back — all call router.back().",
+      "html": "<div class=\"ds-modal-overlay\"><div class=\"ds-modal-panel\" role=\"dialog\" aria-modal=\"true\"><button class=\"ds-modal-close\" aria-label=\"닫기\">×</button><!-- detail content --></div></div>",
+      "css": ".ds-modal-overlay { position: fixed; inset: 0; z-index: 50; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 64px 24px; } .ds-modal-panel { position: relative; margin: 0 auto; width: 100%; max-width: 42rem; border-radius: 8px; border: 1px solid #d2d2d7; background: #fbfbfd; padding: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); } .ds-modal-close { position: absolute; top: 20px; right: 20px; color: #6e6e73; }"
+    },
     {
       "name": "Detail Section",
       "kind": "custom",
@@ -93,7 +102,9 @@
       { "name": "The One Accent Rule", "body": "System Blue is the only saturated color on the page and it is reserved for things you can click. It never fills a background, never decorates a card, never marks status.", "section": "colors" },
       { "name": "The No-Verdict Rule", "body": "Status words (shipped / paused / discontinued / in progress) are always set in Graphite, never in a destructive or success color. Status is information, not a judgment.", "section": "colors" },
       { "name": "The Data-Is-Mono Rule", "body": "JetBrains Mono is used only for actual data — dates, status, stack names — never as a decorative \"technical\" costume on prose.", "section": "typography" },
-      { "name": "The Flat-at-Rest Rule", "body": "Surfaces do not cast shadows. If a future interactive surface (a modal, a dropdown) needs separation, that is the first legitimate use of a shadow in this system — introduce one shadow token then, not before.", "section": "elevation" }
+      { "name": "The Flat-at-Rest Rule", "body": "Surfaces do not cast shadows at rest. A modal is the one surface that isn't at rest relative to the page.", "section": "elevation" },
+      { "name": "The Itemized-Detail Rule", "body": "Detail-page content is bulleted facts under plain headings, not narrative prose. A bullet reads as \"did X\" or \"found Y,\" not as a sentence building toward a moral.", "section": "components" },
+      { "name": "The One-Shadow Exception", "body": "A modal is the system's first legitimate use of a shadow, because a floating panel over dimmed content needs the separation a border alone can't give it at this scale. No other component earns a shadow by this precedent.", "section": "elevation" }
     ],
     "dos": [
       "Do keep status words in Secondary/Graphite regardless of what the status is.",
