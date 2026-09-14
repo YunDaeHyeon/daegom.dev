@@ -78,7 +78,7 @@ export default function Home() {
         className="flex min-h-dvh scroll-mt-20 items-center py-24 focus:outline-none sm:py-32"
       >
         <Container>
-          <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-[46ch]">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
                 윤대현 · YunDaeHyeon
