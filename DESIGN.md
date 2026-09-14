@@ -127,7 +127,7 @@ Home, Work, and Decisions are sections of a single scrollable page (`id="top"`, 
 ### Named Rules
 **The Continuous Scroll Rule.** Home → Work → Decisions is one scroll, not three destinations. Nav links move the reading position within the page (`<a href="#section">`), they never navigate to a new document.
 
-Each section is at least one viewport tall (`min-h-dvh`) with `scroll-snap-align: start` and `scroll-margin-top` matching the sticky header's height, so both a manual scroll and a nav click settle a section cleanly below the header rather than stopping mid-section. Snapping uses `snap-proximity` (not `mandatory`): it assists a scroll that's already headed toward a section boundary without fighting a deliberate mid-section stop or a direct anchor jump. `scroll-behavior: smooth` provides the animated transition and is disabled under `prefers-reduced-motion`, which also turns snapping off entirely.
+Each section is at least one viewport tall (`min-h-dvh`) with `scroll-margin-top` matching the sticky header's height, so a nav click settles the section cleanly below the header rather than partially behind it. `scroll-behavior: smooth` (disabled under `prefers-reduced-motion`) animates that jump. Scroll-snap was tried and removed — it fought ordinary scrolling and felt uncomfortable rather than assistive; free scrolling plus the smooth anchor-jump on click is the deliberate choice.
 
 ## Elevation & Depth
 

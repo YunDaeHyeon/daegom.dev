@@ -74,7 +74,7 @@ export default function Home() {
       <section
         id="top"
         tabIndex={-1}
-        className="flex min-h-dvh scroll-mt-20 snap-start items-center py-24 focus:outline-none sm:py-32"
+        className="flex min-h-dvh scroll-mt-20 items-center py-24 focus:outline-none sm:py-32"
       >
         <Container>
           <div className="max-w-[42ch]">
@@ -109,7 +109,7 @@ export default function Home() {
       <section
         id="work"
         tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 snap-start border-t border-border py-16 focus:outline-none sm:py-24"
+        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -153,7 +153,7 @@ export default function Home() {
       <section
         id="decisions"
         tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 snap-start border-t border-border py-16 focus:outline-none sm:py-24"
+        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
