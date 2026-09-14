@@ -78,8 +78,8 @@ export default function Home() {
         className="flex min-h-dvh scroll-mt-20 items-center py-24 focus:outline-none sm:py-32"
       >
         <Container>
-          <div className="flex flex-wrap items-start gap-10">
-            <div className="min-w-[280px] max-w-[46ch] flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-10">
+            <div className="min-w-[280px] max-w-[65ch] flex-1">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
                 윤대현 · YunDaeHyeon
               </h1>
