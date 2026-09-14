@@ -87,14 +87,12 @@ export default function Home() {
               <p className="mt-8 max-w-[65ch] text-lg leading-8 text-foreground">
                 기기와 사람을 잇는 경험을 만듭니다.
               </p>
-              <div className="mt-6 max-w-[65ch] space-y-3 text-base leading-7 text-muted-foreground">
+              <div className="mt-6 max-w-[65ch] space-y-4 text-base leading-7 text-muted-foreground">
                 <p>
                   AI에게는 답보다 이유를 먼저 묻습니다. 무엇이 문제인지
-                  정의하는 일은 사람의 몫이라고 생각합니다.
-                </p>
-                <p>
-                  문제가 생기면 코드보다 그 아래에서 무엇이 어떻게
-                  동작하는지를 먼저 확인합니다.
+                  정의하는 일은 사람의 몫이라고 생각합니다. 문제가 생기면
+                  코드보다 그 아래에서 무엇이 어떻게 동작하는지를 먼저
+                  확인합니다.
                 </p>
                 <p>
                   개발자가 의도한 대로 동작하는 것과 사용자가 실제로
