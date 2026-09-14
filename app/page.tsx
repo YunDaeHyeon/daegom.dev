@@ -78,8 +78,8 @@ export default function Home() {
         className="flex min-h-dvh scroll-mt-20 items-center py-24 focus:outline-none sm:py-32"
       >
         <Container>
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-[46ch]">
+          <div className="flex flex-wrap items-start gap-10">
+            <div className="min-w-[280px] max-w-[46ch] flex-1">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
                 윤대현 · YunDaeHyeon
               </h1>
@@ -89,14 +89,11 @@ export default function Home() {
               </p>
               <div className="mt-6 max-w-[65ch] space-y-4 text-base leading-7 text-muted-foreground">
                 <p>
-                  AI에게는 답보다 이유를 먼저 묻습니다. 무엇이 문제인지
-                  정의하는 일은 사람의 몫이라고 생각합니다. 문제가 생기면
-                  코드보다 그 아래에서 무엇이 어떻게 동작하는지를 먼저
-                  확인합니다.
+                  AI에게는 답보다 이유를 먼저 묻습니다. 무엇이 문제인지 정의하는 일은 사람의 몫이라고 생각합니다.
+                  문제가 생기면 코드보다 그 아래에서 무엇이 어떻게 동작하는지를 먼저 확인합니다.
                 </p>
                 <p>
-                  개발자가 의도한 대로 동작하는 것과 사용자가 실제로
-                  경험하는 것은 다르다고 생각합니다.
+                  개발자가 의도한 대로 동작하는 것과 사용자가 실제로 경험하는 것은 다르다고 생각합니다.
                 </p>
               </div>
               <div className="mt-10 flex items-center gap-8 text-sm">
