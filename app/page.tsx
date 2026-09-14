@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { StatusLabel, type Status } from "@/components/status-label";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { ProfilePhoto } from "@/components/profile-photo";
 
 type WorkItem = {
   title: string;
@@ -116,7 +116,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <PhotoPlaceholder />
+            <ProfilePhoto />
           </div>
         </Container>
       </section>
