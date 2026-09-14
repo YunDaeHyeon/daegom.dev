@@ -19,7 +19,7 @@ export default function Home() {
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
                 윤대현 · YunDaeHyeon
               </h1>
-              <p className="mt-3 text-sm text-muted-foreground">iOS 개발자</p>
+              <p className="mt-3 text-sm text-muted-foreground">iOS Developer</p>
               <p className="mt-8 max-w-[65ch] text-lg leading-8 text-foreground">
                 기기와 사람을 잇는 경험을 만듭니다.
               </p>
