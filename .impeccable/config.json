@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "noto sans kr",
+        "createdAt": "2026-09-14T06:50:32.135Z",
+        "reason": "favicon/OG 이미지는 next/og로 서버에서 생성되는 정적 PNG로, 실제 사이트 DOM/타이포그래피 시스템과 무관함. Inter/JetBrains Mono에는 한글 글리프가 없어(Latin-Mono Rule과 동일한 이유) 이 좁은 이미지 생성 컨텍스트에서만 Noto Sans KR을 사용함."
+      }
+    ]
+  }
+}
