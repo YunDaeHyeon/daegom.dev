@@ -166,7 +166,7 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 ### Profile Photo
 - **Shape:** Portrait 4:5, max 260px wide, 8px radius, 1px Hairline border, `object-fit: cover` (never stretched).
 - **Source:** `public/photos/profile.jpg`, served through `next/image` for automatic responsive sizing/format.
-- **Position:** shares an intrinsic `flex flex-wrap` row with the hero text, not a viewport-breakpoint switch. The text column has `min-w-[280px]` and the photo is `shrink-0`, so the photo drops to its own line exactly when the row can no longer hold both without the `gap-10` (40px) collapsing below it — a real available-space threshold rather than a fixed screen size, and the reason a very wide external monitor and a middling tablet can both be "wrapped" or "side-by-side" correctly.
+- **Position:** shares an intrinsic `flex flex-wrap justify-between` row with the hero text, not a viewport-breakpoint switch. The text column (`min-w-[280px] max-w-[65ch] flex-1`) grows to its natural reading width when there's room and `justify-between` pushes the photo toward the row's right edge rather than gluing it to the text; below the wrap point the photo is `shrink-0` and drops to its own line exactly when the row can no longer hold both without the `gap-10` (40px) floor collapsing — a real available-space threshold rather than a fixed screen size.
 
 ### List Row (Work / Decisions)
 - **Border:** 1px Hairline top-divider between rows (`divide-y`), no border on the row itself.
