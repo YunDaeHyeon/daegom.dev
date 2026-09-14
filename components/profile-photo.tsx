@@ -9,7 +9,7 @@ export function ProfilePhoto() {
         fill
         sizes="220px"
         priority
-        className="object-cover"
+        className="object-cover object-[50%_30%]"
       />
     </div>
   );
