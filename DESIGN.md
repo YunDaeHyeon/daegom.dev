@@ -129,12 +129,12 @@ Vertical rhythm: page sections use 64px top padding on mobile, 96px on `sm` and 
 
 ### One-page structure
 
-Home, Work, and Decisions are sections of a single scrollable page (`id="top"`, `id="work"`, `id="decisions"`), not separate routes — this is a portfolio introducing one person, and the brief called for it to read as one continuous, self-introducing scroll rather than a multi-page site. `/work` and `/decisions` still resolve (redirecting to `/#work` / `/#decisions`) so old links don't break.
+Home, Work, Decisions, About, and Lab are sections of a single scrollable page (`id="top"`, `id="work"`, `id="decisions"`, `id="about"`, `id="lab"`), not separate routes — this is a portfolio introducing one person, and the brief called for it to read as one continuous, self-introducing scroll rather than a multi-page site. `/work` and `/decisions` still resolve (redirecting to `/#work` / `/#decisions`) so old links don't break. Writing is the one nav item left unbuilt; it stays disabled until it has a section to point to.
 
-Individual Work and Decision items break this rule on purpose: each has its own detail page at `/work/<slug>` and `/decisions/<slug>`, reached by clicking a list-row title. The one-page rule governs the three top-level destinations a nav click can reach, not the content one level below them — a title click is a deliberate "go deeper," not primary navigation.
+Individual Work and Decision items break this rule on purpose: each has its own detail page at `/work/<slug>` and `/decisions/<slug>`, reached by clicking a list-row title. The one-page rule governs the top-level destinations a nav click can reach, not the content one level below them — a title click is a deliberate "go deeper," not primary navigation.
 
 ### Named Rules
-**The Continuous Scroll Rule.** Home → Work → Decisions is one scroll, not three destinations. Nav links move the reading position within the page (`<a href="#section">`), they never navigate to a new document.
+**The Continuous Scroll Rule.** Home → Work → Decisions → About → Lab is one scroll, not five destinations. Nav links move the reading position within the page (`<a href="#section">`), they never navigate to a new document.
 
 Each section is at least one viewport tall (`min-h-dvh`) with `scroll-margin-top` matching the sticky header's height, so a nav click settles the section cleanly below the header rather than partially behind it. `scroll-behavior: smooth` (disabled under `prefers-reduced-motion`) animates that jump. Scroll-snap was tried and removed — it fought ordinary scrolling and felt uncomfortable rather than assistive; free scrolling plus the smooth anchor-jump on click is the deliberate choice.
 
@@ -156,9 +156,18 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 
 ### Navigation
 - Sticky (`position: sticky; top: 0`) so it stays reachable while scrolling through the one-page structure; opaque `background` so content doesn't show through underneath it.
-- Site name set in mono, left-aligned, links to `#top`; primary links (Home / Work / Decisions) in body type, right-aligned, each an in-page anchor (`#top` / `#work` / `#decisions`), never a route change.
-- Unbuilt sections (About / Lab / Writing) render as non-interactive, 50%-opacity text — present in the structure, not yet a dead link — and are hidden below the `sm` breakpoint to keep the mobile header to the working links only.
+- Site name set in mono, `shrink-0`, links to `#top`; primary links (Home / Work / Decisions / About / Lab) in body type, each an in-page anchor, never a route change.
+- Unbuilt sections (currently just Writing) render as non-interactive, 50%-opacity text — present in the structure, not yet a dead link — and are hidden below the `sm` breakpoint.
+- **The link row itself is `min-w-0` + `overflow-x-auto`, pushed right with `ml-auto` rather than the row's `justify-between`.** As sections were added the label row stopped fitting some narrow widths; without `min-w-0` a flex child won't shrink below its content's natural width, so it pushed the whole header (and page) wider instead of wrapping or scrolling. `min-w-0` lets it shrink, `overflow-x-auto` gives it an internal scroll instead of a page-level one — the nav scrolls in place before anything breaks layout.
 - No active-state treatment yet (no section currently highlights itself in nav as it scrolls into view); add one (scroll-spy) if the page grows more sections.
+
+### About
+- Flat sections in one column, matching the List Row idiom used elsewhere: 학력/경력/활동 as row lists (org/school + role/major on the left, mono period on the right, an optional muted note line beneath for 활동); 자격증/수상/멘토링 활동 as plain `DetailSections` bullet lists (see The Itemized-Detail Rule — this is the same component Work/Decision detail pages use, reused here because the content shape — flat, factual, dated — is identical).
+- **Contact** is the one deliberately louder row: full-body-size underlined links (matching the hero CTA weight), not the small muted `LinkRow` treatment used for GitHub/PR references elsewhere — this is a primary action (a recruiter needs to find it), not incidental evidence.
+- No resume link renders until a real one exists; an empty/placeholder link is worse than no link.
+
+### Lab
+- Structurally identical section shell (heading + one-line description) with no content yet — an honest "not ready to show" note, not a fabricated placeholder project. Replace the line, don't add fake entries, once real experiments exist.
 
 ### Status Label
 - Mono, 11px, uppercase, 0.06em tracking, Graphite/Secondary color always — see The No-Verdict Rule. No background, no icon.
