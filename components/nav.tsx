@@ -14,9 +14,10 @@ export function Nav() {
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-5 sm:px-8">
         <Link
           href="#top"
-          className="font-mono text-sm font-medium tracking-tight text-foreground"
+          className="text-sm font-medium tracking-tight text-foreground"
         >
-          daegom
+          <span className="hidden sm:inline">윤대현 · YunDaeHyeon</span>
+          <span className="sm:hidden">YunDaeHyeon</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm sm:gap-6">
           {primaryLinks.map((link) => (
