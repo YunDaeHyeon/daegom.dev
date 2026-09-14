@@ -131,6 +131,8 @@ Vertical rhythm: page sections use 64px top padding on mobile, 96px on `sm` and 
 
 Home, Work, and Decisions are sections of a single scrollable page (`id="top"`, `id="work"`, `id="decisions"`), not separate routes — this is a portfolio introducing one person, and the brief called for it to read as one continuous, self-introducing scroll rather than a multi-page site. `/work` and `/decisions` still resolve (redirecting to `/#work` / `/#decisions`) so old links don't break.
 
+Individual Work and Decision items break this rule on purpose: each has its own detail page at `/work/<slug>` and `/decisions/<slug>`, reached by clicking a list-row title. The one-page rule governs the three top-level destinations a nav click can reach, not the content one level below them — a title click is a deliberate "go deeper," not primary navigation.
+
 ### Named Rules
 **The Continuous Scroll Rule.** Home → Work → Decisions is one scroll, not three destinations. Nav links move the reading position within the page (`<a href="#section">`), they never navigate to a new document.
 
@@ -172,6 +174,16 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 - **Border:** 1px Hairline top-divider between rows (`divide-y`), no border on the row itself.
 - **Content:** title (Title weight) + mono meta (date/period, right-aligned) on one line at `sm` and up, stacking on mobile; body-colored one-line summary below; optional tag row.
 - **Internal Padding:** 24px vertical (28px at `sm`).
+- **Title:** links to the item's detail page (`/work/<slug>`, `/decisions/<slug>`). Underline is transparent at rest, Hairline on hover — present but quiet, matching the system's restraint around decoration.
+
+### Detail Page (Work / Decisions)
+- Reached only by clicking a list-row title — never a route a visitor lands on directly from a nav link.
+- **Structure:** back-link to the section anchor (`← Work` / `← Decisions`) → title → meta (period, or date + Status Label) → one-line summary (same copy as the list) → stack tags / links row (Work) or links row (Decisions) → itemized sections → related cross-links.
+- **Itemized sections (Named Rule below) replace narrative paragraphs here.** Each section is a plain-text heading (e.g. "담당한 기능", "시도한 것", "판단과 발견") followed by a flat bullet list — terse, concrete, one fact per line, never a flowing story paragraph.
+- **Cross-links:** a Work item lists its `관련 Decisions`; a Decision lists its `관련 프로젝트` — plain underlined text links between the two content types, no card treatment.
+
+### Named Rules
+**The Itemized-Detail Rule.** Detail-page content is bulleted facts under plain headings, not narrative prose. A bullet reads as "did X" or "found Y," not as a sentence building toward a moral. This is a deliberate departure from earlier narrative-paragraph drafts — bullets scan faster and resist embellishment better than a story arc does.
 
 ## Do's and Don'ts
 

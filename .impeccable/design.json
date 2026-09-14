@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-14T12:00:00.000Z",
+  "generatedAt": "2026-09-14T18:00:00.000Z",
   "title": "Design System: daegom.dev",
   "extensions": {
     "colorMeta": {
@@ -33,6 +33,13 @@
     ]
   },
   "components": [
+    {
+      "name": "Detail Section",
+      "kind": "custom",
+      "description": "Plain heading + flat bullet list used on Work/Decision detail pages instead of narrative paragraphs. See The Itemized-Detail Rule.",
+      "html": "<div class=\"ds-detail-section\"><h2>담당한 기능</h2><ul><li><span aria-hidden=\"true\">—</span><span>초기 스트리밍 프로토타입 구현</span></li></ul></div>",
+      "css": ".ds-detail-section h2 { font-size: 14px; font-weight: 500; color: #1d1d1f; } .ds-detail-section ul { margin-top: 12px; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; } .ds-detail-section li { display: flex; gap: 8px; font-size: 14px; line-height: 1.5; color: #6e6e73; } .ds-detail-section li span:first-child { color: color-mix(in srgb, #6e6e73 50%, transparent); }"
+    },
     {
       "name": "Profile Photo",
       "kind": "custom",
