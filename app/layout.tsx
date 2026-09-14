@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full snap-y snap-proximity antialiased motion-reduce:snap-none`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <Nav />
