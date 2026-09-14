@@ -43,7 +43,12 @@ Six top-level areas:
 
 ## Evidence on Hand
 
-Resume/bio content, specific projects to feature, and a photo for About are to be supplied by the user. None has been delivered yet — do not fabricate project details, employers, dates, or outcomes; wait for real content before populating these sections.
+Delivered and live on the site:
+- Name, role, and intro copy in the Home hero, plus a profile photo (currently placed in Home's hero since About doesn't exist as a page yet — move it there if/when About is built).
+- 3 real Work entries (미러링부스, 절약학개론, DrPill) with actual scope, stack, and GitHub links.
+- 4 real Decisions entries spanning shipped, in-progress, and one discontinued project, each with a real one-line summary and a longer `detail` field already captured in `app/page.tsx` but not yet rendered (reserved for a future per-item detail page).
+
+Still not delivered: About page content beyond the photo, Lab, Writing. Do not fabricate project details, employers, dates, or outcomes for these — wait for real content.
 
 ## Product Principles
 
