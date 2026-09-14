@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-14T00:00:00.000Z",
+  "title": "Design System: daegom.dev",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Ink", "canonical": "#1d1d1f" },
+      "secondary": { "role": "secondary", "displayName": "Graphite", "canonical": "#6e6e73" },
+      "accent": { "role": "accent", "displayName": "System Blue", "canonical": "#0071e3" },
+      "background": { "role": "neutral", "displayName": "Paper", "canonical": "#fbfbfd" },
+      "card": { "role": "neutral", "displayName": "Surface", "canonical": "#ffffff" },
+      "muted": { "role": "neutral", "displayName": "Wash", "canonical": "#f5f5f7" },
+      "border": { "role": "neutral", "displayName": "Hairline", "canonical": "#d2d2d7" },
+      "background-dark": { "role": "neutral", "displayName": "Paper (dark)", "canonical": "#1c1c1e" },
+      "card-dark": { "role": "neutral", "displayName": "Surface (dark)", "canonical": "#2c2c2e" },
+      "muted-dark": { "role": "neutral", "displayName": "Wash (dark)", "canonical": "#232325" },
+      "border-dark": { "role": "neutral", "displayName": "Hairline (dark)", "canonical": "#38383a" },
+      "primary-dark": { "role": "primary", "displayName": "Ink (dark)", "canonical": "#f5f5f7" },
+      "secondary-dark": { "role": "secondary", "displayName": "Graphite (dark)", "canonical": "#98989d" },
+      "accent-dark": { "role": "accent", "displayName": "System Blue (dark)", "canonical": "#2997ff" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home h1 (name)." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, descriptions, nav links." },
+      "label": { "displayName": "Label / Mono", "purpose": "Status words, dates, stack tags — data only." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard", "value": "color 150ms ease, opacity 150ms ease", "purpose": "Link/hover color transitions; the only motion in the current build." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Status Label",
+      "kind": "chip",
+      "refersTo": "status-label",
+      "description": "Mono uppercase status word (SHIPPED / PAUSED / DISCONTINUED / IN PROGRESS). Always neutral color — never a destructive or success color, since status is informational, not a judgment.",
+      "html": "<span class=\"ds-status-label\">SHIPPED</span>",
+      "css": ".ds-status-label { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #6e6e73; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Stack/technology chip used in Work rows.",
+      "html": "<li class=\"ds-tag\">SwiftUI</li>",
+      "css": ".ds-tag { display: inline-block; background: #f5f5f7; color: #6e6e73; font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; border-radius: 6px; padding: 2px 8px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Primary navigation link. Unbuilt sections render as a non-interactive, half-opacity span instead of this component.",
+      "html": "<a class=\"ds-nav-link\" href=\"/work\">Work</a>",
+      "css": ".ds-nav-link { color: #1d1d1f; font-size: 14px; transition: color 150ms ease; } .ds-nav-link:hover { color: #6e6e73; }"
+    },
+    {
+      "name": "List Row",
+      "kind": "custom",
+      "description": "The repeated-content container for Work and Decisions: a top hairline divider, title + mono meta on one line, one-line summary below. Replaces cards as the system's default list container.",
+      "html": "<li class=\"ds-list-row\"><div class=\"ds-list-row-head\"><h2 class=\"ds-list-row-title\">Placeholder Project A</h2><span class=\"ds-list-row-meta\">2023 — 2024</span></div><p class=\"ds-list-row-summary\">One-line, honest description of scope and actual contribution.</p></li>",
+      "css": ".ds-list-row { padding: 24px 0; border-top: 1px solid #d2d2d7; } .ds-list-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; } .ds-list-row-title { font-size: 16px; font-weight: 500; color: #1d1d1f; } .ds-list-row-meta { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #6e6e73; } .ds-list-row-summary { margin-top: 8px; font-size: 14px; line-height: 1.5; color: #6e6e73; max-width: 65ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineering Log",
+    "overview": "The site reads like a well-kept engineering log, not a portfolio trying to sell itself: neutral ground, one functional accent, and typography that never editorializes. Minimalism & Swiss Style supplies the discipline — grid-based, high-contrast, no decoration for its own sake — rendered in an Apple-system register (the same near-black/near-white/system-blue vocabulary as macOS and iOS) because the subject is an iOS developer and the tone the brief asked for is Notion/Linear-adjacent trust, not startup marketing energy.\n\nThe system exists to let honest content stand without visual apology. A discontinued project and a shipped one carry identical typographic weight; the only thing that changes is a small mono status word. Nothing on the page is allowed to argue that a failure was actually fine, or that a shipped project was more impressive than it was — the type system has no mechanism for emphasis-as-persuasion, only emphasis-as-hierarchy.",
+    "keyCharacteristics": [
+      "Neutral-plus-one-accent color strategy; the accent appears only on interactive text, never as decoration.",
+      "Two-font system: Inter (via the -apple-system stack) for prose/UI, JetBrains Mono reserved for data.",
+      "Flat at rest. Hairline 1px dividers carry structure; no shadows, no gradients, no glass.",
+      "Dark mode follows prefers-color-scheme with a toned dark ground, never pure black."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "System Blue is the only saturated color on the page and it is reserved for things you can click. It never fills a background, never decorates a card, never marks status.", "section": "colors" },
+      { "name": "The No-Verdict Rule", "body": "Status words (shipped / paused / discontinued / in progress) are always set in Graphite, never in a destructive or success color. Status is information, not a judgment.", "section": "colors" },
+      { "name": "The Data-Is-Mono Rule", "body": "JetBrains Mono is used only for actual data — dates, status, stack names — never as a decorative \"technical\" costume on prose.", "section": "typography" },
+      { "name": "The Flat-at-Rest Rule", "body": "Surfaces do not cast shadows. If a future interactive surface (a modal, a dropdown) needs separation, that is the first legitimate use of a shadow in this system — introduce one shadow token then, not before.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep status words in Secondary/Graphite regardless of what the status is.",
+      "Do reserve System Blue for actual links and interactive text.",
+      "Do use JetBrains Mono only for dates, stack names, and status — real data, never decoration.",
+      "Do let discontinued/paused entries share the exact same row styling as shipped ones."
+    ],
+    "donts": [
+      "Don't introduce a shadow, gradient, or glass effect — the system is flat by rule, not by omission.",
+      "Don't color status labels red/green/amber, or otherwise visually rank projects or contributions.",
+      "Don't use emoji as icons; use inline SVG (Heroicons/Lucide) if an icon is ever needed.",
+      "Don't wrap Work/Decisions items in bordered card boxes — the list-row pattern is the system's native container for repeated content."
+    ]
+  }
+}
