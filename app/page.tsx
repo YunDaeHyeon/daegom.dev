@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { StatusLabel, type Status } from "@/components/status-label";
+import { PhotoPlaceholder } from "@/components/photo-placeholder";
 
 type WorkItem = {
   title: string;
@@ -77,42 +78,45 @@ export default function Home() {
         className="flex min-h-dvh scroll-mt-20 items-center py-24 focus:outline-none sm:py-32"
       >
         <Container>
-          <div className="max-w-[46ch]">
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-              윤대현 · YunDaeHyeon
-            </h1>
-            <p className="mt-3 text-sm text-muted-foreground">iOS 개발자</p>
-            <p className="mt-8 max-w-[65ch] text-lg leading-8 text-foreground">
-              기기와 사람을 잇는 경험을 만듭니다.
-            </p>
-            <div className="mt-6 max-w-[65ch] space-y-3 text-base leading-7 text-muted-foreground">
-              <p>
-                AI에게는 답보다 이유를 먼저 묻습니다. 무엇이 문제인지
-                정의하는 일은 사람의 몫이라고 생각합니다.
+          <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
+            <div className="max-w-[46ch]">
+              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
+                윤대현 · YunDaeHyeon
+              </h1>
+              <p className="mt-3 text-sm text-muted-foreground">iOS 개발자</p>
+              <p className="mt-8 max-w-[65ch] text-lg leading-8 text-foreground">
+                기기와 사람을 잇는 경험을 만듭니다.
               </p>
-              <p>
-                문제가 생기면 코드보다 그 아래에서 무엇이 어떻게 동작하는지를
-                먼저 확인합니다.
-              </p>
-              <p>
-                개발자가 의도한 대로 동작하는 것과 사용자가 실제로 경험하는
-                것은 다르다고 생각합니다.
-              </p>
+              <div className="mt-6 max-w-[65ch] space-y-3 text-base leading-7 text-muted-foreground">
+                <p>
+                  AI에게는 답보다 이유를 먼저 묻습니다. 무엇이 문제인지
+                  정의하는 일은 사람의 몫이라고 생각합니다.
+                </p>
+                <p>
+                  문제가 생기면 코드보다 그 아래에서 무엇이 어떻게
+                  동작하는지를 먼저 확인합니다.
+                </p>
+                <p>
+                  개발자가 의도한 대로 동작하는 것과 사용자가 실제로
+                  경험하는 것은 다르다고 생각합니다.
+                </p>
+              </div>
+              <div className="mt-10 flex items-center gap-8 text-sm">
+                <Link
+                  href="#work"
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                >
+                  작업물 보기
+                </Link>
+                <Link
+                  href="#decisions"
+                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                >
+                  의사결정 기록 보기
+                </Link>
+              </div>
             </div>
-            <div className="mt-10 flex items-center gap-8 text-sm">
-              <Link
-                href="#work"
-                className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-              >
-                작업물 보기
-              </Link>
-              <Link
-                href="#decisions"
-                className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-              >
-                의사결정 기록 보기
-              </Link>
-            </div>
+            <PhotoPlaceholder />
           </div>
         </Container>
       </section>
