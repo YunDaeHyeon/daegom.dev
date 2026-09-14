@@ -3,7 +3,8 @@ import { Container } from "@/components/container";
 import { StatusLabel } from "@/components/status-label";
 import { ProfilePhoto } from "@/components/profile-photo";
 import { LinkRow } from "@/components/link-row";
-import { workItems, decisions } from "@/lib/content";
+import { DetailSections } from "@/components/detail-sections";
+import { workItems, decisions, about } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -142,6 +143,128 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      <section
+        id="about"
+        tabIndex={-1}
+        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+      >
+        <Container>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+            About
+          </h2>
+          <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
+            학력, 경력, 그리고 그 사이에 있었던 활동들을 정리했습니다.
+          </p>
+
+          <div className="mt-10 space-y-10">
+            <div>
+              <h3 className="text-sm font-medium text-foreground">학력</h3>
+              <ul className="mt-3 divide-y divide-border border-t border-border">
+                {about.education.map((entry) => (
+                  <li
+                    key={entry.school}
+                    className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between"
+                  >
+                    <span className="text-sm text-foreground">
+                      {entry.school} · {entry.major}
+                    </span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {entry.period}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-foreground">경력</h3>
+              <ul className="mt-3 divide-y divide-border border-t border-border">
+                {about.career.map((entry) => (
+                  <li
+                    key={entry.org}
+                    className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between"
+                  >
+                    <span className="text-sm text-foreground">
+                      {entry.org} · {entry.role}
+                    </span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {entry.period}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-foreground">활동</h3>
+              <ul className="mt-3 divide-y divide-border border-t border-border">
+                {about.experience.map((entry) => (
+                  <li key={entry.org} className="py-4">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <span className="text-sm text-foreground">
+                        {entry.org}
+                      </span>
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {entry.period}
+                      </span>
+                    </div>
+                    {entry.note && (
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {entry.note}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <DetailSections
+              sections={[
+                { heading: "자격증", items: about.certifications },
+                { heading: "수상", items: about.awards },
+                { heading: "멘토링 활동", items: about.mentoring },
+              ]}
+            />
+
+            <div>
+              <h3 className="text-sm font-medium text-foreground">Contact</h3>
+              <div className="mt-3 flex flex-wrap gap-6 text-sm">
+                {about.contact.map((link) => {
+                  const isExternal = !link.href.startsWith("mailto:");
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section
+        id="lab"
+        tabIndex={-1}
+        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+      >
+        <Container>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+            Lab
+          </h2>
+          <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
+            일이 아니어도 궁금해서 만들어본 것들을 정리하는 중입니다. 아직
+            올릴 준비가 되지 않았어요.
+          </p>
         </Container>
       </section>
     </>
