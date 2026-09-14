@@ -9,6 +9,7 @@
   --muted-foreground: #6e6e73;
   --accent: #0071e3;
   --accent-foreground: #ffffff;
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +22,7 @@
     --muted-foreground: #98989d;
     --accent: #2997ff;
     --accent-foreground: #ffffff;
+    --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -39,6 +41,8 @@
 
   --radius-sm: 6px;
   --radius-md: 8px;
+
+  --shadow-modal: var(--modal-shadow);
 }
 
 html {
