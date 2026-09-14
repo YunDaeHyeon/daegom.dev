@@ -187,6 +187,7 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 - **Content:** title (Title weight) + mono meta (date/period, right-aligned) on one line at `sm` and up, stacking on mobile; body-colored one-line summary below; optional tag row.
 - **Internal Padding:** 24px vertical (28px at `sm`).
 - **Title:** links to the item's detail page (`/work/<slug>`, `/decisions/<slug>`). Underline is transparent at rest, Hairline on hover — present but quiet, matching the system's restraint around decoration.
+- **App icon (Work only, optional):** a 20px (list) / 32px (detail page) `rounded-sm` image immediately before the title, only when the project actually has a real app/product icon (`WorkItem.icon`) — `alt=""` since the adjacent title already names it. This is real artifact, not decoration: never a generic folder/category icon standing in for a project without one.
 
 ### Detail Page (Work / Decisions)
 - Reached only by clicking a list-row title — never a route a visitor lands on directly from a nav link.
