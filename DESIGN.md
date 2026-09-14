@@ -47,7 +47,7 @@ components:
   profile-photo:
     backgroundColor: "{colors.muted}"
     rounded: "{rounded.md}"
-    width: "200px"
+    width: "280px"
     height: "250px"
   tag:
     backgroundColor: "{colors.muted}"
@@ -164,9 +164,9 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 - No border, no hover state (informational, not interactive).
 
 ### Profile Photo
-- **Shape:** Portrait 4:5, max 200–220px wide, 8px radius, 1px Hairline border, `object-fit: cover` (never stretched).
+- **Shape:** Portrait 4:5, max 240px wide (280px at `lg`+), 8px radius, 1px Hairline border, `object-fit: cover` (never stretched).
 - **Source:** `public/photos/profile.jpg`, served through `next/image` for automatic responsive sizing/format.
-- **Position:** sits beside the Home hero text on `sm` and up (aligned to the top, near the name), stacks below the hero CTAs on mobile.
+- **Position:** sits beside the Home hero text at `lg` and up (aligned to the top, near the name), stacks below the hero CTAs below `lg`. The side-by-side layout starts at `lg` rather than `sm` specifically so the name never wraps mid-breakpoint at tablet widths.
 
 ### List Row (Work / Decisions)
 - **Border:** 1px Hairline top-divider between rows (`divide-y`), no border on the row itself.
