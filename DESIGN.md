@@ -44,10 +44,8 @@ spacing:
   section-y-lg: "96px"
   row-y: "24px"
 components:
-  photo-placeholder:
+  profile-photo:
     backgroundColor: "{colors.muted}"
-    textColor: "{colors.secondary}"
-    typography: "{typography.label}"
     rounded: "{rounded.md}"
     width: "200px"
     height: "250px"
@@ -165,9 +163,9 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 - **Fill:** Wash background, Secondary text, mono 11px.
 - No border, no hover state (informational, not interactive).
 
-### Photo Placeholder
-- **Shape:** Portrait 4:5, max 200–220px wide, 8px radius, 1px Hairline border, Wash fill.
-- **Content:** a single-stroke outline person icon + "사진 자리" label, both in Secondary/Graphite. No photo has been supplied yet — this is the reserved frame, not a generic avatar.
+### Profile Photo
+- **Shape:** Portrait 4:5, max 200–220px wide, 8px radius, 1px Hairline border, `object-fit: cover` (never stretched).
+- **Source:** `public/photos/profile.jpg`, served through `next/image` for automatic responsive sizing/format.
 - **Position:** sits beside the Home hero text on `sm` and up (aligned to the top, near the name), stacks below the hero CTAs on mobile.
 
 ### List Row (Work / Decisions)
