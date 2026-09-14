@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
 import "./globals.css";
@@ -20,7 +21,13 @@ export const metadata: Metadata = {
   description: "기기와 사람을 잇는 경험을 만드는 iOS 개발자 윤대현의 포트폴리오.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+  modal,
+}: {
+  children: ReactNode;
+  modal: ReactNode;
+}) {
   return (
     <html
       lang="ko"
@@ -34,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             © {new Date().getFullYear()} 윤대현
           </div>
         </footer>
+        {modal}
       </body>
     </html>
   );
