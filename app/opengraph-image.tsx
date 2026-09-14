@@ -27,7 +27,7 @@ export default async function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 30, color: "#98989d" }}>
-          iOS 개발자
+          iOS Developer
         </div>
         <div
           style={{
