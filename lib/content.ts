@@ -83,25 +83,9 @@ export const workItems: WorkItem[] = [
     ],
     relatedDecisions: [
       "relentless-troubleshooting",
+      "defining-ai-review-scope",
       "choosing-which-feedback-to-take",
     ],
-  },
-  {
-    slug: "n8n-review-pipeline",
-    title: "AI 업무 자동화 파이프라인",
-    icon: "/icons/n8n-pipeline.png",
-    period: "2026.01 — 진행중",
-    summary:
-      "PR 리뷰 부담을 줄이기 위해 n8n 기반 자동 리뷰 파이프라인을 설계했어요. 미러링부스에서 하루 최대 12건까지 쌓이던 PR 리뷰를 위해 만들었습니다.",
-    stack: ["n8n", "AWS EC2", "GitHub REST API"],
-    sections: [],
-    links: [
-      {
-        label: "정리 노트",
-        href: "https://daegom.notion.site/n8n-3c61833ac003802e837be9f7c42945f0?source=copy_link",
-      },
-    ],
-    relatedDecisions: ["defining-ai-review-scope"],
   },
   {
     slug: "student-deals-map",
@@ -263,7 +247,7 @@ export const decisions: Decision[] = [
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
     ],
-    relatedWork: "n8n-review-pipeline",
+    relatedWork: "mirroring-booth",
   },
   {
     slug: "ar-anchor-validation",
