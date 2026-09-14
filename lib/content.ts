@@ -6,6 +6,7 @@ export type DetailSection = { heading: string; items: string[] };
 export type WorkItem = {
   slug: string;
   title: string;
+  icon?: string;
   period: string;
   summary: string;
   stack: string[];
@@ -88,6 +89,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "student-deals-map",
     title: "절약학개론",
+    icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
     summary:
       "학생 제휴 매장 정보를 지도 위에서 확인하는 앱이에요. 팀장을 맡아 TestFlight까지 배포했습니다.",
@@ -112,6 +114,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "drpill",
     title: "DrPill (약선생)",
+    icon: "/icons/drpill.png",
     period: "2024.09 — 2024.12",
     summary:
       "약물 오남용 방지를 위한 개인 맞춤형 복약 관리 앱이에요. 캡스톤 팀장을 맡았습니다.",
@@ -297,9 +300,8 @@ export const about: About = {
   ],
   experience: [
     {
-      org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
-      period: "2025.06 — 2026.02",
-      note: "8개월 풀타임, 미러링부스 그룹 프로젝트 진행",
+      org: "KB-Bridge AI 활용 데이터분석 과정",
+      period: "2026.08 — 진행중",
     },
     {
       org: "전북신용보증재단 일경험",
@@ -307,8 +309,9 @@ export const about: About = {
       note: "보증드림 앱 사용법 안내, 엑셀 매크로 자동화로 보증서류 처리 속도 개선",
     },
     {
-      org: "KB-Bridge AI 활용 데이터분석 과정",
-      period: "2026.08 — 진행중",
+      org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
+      period: "2025.06 — 2026.02",
+      note: "8개월 풀타임, 미러링부스 그룹 프로젝트 진행",
     },
     {
       org: "카카오엔터프라이즈X구름 군장병 AI·SW 역량강화과정",
@@ -317,10 +320,10 @@ export const about: About = {
     },
   ],
   certifications: [
-    "정보처리기능사 (2019)",
-    "정보처리기사 (2026)",
-    "SQLD (2026)",
-    "리눅스마스터 2급 (2022)",
+    "정보처리기사",
+    "SQLD",
+    "리눅스마스터 2급",
+    "정보처리기능사",
   ],
   awards: [
     "캡스톤디자인 경진대회 대상 (2024)",
