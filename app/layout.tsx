@@ -17,8 +17,20 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://daegom.dev"),
   title: "윤대현 · YunDaeHyeon — iOS 개발자",
   description: "기기와 사람을 잇는 경험을 만드는 iOS 개발자 윤대현의 포트폴리오.",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    title: "윤대현 · YunDaeHyeon — iOS 개발자",
+    description: "기기와 사람을 잇는 경험을 만드는 iOS 개발자 윤대현의 포트폴리오.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "윤대현 · YunDaeHyeon — iOS 개발자",
+    description: "기기와 사람을 잇는 경험을 만드는 iOS 개발자 윤대현의 포트폴리오.",
+  },
 };
 
 export default function RootLayout({
