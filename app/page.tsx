@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { StatusLabel } from "@/components/status-label";
@@ -71,7 +72,16 @@ export default function Home() {
             {workItems.map((item) => (
               <li key={item.slug} className="py-6 sm:py-7">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="text-base font-medium text-foreground">
+                  <h3 className="flex items-center gap-2 text-base font-medium text-foreground">
+                    {item.icon && (
+                      <Image
+                        src={item.icon}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className="rounded-sm"
+                      />
+                    )}
                     <Link
                       href={`/work/${item.slug}`}
                       className="underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border"

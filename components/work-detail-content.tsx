@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { DetailSections } from "@/components/detail-sections";
 import { LinkRow } from "@/components/link-row";
@@ -12,7 +13,16 @@ export function WorkDetailContent({
 }) {
   return (
     <>
-      <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+      <h1 className="flex items-center gap-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        {item.icon && (
+          <Image
+            src={item.icon}
+            alt=""
+            width={32}
+            height={32}
+            className="rounded-sm"
+          />
+        )}
         {item.title}
       </h1>
       <p className="mt-2 font-mono text-sm text-muted-foreground">
