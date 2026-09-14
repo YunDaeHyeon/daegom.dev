@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/container";
-import { DetailSections } from "@/components/detail-sections";
-import { LinkRow } from "@/components/link-row";
-import { StatusLabel } from "@/components/status-label";
+import { DecisionDetailContent } from "@/components/decision-detail-content";
 import { decisions, workItems } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -30,40 +28,9 @@ export default async function DecisionDetailPage({
         >
           ← Decisions
         </Link>
-
-        <h1 className="mt-6 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          {decision.title}
-        </h1>
-        <div className="mt-2 flex items-center gap-4">
-          <span className="font-mono text-sm text-muted-foreground">
-            {decision.date}
-          </span>
-          <StatusLabel status={decision.status} />
+        <div className="mt-6">
+          <DecisionDetailContent decision={decision} relatedWork={relatedWork} />
         </div>
-        <p className="mt-6 max-w-[65ch] text-lg leading-8 text-muted-foreground">
-          {decision.summary}
-        </p>
-        <LinkRow links={decision.links} />
-
-        <DetailSections sections={decision.sections} />
-
-        {relatedWork && (
-          <div className="mt-8">
-            <h2 className="text-sm font-medium text-foreground">
-              관련 프로젝트
-            </h2>
-            <ul className="mt-3 space-y-2">
-              <li>
-                <Link
-                  href={`/work/${relatedWork.slug}`}
-                  className="text-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  {relatedWork.title}
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
       </Container>
     </main>
   );
