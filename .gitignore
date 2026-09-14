@@ -46,3 +46,8 @@ next-env.d.ts
 
 # Impeccable local-only config (build-path choice etc. is machine-specific)
 .impeccable/config.local.json
+
+# Impeccable working directories (QA screenshots, comps, build state)
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
