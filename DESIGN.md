@@ -114,6 +114,8 @@ Neutral-dominant palette with a single functional blue accent; the palette is in
 ### Named Rules
 **The Data-Is-Mono Rule.** JetBrains Mono is used only for actual data — dates, status, stack names — never as a decorative "technical" costume on prose.
 
+**The Latin-Mono Rule.** JetBrains Mono only ever renders Latin/ASCII data (dates, `SwiftUI`, `SHIPPED`). Any label mixing Hangul — the name/role line, prose — uses the sans stack instead: the mono font has no Hangul glyphs and silently falls back mid-string, breaking the fixed-width rhythm and mixing two typefaces in one line.
+
 ## Layout
 
 12-column conceptual grid inside a 1200px max-width container, with 24px side gutters below the `sm` breakpoint and 32px above it. Content is list-first rather than card-first: Work and Decisions render as single-column row lists (title / meta / summary), each row separated by a 1px hairline, rather than a grid of boxed cards — this reads closer to a Notion database or Linear issue list than a marketing showcase.
