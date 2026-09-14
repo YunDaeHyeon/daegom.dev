@@ -154,6 +154,11 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 
 ## Components
 
+### Favicon, Apple Touch Icon & Open Graph Image
+- Generated at build/request time via `next/og` (`app/icon.tsx`, `app/apple-icon.tsx`, `app/opengraph-image.tsx`) rather than static image files — the design (Ink background, Paper "D" monogram / name+tagline) stays code, tied to the same tokens as the rest of the system instead of drifting as a separately-exported asset.
+- **Font exception:** these three generators load `lib/fonts/noto-sans-kr-bold-subset.ttf` (a minimal Noto Sans KR subset, glyphs limited to the exact strings rendered) instead of Inter/JetBrains Mono. Both site fonts lack Hangul glyphs — the same reason behind The Latin-Mono Rule — and this is a narrow, code-documented exception (`.impeccable/config.json` ignoreValues) rather than a real typography-system change: these images are never part of the live DOM.
+- `metadataBase` is set to `https://daegom.dev` in `app/layout.tsx` so the generated `og:image`/`twitter:image` tags resolve to absolute production URLs.
+
 ### Navigation
 - Sticky (`position: sticky; top: 0`) so it stays reachable while scrolling through the one-page structure; opaque `background` so content doesn't show through underneath it.
 - Site name set in mono, `shrink-0`, links to `#top`; primary links (Home / Work / Decisions / About / Lab) in body type, each an in-page anchor, never a route change.
