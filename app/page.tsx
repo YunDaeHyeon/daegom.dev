@@ -6,9 +6,17 @@ import { ProfilePhoto } from "@/components/profile-photo";
 import { LinkRow } from "@/components/link-row";
 import { BadgeLink } from "@/components/badge-link";
 import { DetailSections } from "@/components/detail-sections";
+import { LabTypeBadge } from "@/components/lab-type-badge";
+import { StackTags } from "@/components/stack-tags";
 import { workItems, decisions, about } from "@/lib/content";
+import { getAllLabPosts, formatLabDate } from "@/lib/lab";
 
-export default function Home() {
+export const revalidate = 3600;
+
+export default async function Home() {
+  const labPosts = await getAllLabPosts();
+  const latestLabPosts = labPosts.slice(0, 6);
+
   return (
     <>
       <section
@@ -273,9 +281,37 @@ export default function Home() {
             Lab
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            업무 밖에서 궁금해서 만들어본 것들을 이곳에 채워나갈
-            예정입니다.
+            업무 밖에서 공부하거나 만들어본 것들의 기록입니다. 총{" "}
+            {labPosts.length}개.
           </p>
+
+          <ul className="mt-10 divide-y divide-border border-t border-border">
+            {latestLabPosts.map((post) => (
+              <li key={post.slug} className="py-4">
+                <Link href={`/lab/${post.slug}`} className="block">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                    <span className="text-sm text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
+                      {post.title}
+                    </span>
+                    <span className="flex shrink-0 items-center gap-3">
+                      <LabTypeBadge type={post.type} />
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {formatLabDate(post.createdAt)}
+                      </span>
+                    </span>
+                  </div>
+                  <StackTags stack={post.stack} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href="/lab"
+            className="mt-8 inline-block text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+          >
+            전체 보기 →
+          </Link>
         </Container>
       </section>
     </>
