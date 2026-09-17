@@ -26,9 +26,13 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.PEMKEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "${{ secrets.PEMKEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Validate SSH key format
+        run: |
+          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null && echo "✅ Key format is valid" || echo "❌ Key format is INVALID"
 
       - name: Sync build to EC2
         run: |
