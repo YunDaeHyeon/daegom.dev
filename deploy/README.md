@@ -74,8 +74,9 @@ rsync -avz --exclude node_modules \
 cd ~/daegom-portfolio && npm ci --omit=dev
 ```
 
-Node 버전: Next.js 16은 **Node 20.9 이상** 필요. `node -v`로 확인하고,
-낮으면 nvm으로 20 LTS 설치.
+Node 버전: Next.js 16 자체는 Node 20.9 이상이면 되지만, `firebase-admin`
+(Lab 기능의 Firestore 연동)이 **Node 22 이상**을 요구한다. `node -v`로
+확인하고, 낮으면 nvm으로 22 LTS 설치.
 
 ## 4. PM2로 프로세스 상시 구동
 
