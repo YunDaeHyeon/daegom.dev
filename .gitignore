@@ -51,3 +51,7 @@ next-env.d.ts
 .impeccable/review/
 .impeccable/mocks/
 .impeccable/build/
+
+# One-off Lab content migration scripts (Velog/Notion -> Firestore/S3) —
+# local tooling, not part of the shipped site
+/scripts/migrate/
