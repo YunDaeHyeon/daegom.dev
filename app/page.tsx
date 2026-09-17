@@ -4,6 +4,7 @@ import { Container } from "@/components/container";
 import { StatusLabel } from "@/components/status-label";
 import { ProfilePhoto } from "@/components/profile-photo";
 import { LinkRow } from "@/components/link-row";
+import { BadgeLink } from "@/components/badge-link";
 import { DetailSections } from "@/components/detail-sections";
 import { workItems, decisions, about } from "@/lib/content";
 
@@ -65,7 +66,7 @@ export default function Home() {
             Work
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            직접 참여한 프로젝트에서 실제로 담당한 범위를 정리했습니다.
+            직접 만든 프로젝트에서 제가 맡았던 부분만 적었습니다.
           </p>
 
           <ul className="mt-10 divide-y divide-border border-t border-border">
@@ -88,6 +89,7 @@ export default function Home() {
                     >
                       {item.title}
                     </Link>
+                    {item.badge && <BadgeLink badge={item.badge} />}
                   </h3>
                   <span className="font-mono text-xs text-muted-foreground">
                     {item.period}
@@ -106,7 +108,6 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <LinkRow links={item.links} />
               </li>
             ))}
           </ul>
@@ -123,8 +124,8 @@ export default function Home() {
             Decisions
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            중단되거나 보류된 것도 포함해, 그 과정에서 있었던 판단을 그대로
-            남깁니다.
+            작업하면서 내렸던 판단을 적었습니다. 중단하거나 보류한 것도
+            포함됩니다.
           </p>
 
           <ul className="mt-10 divide-y divide-border border-t border-border">
@@ -166,7 +167,7 @@ export default function Home() {
             About
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            학력, 경력, 그리고 그 사이에 있었던 활동들을 정리했습니다.
+            학력과 경력, 그 사이의 활동을 적었습니다.
           </p>
 
           <div className="mt-10 space-y-10">
@@ -272,8 +273,8 @@ export default function Home() {
             Lab
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            일이 아니어도 궁금해서 만들어본 것들을 정리하는 중입니다. 아직
-            올릴 준비가 되지 않았어요.
+            업무 밖에서 궁금해서 만들어본 것들을 이곳에 채워나갈
+            예정입니다.
           </p>
         </Container>
       </section>

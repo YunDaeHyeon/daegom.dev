@@ -11,6 +11,10 @@ export type WorkItem = {
   summary: string;
   stack: string[];
   sections: DetailSection[];
+  /** A single, prominent piece of evidence (e.g. a live App Store listing) —
+   *  rendered as a small pill next to the title, separate from the plain
+   *  reference links in `links`. */
+  badge?: ExternalLink;
   links: ExternalLink[];
   relatedDecisions?: string[];
 };
@@ -47,7 +51,7 @@ export const workItems: WorkItem[] = [
     icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
     summary:
-      "Apple 기기를 연결해 어디서나 나만의 포토부스를 만드는 앱이에요. 촬영 결과물 공유 기능과 초기 스트리밍 파이프라인을 담당했습니다.",
+      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다. 촬영 결과 공유 기능과 초기 스트리밍 구조를 맡았습니다.",
     stack: [
       "Swift",
       "SwiftUI",
@@ -71,14 +75,14 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
+    badge: {
+      label: "App Store",
+      href: "https://apps.apple.com/kr/app/%EB%AF%B8%EB%9F%AC%EB%A7%81%EB%B6%80%EC%8A%A4/id6758043558",
+    },
     links: [
       {
         label: "GitHub 저장소",
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang",
-      },
-      {
-        label: "PR #220",
-        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
     ],
     relatedDecisions: [
@@ -93,12 +97,16 @@ export const workItems: WorkItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
     summary:
-      "학생 제휴 매장 정보를 지도 위에서 확인하는 앱이에요. 팀장을 맡아 TestFlight까지 배포했습니다.",
-    stack: ["Swift", "UIKit", "Spring Boot"],
+      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다. 팀장을 맡았고 TestFlight까지 배포했습니다.",
+    stack: ["Swift", "UIKit", "NMapsMap", "Firebase"],
     sections: [
       {
         heading: "팀 구성",
-        items: ["4인 팀 프로젝트 (팀장)", "TestFlight 배포까지 진행"],
+        items: [
+          "4인 팀 프로젝트 (팀장)",
+          "TestFlight 배포까지 진행",
+          "팀원이 담당한 백엔드 구현에 조언을 주기도 했습니다.",
+        ],
       },
       {
         heading: "담당한 기능",
@@ -110,7 +118,12 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
-    links: [],
+    links: [
+      {
+        label: "GitHub 저장소",
+        href: "https://github.com/CampusCrew/Jeolhak-ios",
+      },
+    ],
   },
   {
     slug: "drpill",
@@ -118,8 +131,8 @@ export const workItems: WorkItem[] = [
     icon: "/icons/drpill.png",
     period: "2024.09 — 2024.12",
     summary:
-      "약물 오남용 방지를 위한 개인 맞춤형 복약 관리 앱이에요. 캡스톤 팀장을 맡았습니다.",
-    stack: ["React Native", "OpenCV", "Flask"],
+      "약물 오남용을 줄이기 위한 복약 관리 앱입니다. 캡스톤 프로젝트 팀장을 맡았습니다.",
+    stack: ["React Native", "NestJS", "OpenCV"],
     sections: [
       {
         heading: "팀 구성",
@@ -135,7 +148,12 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
-    links: [],
+    links: [
+      {
+        label: "GitHub 저장소",
+        href: "https://github.com/YunDaeHyeon/DrPill",
+      },
+    ],
   },
 ];
 
@@ -146,7 +164,7 @@ export const decisions: Decision[] = [
     date: "2026-02-04",
     status: "SHIPPED",
     summary:
-      "클로저를 AsyncStream으로 옮기며 일부러 남긴 것이 있었고, 동료의 개선 제안도 근거를 따져 하나는 받고 하나는 거절했습니다.",
+      "클로저를 AsyncStream으로 옮겼습니다. 동료가 준 개선 제안은 근거를 따져 하나는 받아들이고, 하나는 그대로 뒀습니다.",
     sections: [
       {
         heading: "배경",
@@ -176,11 +194,11 @@ export const decisions: Decision[] = [
   },
   {
     slug: "relentless-troubleshooting",
-    title: "포기하지 않는 트러블슈팅",
+    title: "바꿔도 사라지지 않은 크래시",
     date: "2026-01-27",
     status: "SHIPPED",
     summary:
-      "렌더링 방식과 공유 방식을 번갈아 바꿔도 크래시가 그대로였고, 그 사실 자체가 원인이 코드 밖에 있다는 단서였습니다.",
+      "렌더링 방식도, 공유 방식도 바꿔봤지만 크래시는 그대로였습니다. 그래서 원인이 코드 밖에 있을 수 있다고 봤습니다.",
     sections: [
       {
         heading: "시도한 것",
@@ -218,7 +236,7 @@ export const decisions: Decision[] = [
     date: "2026-01",
     status: "IN PROGRESS",
     summary:
-      "AI에게 전체 코드를 맡기자 맥락과 무관한 리뷰가 나왔고, 범위를 좁힌 뒤에도 남는 한계를 인정하고 역할을 나눴습니다.",
+      "AI에게 전체 코드를 보여줬더니 지금 변경과 상관없는 리뷰가 나왔습니다. PR의 변경사항만 전달하도록 범위를 좁혔고, 그래도 남는 부분은 사람이 판단하기로 했습니다.",
     sections: [
       {
         heading: "배경",
@@ -255,7 +273,7 @@ export const decisions: Decision[] = [
     date: "2025-12-18",
     status: "DISCONTINUED",
     summary:
-      "위치에 AR 콘텐츠를 고정하는 기능을 3주간 검증했고, 서비스 수준에서는 불가능하다고 결론 내려 만들기 전에 접었습니다.",
+      "위치에 AR 콘텐츠를 고정하는 기능을 3주 동안 검증했습니다. 기술적으로 되는 것과 서비스에 필요한 수준 사이 차이가 컸고, 더 만들기 전에 중단했습니다.",
     sections: [
       {
         heading: "검증한 것",
@@ -307,12 +325,12 @@ export const about: About = {
     {
       org: "전북신용보증재단 일경험",
       period: "2026.04 — 2026.07",
-      note: "보증드림 앱 사용법 안내, 엑셀 매크로 자동화로 보증서류 처리 속도 개선",
+      note: "보증드림 앱 사용법 안내, 엑셀 매크로를 이용한 보증서류 처리 자동화",
     },
     {
       org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
       period: "2025.06 — 2026.02",
-      note: "8개월 풀타임, 미러링부스 그룹 프로젝트 진행",
+      note: "8개월 풀타임으로 참여했고, 미러링부스 그룹 프로젝트를 진행했습니다.",
     },
     {
       org: "카카오엔터프라이즈X구름 군장병 AI·SW 역량강화과정",
@@ -328,7 +346,6 @@ export const about: About = {
   ],
   awards: [
     "캡스톤디자인 경진대회 대상 (2024)",
-    "컴공인의날 기업연계프로젝트 우수상 (2024)",
     "기업분석·면접경진대회 대상 (2025, 단독 참가)",
   ],
   mentoring: [

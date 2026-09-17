@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DetailSections } from "@/components/detail-sections";
 import { LinkRow } from "@/components/link-row";
+import { BadgeLink } from "@/components/badge-link";
 import type { WorkItem, Decision } from "@/lib/content";
 
 export function WorkDetailContent({
@@ -24,6 +25,7 @@ export function WorkDetailContent({
           />
         )}
         {item.title}
+        {item.badge && <BadgeLink badge={item.badge} />}
       </h1>
       <p className="mt-2 font-mono text-sm text-muted-foreground">
         {item.period}
