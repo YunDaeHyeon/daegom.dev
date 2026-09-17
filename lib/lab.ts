@@ -1,4 +1,5 @@
 import "server-only";
+import type { QueryDocumentSnapshot } from "firebase-admin/firestore";
 import { getDb } from "@/lib/firebase-admin";
 import type { LabPost, LabPostSummary } from "@/lib/lab-types";
 
@@ -8,7 +9,7 @@ export { LAB_TYPE_LABELS, formatLabDate } from "@/lib/lab-types";
 export async function getAllLabPosts(): Promise<LabPostSummary[]> {
   const db = getDb();
   const snap = await db.collection("labPosts").orderBy("createdAt", "desc").get();
-  return snap.docs.map((doc) => {
+  return snap.docs.map((doc: QueryDocumentSnapshot) => {
     const data = doc.data();
     return {
       slug: data.slug,
