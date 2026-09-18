@@ -10,8 +10,6 @@ const primaryLinks = [
   { href: "#lab", label: "Lab" },
 ];
 
-const upcomingLinks = ["Writing"];
-
 export function Nav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -41,15 +39,6 @@ export function Nav() {
             >
               {link.label}
             </a>
-          ))}
-          {upcomingLinks.map((label) => (
-            <span
-              key={label}
-              aria-disabled="true"
-              className="hidden shrink-0 text-muted-foreground/50 sm:inline"
-            >
-              {label}
-            </span>
           ))}
         </nav>
       </div>
