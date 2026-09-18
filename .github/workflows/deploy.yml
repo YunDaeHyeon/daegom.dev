@@ -68,7 +68,7 @@ jobs:
       - name: Install prod dependencies & restart on EC2
         run: |
           ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            'bash -lic "cd ~/daegom-portfolio && npm ci --omit=dev && pm2 restart daegom-portfolio"'
+            'bash -lic "bash ~/daegom-portfolio/deploy/remote-deploy.sh"'
 
       - name: Clean up SSH key
         if: always()

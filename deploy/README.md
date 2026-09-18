@@ -76,7 +76,13 @@ cd ~/daegom-portfolio && npm ci --omit=dev
 
 Node 버전: Next.js 16 자체는 Node 20.9 이상이면 되지만, `firebase-admin`
 (Lab 기능의 Firestore 연동)이 **Node 22 이상**을 요구한다. `node -v`로
-확인하고, 낮으면 nvm으로 22 LTS 설치.
+확인하고, 낮으면 nvm으로 22 LTS 설치 (`nvm install 22 && nvm alias default 22`).
+
+**주의**: GitHub Actions 워크플로우의 Node 버전을 22로 맞춰도 그건 CI
+러너에만 적용된다 — EC2 박스 자체의 Node 버전은 별개로 22여야 한다.
+낮으면 `@google-cloud/firestore`(firebase-admin의 optionalDependency)가
+`npm ci` 중 EBADENGINE으로 조용히 빠지고, `/lab` 접속 시에만
+"Cannot find package 'firebase-admin-...'" 500 에러로 나타난다.
 
 ## 4. PM2로 프로세스 상시 구동
 
@@ -132,11 +138,20 @@ sudo certbot --nginx -d n8n.daegom.dev
 - [ ] 기존 워크플로우의 웹훅이 새 도메인에서도 정상 동작하는지 (하나 직접 트리거해보기)
 - [ ] `pm2 status`로 포트폴리오 프로세스가 `online`인지
 
-## 재배포 시 (다음부터)
+## 자동 배포 (GitHub Actions)
+
+`main` 브랜치에 push하면 `.github/workflows/deploy.yml`이 로컬 빌드 →
+rsync → `deploy/remote-deploy.sh` 실행(EC2에서 Node 22 확인 →
+`npm ci --omit=dev` → `pm2 restart --update-env` → `/lab` 헬스체크) 순으로
+자동 배포한다. `pm2 restart`에 `--update-env`가 빠지면 pm2 데몬이 최초
+기동 시점의 낡은 PATH/Node 버전을 계속 캐싱해서 쓸 수 있으니, 수동으로
+재시작할 때도 반드시 `--update-env`를 붙일 것.
+
+## 재배포 시 (수동으로 다시 할 때)
 
 ```bash
 git pull
 npm ci
 npm run build
-pm2 restart daegom-portfolio
+bash deploy/remote-deploy.sh   # Node 버전 확인 + npm ci --omit=dev + pm2 restart --update-env + 헬스체크
 ```
