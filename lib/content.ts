@@ -49,7 +49,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
     summary:
-      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다. 촬영 결과 공유 기능과 초기 스트리밍 구조를 맡았습니다.",
+      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다. 기기 간 통신과 촬영 결과 공유를 맡았습니다.",
     stack: [
       "Swift",
       "SwiftUI",
@@ -99,7 +99,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
     summary:
-      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다. 팀장을 맡았고 TestFlight까지 배포했습니다.",
+      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다. 팀장으로 개발했고 TestFlight까지 배포했습니다.",
     stack: ["Swift", "UIKit", "NMapsMap", "Firebase"],
     sections: [
       {

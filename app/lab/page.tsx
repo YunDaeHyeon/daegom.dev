@@ -23,7 +23,7 @@ export default async function LabPage() {
           Lab
         </h1>
         <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-          업무 밖에서 공부하거나 만들어본 것들의 기록입니다. 총 {posts.length}개.
+          공부하고, 만들어보고, 확인한 것들을 기록했습니다.
         </p>
 
         <div className="mt-10">

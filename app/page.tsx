@@ -65,9 +65,6 @@ export default async function Home() {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             Projects
           </h2>
-          <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            직접 만든 프로젝트에서 제가 맡았던 부분만 적었습니다.
-          </p>
 
           <ul className="mt-10 divide-y divide-border border-t border-border">
             {projectItems.map((item) => (
@@ -123,9 +120,6 @@ export default async function Home() {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             About
           </h2>
-          <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            학력과 개발 관련 활동을 적었습니다.
-          </p>
 
           <div className="mt-10 space-y-12">
             <div>
@@ -213,8 +207,7 @@ export default async function Home() {
             Lab
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            업무 밖에서 공부하거나 만들어본 것들의 기록입니다. 총{" "}
-            {labPosts.length}개.
+            공부하고, 만들어보고, 확인한 것들을 기록했습니다.
           </p>
 
           <ul className="mt-10 divide-y divide-border border-t border-border">
