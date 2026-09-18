@@ -136,7 +136,9 @@ Individual Work and Decision items break this rule on purpose: each has its own 
 ### Named Rules
 **The Continuous Scroll Rule.** Home → Work → Decisions → About → Lab is one scroll, not five destinations. Nav links move the reading position within the page (`<a href="#section">`), they never navigate to a new document.
 
-Each section is at least one viewport tall (`min-h-dvh`) with `scroll-margin-top` matching the sticky header's height, so a nav click settles the section cleanly below the header rather than partially behind it. `scroll-behavior: smooth` (disabled under `prefers-reduced-motion`) animates that jump. Scroll-snap was tried and removed — it fought ordinary scrolling and felt uncomfortable rather than assistive; free scrolling plus the smooth anchor-jump on click is the deliberate choice.
+Each section carries `scroll-margin-top` matching the sticky header's height, so a nav click settles the section cleanly below the header rather than partially behind it. `scroll-behavior: smooth` (disabled under `prefers-reduced-motion`) animates that jump. Scroll-snap was tried and removed — it fought ordinary scrolling and felt uncomfortable rather than assistive; free scrolling plus the smooth anchor-jump on click is the deliberate choice.
+
+Only the hero (`#top`) forces `min-h-dvh`, for a deliberate full-viewport first impression. Content sections (Projects, About, Lab) size to their own content plus the documented `section-y`/`section-y-lg` padding instead — an earlier version forced `min-h-dvh` on every section, but on tall viewports it left content-light sections (About) swimming in empty space with no relationship to how much they actually had to show; direct user feedback reversed it.
 
 ## Elevation & Depth
 

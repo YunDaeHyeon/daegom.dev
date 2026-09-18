@@ -59,7 +59,7 @@ export default async function Home() {
       <section
         id="projects"
         tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -114,21 +114,21 @@ export default async function Home() {
       <section
         id="about"
         tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             About
           </h2>
 
-          <div className="mt-10 space-y-12">
+          <div className="mt-10 space-y-10">
             <div>
               <h3 className="text-base font-semibold text-foreground">학력</h3>
-              <ul className="mt-4 divide-y divide-border border-t border-border">
+              <ul className="mt-4 divide-y divide-border">
                 {about.education.map((entry) => (
                   <li
                     key={entry.school}
-                    className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between"
+                    className="flex flex-col gap-1 py-4 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between"
                   >
                     <span className="text-sm text-foreground">
                       {entry.school} · {entry.major}
@@ -141,11 +141,11 @@ export default async function Home() {
               </ul>
             </div>
 
-            <div className="border-t border-border pt-12">
+            <div>
               <h3 className="text-base font-semibold text-foreground">활동</h3>
-              <ul className="mt-4 divide-y divide-border border-t border-border">
+              <ul className="mt-4 divide-y divide-border">
                 {about.experience.map((entry) => (
-                  <li key={entry.org} className="py-4">
+                  <li key={entry.org} className="py-4 first:pt-0">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                       <span className="text-sm text-foreground">
                         {entry.org}
@@ -164,17 +164,15 @@ export default async function Home() {
               </ul>
             </div>
 
-            <div className="border-t border-border pt-12">
-              <DetailSections
-                sections={[
-                  { heading: "자격증", items: about.certifications },
-                  { heading: "수상", items: about.awards },
-                  { heading: "멘토링 활동", items: about.mentoring },
-                ]}
-              />
-            </div>
+            <DetailSections
+              sections={[
+                { heading: "자격증", items: about.certifications },
+                { heading: "수상", items: about.awards },
+                { heading: "멘토링 활동", items: about.mentoring },
+              ]}
+            />
 
-            <div className="border-t border-border pt-12">
+            <div>
               <h3 className="text-base font-semibold text-foreground">Contact</h3>
               <div className="mt-4 flex flex-wrap gap-6 text-base">
                 {about.contact.map((link) => {
@@ -200,7 +198,7 @@ export default async function Home() {
       <section
         id="lab"
         tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
