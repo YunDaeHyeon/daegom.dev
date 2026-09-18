@@ -2,14 +2,14 @@ import Link from "next/link";
 import { DetailSections } from "@/components/detail-sections";
 import { LinkRow } from "@/components/link-row";
 import { StatusLabel } from "@/components/status-label";
-import type { Decision, WorkItem } from "@/lib/content";
+import type { Decision, ProjectItem } from "@/lib/content";
 
 export function DecisionDetailContent({
   decision,
-  relatedWork,
+  relatedProject,
 }: {
   decision: Decision;
-  relatedWork: WorkItem | undefined;
+  relatedProject: ProjectItem | undefined;
 }) {
   return (
     <>
@@ -29,7 +29,7 @@ export function DecisionDetailContent({
 
       <DetailSections sections={decision.sections} />
 
-      {relatedWork && (
+      {relatedProject && (
         <div className="mt-8">
           <h2 className="text-sm font-medium text-foreground">
             관련 프로젝트
@@ -37,10 +37,10 @@ export function DecisionDetailContent({
           <ul className="mt-3 space-y-2">
             <li>
               <Link
-                href={`/work/${relatedWork.slug}`}
+                href={`/projects/${relatedProject.slug}`}
                 className="text-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
               >
-                {relatedWork.title}
+                {relatedProject.title}
               </Link>
             </li>
           </ul>

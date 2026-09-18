@@ -3,13 +3,13 @@ import Link from "next/link";
 import { DetailSections } from "@/components/detail-sections";
 import { LinkRow } from "@/components/link-row";
 import { BadgeLink } from "@/components/badge-link";
-import type { WorkItem, Decision } from "@/lib/content";
+import type { ProjectItem, Decision } from "@/lib/content";
 
-export function WorkDetailContent({
+export function ProjectDetailContent({
   item,
   related,
 }: {
-  item: WorkItem;
+  item: ProjectItem;
   related: Decision[];
 }) {
   return (

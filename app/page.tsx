@@ -1,14 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/container";
-import { StatusLabel } from "@/components/status-label";
 import { ProfilePhoto } from "@/components/profile-photo";
-import { LinkRow } from "@/components/link-row";
 import { BadgeLink } from "@/components/badge-link";
 import { DetailSections } from "@/components/detail-sections";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
-import { workItems, decisions, about } from "@/lib/content";
+import { projectItems, about } from "@/lib/content";
 import { getAllLabPosts, formatLabDate } from "@/lib/lab";
 
 export const revalidate = 3600;
@@ -46,16 +44,10 @@ export default async function Home() {
               </div>
               <div className="mt-10 flex items-center gap-8 text-sm">
                 <Link
-                  href="#work"
+                  href="#projects"
                   className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
                 >
-                  작업물 보기
-                </Link>
-                <Link
-                  href="#decisions"
-                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  의사결정 기록 보기
+                  프로젝트 보기
                 </Link>
               </div>
             </div>
@@ -65,20 +57,20 @@ export default async function Home() {
       </section>
 
       <section
-        id="work"
+        id="projects"
         tabIndex={-1}
         className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
       >
         <Container>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Work
+            Projects
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
             직접 만든 프로젝트에서 제가 맡았던 부분만 적었습니다.
           </p>
 
           <ul className="mt-10 divide-y divide-border border-t border-border">
-            {workItems.map((item) => (
+            {projectItems.map((item) => (
               <li key={item.slug} className="py-6 sm:py-7">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                   <h3 className="flex items-center gap-2 text-base font-medium text-foreground">
@@ -92,7 +84,7 @@ export default async function Home() {
                       />
                     )}
                     <Link
-                      href={`/work/${item.slug}`}
+                      href={`/projects/${item.slug}`}
                       className="underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border"
                     >
                       {item.title}
@@ -116,49 +108,6 @@ export default async function Home() {
                     </li>
                   ))}
                 </ul>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      <section
-        id="decisions"
-        tabIndex={-1}
-        className="min-h-dvh scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
-      >
-        <Container>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Decisions
-          </h2>
-          <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            작업하면서 내렸던 판단을 적었습니다. 중단하거나 보류한 것도
-            포함됩니다.
-          </p>
-
-          <ul className="mt-10 divide-y divide-border border-t border-border">
-            {decisions.map((decision) => (
-              <li key={decision.slug} className="py-6 sm:py-7">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="text-base font-medium text-foreground">
-                    <Link
-                      href={`/decisions/${decision.slug}`}
-                      className="underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border"
-                    >
-                      {decision.title}
-                    </Link>
-                  </h3>
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {decision.date}
-                    </span>
-                    <StatusLabel status={decision.status} />
-                  </div>
-                </div>
-                <p className="mt-2 max-w-[65ch] text-sm leading-6 text-muted-foreground">
-                  {decision.summary}
-                </p>
-                <LinkRow links={decision.links} />
               </li>
             ))}
           </ul>

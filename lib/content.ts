@@ -3,7 +3,7 @@ import type { Status } from "@/components/status-label";
 export type ExternalLink = { label: string; href: string };
 export type DetailSection = { heading: string; items: string[] };
 
-export type WorkItem = {
+export type ProjectItem = {
   slug: string;
   title: string;
   icon?: string;
@@ -41,10 +41,10 @@ export type Decision = {
   summary: string;
   sections: DetailSection[];
   links: ExternalLink[];
-  relatedWork?: string;
+  relatedProject?: string;
 };
 
-export const workItems: WorkItem[] = [
+export const projectItems: ProjectItem[] = [
   {
     slug: "mirroring-booth",
     title: "미러링부스",
@@ -86,9 +86,13 @@ export const workItems: WorkItem[] = [
       },
     ],
     relatedDecisions: [
-      "relentless-troubleshooting",
-      "defining-ai-review-scope",
+      "video-transfer-mode-tradeoff",
       "choosing-which-feedback-to-take",
+      "relentless-troubleshooting",
+      "browser-advertiser-encryption-mismatch",
+      "fastlane-lane-misunderstanding",
+      "browser-refactor-hybrid-decision",
+      "defining-ai-review-scope",
     ],
   },
   {
@@ -159,6 +163,30 @@ export const workItems: WorkItem[] = [
 
 export const decisions: Decision[] = [
   {
+    slug: "video-transfer-mode-tradeoff",
+    title: "실시간성과 완전성, 같은 방식으로 보낼 수 없었습니다",
+    date: "2026-02-25",
+    status: "SHIPPED",
+    summary:
+      "비디오와 사진을 같은 방식으로 전송하지 않았습니다. 실시간 스트림은 손실을 감수하고, 완전한 결과물이 필요한 사진은 신뢰성을 우선했습니다.",
+    sections: [
+      {
+        heading: "판단",
+        items: [
+          "비디오는 실시간성이 중요하고 일부 패킷 손실을 허용해도 된다고 보고 MultipeerConnectivity의 .unreliable 전송을 채택",
+          "인코딩은 지연을 최소화하기 위해 H.264 Baseline Profile + VideoToolbox, B-frame 비활성화로 구성",
+          "사진은 파일 크기가 크고 한 장이라도 완전해야 하므로 .unreliable 대신 sendResource로 분리",
+        ],
+      },
+      {
+        heading: "결론",
+        items: ["데이터 성격에 따라 전송 방식과 인코딩 설정을 다르게 가져가는 것으로 역할을 분리해 확정"],
+      },
+    ],
+    links: [{ label: "전체 기록", href: "/lab/프로토타입-기술-스택-및-구현-방식" }],
+    relatedProject: "mirroring-booth",
+  },
+  {
     slug: "choosing-which-feedback-to-take",
     title: "제안을 가려 받는 것도 판단입니다",
     date: "2026-02-04",
@@ -190,7 +218,7 @@ export const decisions: Decision[] = [
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/287",
       },
     ],
-    relatedWork: "mirroring-booth",
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "relentless-troubleshooting",
@@ -228,7 +256,40 @@ export const decisions: Decision[] = [
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
     ],
-    relatedWork: "mirroring-booth",
+    relatedProject: "mirroring-booth",
+  },
+  {
+    slug: "browser-advertiser-encryption-mismatch",
+    title: "설정이 아니라 놓친 코드 한 줄이었습니다",
+    date: "2026-01-16",
+    status: "SHIPPED",
+    summary:
+      "미러링·리모트 기기 간 세션 암호화 설정이 계속 어긋나는 문제를 겪었습니다. 설정값을 두 번 바꿔가며 실패한 뒤에야, 진짜 원인이 코드에서 빠뜨린 한 줄이었다는 걸 알았습니다.",
+    sections: [
+      {
+        heading: "시도",
+        items: [
+          "remoteSession의 암호화를 .required에서 .none으로 바꿔 재연결 → 이유를 알 수 없는 암호화 오류 재발",
+          "명령 세션을 하나 더 분리하는 2단계 구조로 변경 → 연결은 되지만 관리할 세션이 늘고 체감 지연도 커짐",
+          "동료의 PR 피드백('remote session이 꼭 .required여야 했나요?')을 계기로 처음부터 다시 의심",
+        ],
+      },
+      {
+        heading: "판단",
+        items: [
+          "확신 없이 넘어가지 않기 위해 PR을 Draft로 돌리고, develop에서 별도 테스트 브랜치를 파서 원인을 격리해 재현하기로 결정",
+          "테스트 브랜치에서 remoteSession을 다시 .none으로 되돌리고, Browser의 didReceive 핸들러에 remoteSession 분기가 빠져있었다는 것을 발견",
+          "설정값이 아니라 수신 핸들러 코드 누락이 처음부터 진짜 원인이었음을 확인",
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "PR #111",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/111",
+      },
+    ],
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "fastlane-lane-misunderstanding",
@@ -281,6 +342,7 @@ export const decisions: Decision[] = [
       },
     ],
     links: [{ label: "전체 기록", href: "/lab/Browser-리팩터링-일지" }],
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "defining-ai-review-scope",
@@ -317,7 +379,7 @@ export const decisions: Decision[] = [
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
     ],
-    relatedWork: "mirroring-booth",
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "ar-anchor-validation",
@@ -351,268 +413,6 @@ export const decisions: Decision[] = [
       },
     ],
     links: [],
-  },
-  {
-    slug: "airdrop-share-sheet-across-devices",
-    title: "에어드랍은 API가 아니라 시스템 공유 기능의 일부였습니다",
-    date: "2025-12-15",
-    status: "SHIPPED",
-    summary:
-      "에어드랍 공유를 직접 구현하려다, 이것이 별도 API가 아니라 iOS의 공유 시스템(Activity) 중 하나라는 걸 알게 됐습니다. UIKit과 SwiftUI 각각에 맞는 구현 방식을 정리했습니다.",
-    sections: [
-      {
-        heading: "시도와 발견",
-        items: [
-          "UIActivityViewController로 구현 시작 — activityItems/applicationActivities 동작 확인",
-          "아이패드 실기기 테스트 중 팝오버 위치 미지정 시 크래시 재현",
-          "SwiftUI(16+)의 ShareLink는 Transferable 프로토콜이 별도로 필요함을 확인",
-        ],
-      },
-      {
-        heading: "결론",
-        items: [
-          "아이폰은 전체화면, 아이패드는 팝오버로 모달 표시 방식이 다르다는 것이 크래시의 근본 원인이었음을 확인",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/Airdrop-구현-방법을-알아보자" }],
-  },
-  {
-    slug: "vapor-eb-deploy-my-mistake",
-    title: "제 실수였습니다, 라고 인정하는 데 2시간 걸렸습니다",
-    date: "2025-10-12",
-    status: "IN PROGRESS",
-    summary:
-      "Vapor 서버를 Elastic Beanstalk에 자동 배포하다 두 번의 실패를 겪었습니다. 하나는 빌드 산출물 크기 문제였고, 다른 하나는 제가 작성한 설정 파일이 원인이었습니다.",
-    sections: [
-      {
-        heading: "시도",
-        items: [
-          "eb deploy 시 zip 용량 초과(FileTooLargeError) 발생 → .ebignore로 빌드 산출물 제외",
-          "재배포 시 SPM 'overlapping sources' 에러 발생",
-          "원인을 추적한 끝에 방금 만든 .ebignore가 Tests/ 디렉터리까지 제외해버렸다는 것을 발견",
-          "프리티어 인스턴스에서 빌드 타임아웃 발생 — swap 메모리로 우회 시도",
-        ],
-      },
-      {
-        heading: "판단",
-        items: [
-          "CLI에서는 타임아웃으로 보여도 AWS 콘솔에서는 실제 배포가 완료되어 있는 경우가 있음을 확인",
-          "완전 자동화(git push만으로 배포)는 이번 범위에서 완성하지 못해 다음 과제로 남김",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/Vapor-Elastic-Beanstalk-배포기" }],
-  },
-  {
-    slug: "banknote-classifier-split-ratio",
-    title: "데이터 분할 비율, 감이 아니라 실측으로 정했습니다",
-    date: "2025-10-07",
-    status: "SHIPPED",
-    summary:
-      "지폐 이미지 분류 모델을 만들면서 훈련/검증/테스트 비율을 세 가지로 나눠 직접 비교했습니다. 문서화되지 않은 부분은 인정하고, 판단 가능한 부분은 실측 데이터로 결정했습니다.",
-    sections: [
-      {
-        heading: "시도",
-        items: [
-          "8:1:1 비율로 1차 모델 학습(45 iteration)",
-          "9:0.5:0.5 비율에 Flip augmentation을 더해 2차 모델 학습(25 iteration)",
-          "7:1.5:1.5 비율로 3차 모델 학습 후 세 모델의 훈련/검증 정확도 비교",
-        ],
-      },
-      {
-        heading: "판단",
-        items: [
-          "CreateML의 특징 추출기 내부 알고리즘은 문서에 없다는 것을 그대로 인정",
-          "과적합-신뢰도 트레이드오프는 훈련/검증 정확도 비교로 직접 검증 가능하다고 보고 실험 설계",
-          "2차 모델(9:0.5:0.5)이 훈련 92.8%/검증 99.0%로 가장 우수해 채택",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/CreateML을-사용한-이미지-분류-모델-만들기" }],
-  },
-  {
-    slug: "toxic-review-detection-model",
-    title: "정확도만 보고 모델을 고르지 않았습니다",
-    date: "2025-09-27",
-    status: "SHIPPED",
-    summary:
-      "숙소 후기 비속어 감지 모델을 만들면서 단일 데이터셋으로는 정상 후기까지 욕설로 오탐하는 문제를 겪었습니다. 도메인이 다른 데이터셋을 섞어 재학습해 정상 판별 성능을 크게 끌어올렸습니다.",
-    sections: [
-      {
-        heading: "시도",
-        items: [
-          "멀티라벨(욕설+숙소무관) 분류를 시도했으나 CreateML이 단일 라벨만 지원해 방향 전환",
-          "문맥형 욕설·은어·오타에 강하다는 근거로 BERT CJK 계열 모델 선택",
-          "UnSmile 데이터셋만으로 학습한 모델A는 정상 후기 재현율이 낮아 F1 0.80에 그침",
-        ],
-      },
-      {
-        heading: "판단과 개선",
-        items: [
-          "문제는 모델이 아니라 '숙소 리뷰다운 정상 문장'을 학습하지 못한 데이터라고 판단",
-          "UnSmile의 욕설 데이터에 Booking.com 실제 호텔 리뷰의 정상 문장을 더한 커스텀 데이터셋으로 재학습",
-          "모델B는 정상 후기 F1 0.95로 개선되어 채택, 차단 기준(toxic 35~40%)은 잠정치로 설정",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/숙소-후기-비속어-감지-모델-구현기" }],
-  },
-  {
-    slug: "list-vs-lazyvstack-memory",
-    title: "셀을 재사용한다는 말, 진짜인지 메모리로 확인했습니다",
-    date: "2025-08-22",
-    status: "SHIPPED",
-    summary:
-      "SwiftUI List가 내부적으로 셀을 재사용한다는 설명을 그대로 받아들이지 않고, Cell Tree와 Instruments 프로파일링으로 직접 확인했습니다. List와 LazyVStack의 실제 메모리 동작 차이를 실측으로 정리했습니다.",
-    sections: [
-      {
-        heading: "검증",
-        items: [
-          "List/LazyVStack/ScrollView+LazyVStack 세 구조의 View Hierarchy를 직접 비교",
-          "List의 Cell Tree에서 dequeueReusableCell 문자열을 직접 검색해 재사용 여부 확인",
-          "Instruments(Time Profiler, Allocations)로 1000개 Row 스크롤 시 메모리 변화 프로파일링",
-        ],
-      },
-      {
-        heading: "결론",
-        items: [
-          "List는 셀을 재사용하지만 스크롤한 셀이 메모리에서 해제되지 않아 대규모 데이터엔 부적합함을 확인",
-          "ScrollView+LazyVStack은 지연 로딩으로 메모리를 일정하게 유지해 대규모 리스트에 더 유리하다고 판단",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/List와-LazyVstack-성능-분석" }],
-  },
-  {
-    slug: "keychain-when-docs-run-out",
-    title: "공식 문서가 멈춘 곳에서부터는 직접 찾았습니다",
-    date: "2025-08-09",
-    status: "SHIPPED",
-    summary:
-      "Keychain으로 민감정보를 다루면서 4개의 API(추가/조회/수정/삭제)로 구조를 정리했습니다. OSStatus 반환값의 의미는 공식 문서에 없어서, 커뮤니티 자료를 찾아 채워 넣었습니다.",
-    sections: [
-      {
-        heading: "정리",
-        items: [
-          "iOS는 앱마다 격리된 단일 Keychain을, macOS는 여러 Keychain을 쓴다는 차이 확인",
-          "Data와 Attribute를 묶어 암호화 저장하는 Item 구조를 파악",
-          "상황별로 SecItemAdd/CopyMatching/Update/Delete 4개 API를 매핑",
-        ],
-      },
-      {
-        heading: "막힌 지점과 해결",
-        items: [
-          "SecItemAdd가 반환하는 OSStatus 코드의 의미가 공식 문서에 나와 있지 않음을 확인",
-          "osstatus.com 같은 커뮤니티 레퍼런스로 대체해 코드 의미를 채워 넣음",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/KeyChain에-대해" }],
-  },
-  {
-    slug: "uitableview-static-cell-claim",
-    title: "문서 설명을 믿는 대신 새 프로젝트를 하나 더 만들었습니다",
-    date: "2025-06-17",
-    status: "SHIPPED",
-    summary:
-      "UITableView 문서에 나온 'Static Cell은 UITableViewController 없이 안 된다'는 설명을 그대로 믿지 않고, 별도 프로젝트로 직접 재현해 검증했습니다.",
-    sections: [
-      {
-        heading: "학습",
-        items: [
-          "DataSource/Delegate 구조와 UITableViewController 사용 시 자동 연결되는 부분을 코드로 직접 구현하며 비교",
-          "plain/grouped/insetGrouped 스타일과 섹션, 스와이프 액션까지 구현",
-        ],
-      },
-      {
-        heading: "검증",
-        items: [
-          "'Static Cell은 UITableViewController가 필요하다'는 문서 설명을 새 프로젝트로 직접 재현",
-          "Static Cells 속성을 바꿔가며 실제로 오류가 나는지 확인해 문서 내용이 사실임을 확인",
-          "동적 셀은 두 방식(TableViewController / 일반 ViewController) 모두 가능함을 함께 정리",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/UITableView에-대해" }],
-  },
-  {
-    slug: "pod-install-ruby-version",
-    title: "에러 로그 마지막 줄이 진짜 원인이었습니다",
-    date: "2025-01-09",
-    status: "SHIPPED",
-    summary:
-      "pod install이 gem을 못 찾는다는 에러로 실패했습니다. gem 미설치, rbenv 버전 불일치, PATH 문제 세 가지를 의심하다, 로그 마지막 줄에서 진짜 원인을 찾았습니다.",
-    sections: [
-      {
-        heading: "시도",
-        items: [
-          "gem install cocoapods 재시도 → 디렉터리 생성 오류",
-          "sudo로 재시도 → cocoapods의 의존 라이브러리 drb 설치 중 버전 오류 발생",
-          "로그를 끝까지 읽어 drb가 Ruby 2.7 이상을 요구하는데 현재 Ruby가 2.6.10이라는 것을 확인",
-        ],
-      },
-      {
-        heading: "해결",
-        items: ["rbenv로 Ruby를 3.1.2로 올리고 global 설정 후 cocoapods 재설치"],
-      },
-    ],
-    links: [
-      {
-        label: "전체 기록",
-        href: "/lab/pod-install-findspecforexe-cant-find-gem-cocoapods-0.a-with-executable-pod-GemGemNotFoundException",
-      },
-    ],
-  },
-  {
-    slug: "auth-state-loading-vs-unauthenticated",
-    title: "'아직 모름'과 '로그인 안 됨'은 다른 상태입니다",
-    date: "2024-08-07",
-    status: "SHIPPED",
-    summary:
-      "로그인된 사용자가 새로고침 시 로그인 페이지로 튕기는 버그를 만났습니다. isAuthenticated 하나로는 '확인 중'과 '로그인 안 됨'을 구분할 수 없다는 게 원인이었습니다.",
-    sections: [
-      {
-        heading: "문제",
-        items: [
-          "onAuthStateChanged의 비동기 처리가 끝나기 전에 ProtectedRoute가 먼저 렌더링됨",
-          "이 시점의 isAuthenticated는 아직 false/null이라 로그인된 사용자도 리다이렉트됨",
-        ],
-      },
-      {
-        heading: "해결",
-        items: [
-          "isCheckingAuth라는 별도 상태를 추가해 '확인 중'과 '로그인 안 됨'을 분리",
-          "확인 중에는 LoadingScreen을 보여주도록 렌더링 분기를 변경해 오탐 리다이렉트 제거",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/Firebase의-onAuthStateChanged-사용-시-초기-렌더링-문제" }],
-  },
-  {
-    slug: "vite-env-not-dotenv",
-    title: "재설치를 세 번 하고 나서야 원인을 찾았습니다",
-    date: "2024-08-07",
-    status: "SHIPPED",
-    summary:
-      "dotenv로 Firebase API 키를 관리하려다 브라우저에서 'process is not defined' 에러를 만났습니다. Firebase SDK 문제인 줄 알고 재설치만 반복하다, 빌드 도구마다 환경 변수 주입 방식이 다르다는 걸 뒤늦게 알았습니다.",
-    sections: [
-      {
-        heading: "시도",
-        items: [
-          "Firebase SDK 문제라고 짐작해 재설치를 3~4번 반복",
-          "dotenv는 Node.js 전용(process.env) 라이브러리라 브라우저 번들에서는 애초에 동작하지 않는다는 걸 확인",
-        ],
-      },
-      {
-        heading: "해결",
-        items: [
-          "Vite 프로젝트에 맞게 dotenv를 걷어내고 import.meta.env + VITE_ 접두사 방식으로 전환",
-          "TypeScript가 ImportMeta.env 타입을 인식하지 못하는 2차 오류는 env.d.ts와 tsconfig의 vite/client 타입 추가로 해결",
-        ],
-      },
-    ],
-    links: [{ label: "전체 기록", href: "/lab/Uncaught-ReferenceError-process-is-not-defined" }],
   },
 ];
 

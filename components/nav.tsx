@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 
 const primaryLinks = [
   { href: "#top", label: "Home" },
-  { href: "#work", label: "Work" },
-  { href: "#decisions", label: "Decisions" },
+  { href: "#projects", label: "Projects" },
   { href: "#about", label: "About" },
   { href: "#lab", label: "Lab" },
 ];
@@ -18,9 +17,9 @@ export function Nav() {
   const isHome = pathname === "/";
 
   // On the home page, anchors scroll within the page. On any other page
-  // (e.g. a Work/Decisions detail page), the same "#work" href would just
-  // append to the current URL and do nothing — so route back to the home
-  // anchor instead.
+  // (e.g. a Project/Decision detail page), the same "#projects" href would
+  // just append to the current URL and do nothing — so route back to the
+  // home anchor instead.
   const resolveHref = (href: string) => (isHome ? href : `/${href}`);
 
   return (
