@@ -84,6 +84,22 @@ Node 버전: Next.js 16 자체는 Node 20.9 이상이면 되지만, `firebase-ad
 `npm ci` 중 EBADENGINE으로 조용히 빠지고, `/lab` 접속 시에만
 "Cannot find package 'firebase-admin-...'" 500 에러로 나타난다.
 
+**더 근본적인 원인 (2026-09-18에 발견)**: 위 Node 버전 문제를 다 고치고
+pm2 데몬/cluster 모드까지 전부 정리해도 `/lab/[slug]`가 계속 같은
+"Cannot find package 'firebase-admin-<해시>'" 500을 냈다. 원인은
+**Turbopack 프로덕션 빌드**가 `serverExternalPackages`를 해시 붙은 합성
+패키지명(`firebase-admin-<hash>`)으로 컴파일하는데, 이 해시가 EC2에서는
+런타임에 resolve되지 않았다 (로컬 macOS에서는 우연히 성공, 원인 불명 —
+Turbopack 내부가 Rust라 더 못 들어감). `firebase-admin/app`을 해시 없이
+`node -e "import('firebase-admin/app')"`로 직접 부르면 EC2에서도 항상
+성공했으므로, 패키지 설치 자체는 문제가 아니었다.
+
+**해결**: `package.json`의 `build` 스크립트를 `next build --webpack`으로
+고정했다 (`next.config.ts` 상단 주석 참고). Webpack은 이 해시 방식을 안
+쓰고 평범한 `require`/`import`로 externalize하므로 이 버그 자체를
+피해간다. **Turbopack으로 되돌리면 이 버그가 재발한다** — `next build`
+명령에 `--webpack`이 빠지지 않았는지 재배포 전 확인할 것.
+
 ## 4. PM2로 프로세스 상시 구동
 
 저장소 루트의 `ecosystem.config.js`를 그대로 사용:
