@@ -31,7 +31,7 @@ export function LabContent({ markdown }: { markdown: string }) {
   const normalized = normalizeEmphasis(markdown);
   return (
     <div
-      className="mt-8 max-w-[70ch] text-[15px] leading-7 text-foreground
+      className="mt-8 max-w-[70ch] break-words text-[15px] leading-7 text-foreground
         [&_h1]:mt-10 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:tracking-tight
         [&_h2]:mt-9 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-tight
         [&_h3]:mt-7 [&_h3]:text-base [&_h3]:font-semibold
@@ -45,9 +45,9 @@ export function LabContent({ markdown }: { markdown: string }) {
         [&_hr]:mt-8 [&_hr]:border-border
         [&_img]:mt-5 [&_img]:rounded-sm [&_img]:border [&_img]:border-border
         [&_code]:rounded-sm [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px]
-        [&_pre]:mt-5 [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-muted [&_pre]:p-4 [&_pre]:text-[13px] [&_pre]:leading-6
+        [&_pre]:mt-5 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-muted [&_pre]:p-4 [&_pre]:text-[13px] [&_pre]:leading-6
         [&_pre_code]:bg-transparent [&_pre_code]:p-0
-        [&_table]:mt-5 [&_table]:w-full [&_table]:border-collapse [&_table]:text-sm
+        [&_table]:mt-5 [&_table]:block [&_table]:w-full [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:border-collapse [&_table]:text-sm
         [&_th]:border [&_th]:border-border [&_th]:bg-muted [&_th]:px-3 [&_th]:py-2 [&_th]:text-left
         [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-2"
     >
