@@ -1,9 +1,10 @@
-export type LabType = "study" | "troubleshoot" | "build" | "retrospective" | "conference";
+export type LabType = "study" | "experiment" | "deploy" | "troubleshoot" | "retrospective" | "conference";
 
 export const LAB_TYPE_LABELS: Record<LabType, string> = {
   study: "스터디",
+  experiment: "실험",
+  deploy: "배포",
   troubleshoot: "트러블슈팅",
-  build: "빌드",
   retrospective: "회고",
   conference: "컨퍼런스",
 };

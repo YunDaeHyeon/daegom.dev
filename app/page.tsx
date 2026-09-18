@@ -124,13 +124,13 @@ export default async function Home() {
             About
           </h2>
           <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-            학력과 경력, 그 사이의 활동을 적었습니다.
+            학력과 개발 관련 활동을 적었습니다.
           </p>
 
-          <div className="mt-10 space-y-10">
+          <div className="mt-10 space-y-12">
             <div>
-              <h3 className="text-sm font-medium text-foreground">학력</h3>
-              <ul className="mt-3 divide-y divide-border border-t border-border">
+              <h3 className="text-base font-semibold text-foreground">학력</h3>
+              <ul className="mt-4 divide-y divide-border border-t border-border">
                 {about.education.map((entry) => (
                   <li
                     key={entry.school}
@@ -147,28 +147,9 @@ export default async function Home() {
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-foreground">경력</h3>
-              <ul className="mt-3 divide-y divide-border border-t border-border">
-                {about.career.map((entry) => (
-                  <li
-                    key={entry.org}
-                    className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between"
-                  >
-                    <span className="text-sm text-foreground">
-                      {entry.org} · {entry.role}
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {entry.period}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-foreground">활동</h3>
-              <ul className="mt-3 divide-y divide-border border-t border-border">
+            <div className="border-t border-border pt-12">
+              <h3 className="text-base font-semibold text-foreground">활동</h3>
+              <ul className="mt-4 divide-y divide-border border-t border-border">
                 {about.experience.map((entry) => (
                   <li key={entry.org} className="py-4">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
@@ -189,17 +170,19 @@ export default async function Home() {
               </ul>
             </div>
 
-            <DetailSections
-              sections={[
-                { heading: "자격증", items: about.certifications },
-                { heading: "수상", items: about.awards },
-                { heading: "멘토링 활동", items: about.mentoring },
-              ]}
-            />
+            <div className="border-t border-border pt-12">
+              <DetailSections
+                sections={[
+                  { heading: "자격증", items: about.certifications },
+                  { heading: "수상", items: about.awards },
+                  { heading: "멘토링 활동", items: about.mentoring },
+                ]}
+              />
+            </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-foreground">Contact</h3>
-              <div className="mt-3 flex flex-wrap gap-6 text-sm">
+            <div className="border-t border-border pt-12">
+              <h3 className="text-base font-semibold text-foreground">Contact</h3>
+              <div className="mt-4 flex flex-wrap gap-6 text-base">
                 {about.contact.map((link) => {
                   const isExternal = !link.href.startsWith("mailto:");
                   return (

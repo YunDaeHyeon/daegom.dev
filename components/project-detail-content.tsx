@@ -46,11 +46,13 @@ export function ProjectDetailContent({
       </ul>
       <LinkRow links={item.links} />
 
-      <DetailSections sections={item.sections} />
+      <div className="mt-10">
+        <DetailSections sections={item.sections} />
+      </div>
 
       {related.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-sm font-medium text-foreground">
+          <h2 className="text-sm font-semibold text-foreground">
             관련 Decisions
           </h2>
           <ul className="mt-3 space-y-2">

@@ -27,11 +27,13 @@ export function DecisionDetailContent({
       </p>
       <LinkRow links={decision.links} />
 
-      <DetailSections sections={decision.sections} />
+      <div className="mt-10">
+        <DetailSections sections={decision.sections} />
+      </div>
 
       {relatedProject && (
         <div className="mt-8">
-          <h2 className="text-sm font-medium text-foreground">
+          <h2 className="text-sm font-semibold text-foreground">
             관련 프로젝트
           </h2>
           <ul className="mt-3 space-y-2">

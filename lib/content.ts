@@ -20,12 +20,10 @@ export type ProjectItem = {
 };
 
 export type EducationEntry = { school: string; major: string; period: string };
-export type CareerEntry = { org: string; role: string; period: string };
 export type ExperienceEntry = { org: string; period: string; note?: string };
 
 export type About = {
   education: EducationEntry[];
-  career: CareerEntry[];
   experience: ExperienceEntry[];
   certifications: string[];
   awards: string[];
@@ -424,22 +422,10 @@ export const about: About = {
       period: "2020.03 — 2026.02",
     },
   ],
-  career: [
-    {
-      org: "(주)엔진이엔티",
-      role: "STT 품질검수 프리랜서",
-      period: "2021.08 — 2021.12",
-    },
-  ],
   experience: [
     {
       org: "KB-Bridge AI 활용 데이터분석 과정",
       period: "2026.08 — 진행중",
-    },
-    {
-      org: "전북신용보증재단 일경험",
-      period: "2026.04 — 2026.07",
-      note: "보증드림 앱 사용법 안내, 엑셀 매크로를 이용한 보증서류 처리 자동화",
     },
     {
       org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
@@ -448,7 +434,7 @@ export const about: About = {
     },
     {
       org: "카카오엔터프라이즈X구름 군장병 AI·SW 역량강화과정",
-      period: "2023",
+      period: "2023.03 — 2023.06",
       note: "수료",
     },
   ],
@@ -456,11 +442,11 @@ export const about: About = {
     "정보처리기사",
     "SQLD",
     "리눅스마스터 2급",
-    "정보처리기능사",
+    "프로그래밍기능사",
   ],
   awards: [
-    "캡스톤디자인 경진대회 대상 (2024)",
-    "기업분석·면접경진대회 대상 (2025, 단독 참가)",
+    "공학교육원 캡스톤디자인 경진대회 대상 (2024)",
+    "대학일자리플러스센터 기업분석 면접경진대회 대상 (2025)",
   ],
   mentoring: [
     "소프트웨어중심대학 SW길잡이 멘토단",
