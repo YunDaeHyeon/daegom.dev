@@ -424,7 +424,7 @@ export const about: About = {
   ],
   experience: [
     {
-      org: "KB-Bridge AI 활용 데이터분석 과정",
+      org: "KB국민은행 KB-Bridge AI 활용 데이터 분석 과정",
       period: "2026.08 — 진행중",
     },
     {
