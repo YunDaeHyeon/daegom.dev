@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { LabList } from "@/components/lab-list";
@@ -55,7 +56,9 @@ export default async function LabPage() {
         )}
 
         <div className="mt-10">
-          <LabList posts={posts} />
+          <Suspense fallback={null}>
+            <LabList posts={posts} />
+          </Suspense>
         </div>
       </Container>
     </main>

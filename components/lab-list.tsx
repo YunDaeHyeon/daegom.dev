@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LAB_TYPE_LABELS, formatLabDate, type LabPostSummary, type LabType } from "@/lib/lab-types";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
@@ -9,31 +10,50 @@ import { StackTags } from "@/components/stack-tags";
 const PAGE_SIZE = 10;
 
 export function LabList({ posts }: { posts: LabPostSummary[] }) {
-  const [filter, setFilter] = useState<LabType | "all">("all");
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const availableTypes = useMemo(() => {
     const set = new Set(posts.map((p) => p.type));
     return (Object.keys(LAB_TYPE_LABELS) as LabType[]).filter((t) => set.has(t));
   }, [posts]);
 
+  const typeParam = searchParams.get("type");
+  const filter: LabType | "all" =
+    typeParam && (availableTypes as string[]).includes(typeParam) ? (typeParam as LabType) : "all";
+
   const filtered = filter === "all" ? posts : posts.filter((p) => p.type === filter);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
-  useEffect(() => {
-    setPage(1);
-  }, [filter]);
+  const pageParam = Number(searchParams.get("page"));
+  const page = Number.isFinite(pageParam) && pageParam >= 1 && pageParam <= totalPages ? pageParam : 1;
+
+  function updateParams(next: { type?: LabType | "all"; page?: number }) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (next.type !== undefined) {
+      if (next.type === "all") params.delete("type");
+      else params.set("type", next.type);
+      params.delete("page");
+    }
+    if (next.page !== undefined) {
+      if (next.page <= 1) params.delete("page");
+      else params.set("page", String(next.page));
+    }
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
 
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>
+        <FilterButton active={filter === "all"} onClick={() => updateParams({ type: "all" })}>
           전체 ({posts.length})
         </FilterButton>
         {availableTypes.map((t) => (
-          <FilterButton key={t} active={filter === t} onClick={() => setFilter(t)}>
+          <FilterButton key={t} active={filter === t} onClick={() => updateParams({ type: t })}>
             {LAB_TYPE_LABELS[t]} ({posts.filter((p) => p.type === t).length})
           </FilterButton>
         ))}
@@ -62,13 +82,13 @@ export function LabList({ posts }: { posts: LabPostSummary[] }) {
 
       {totalPages > 1 && (
         <nav className="mt-8 flex items-center justify-center gap-4" aria-label="페이지네이션">
-          <PageButton disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
+          <PageButton disabled={page === 1} onClick={() => updateParams({ page: page - 1 })}>
             이전
           </PageButton>
           <span className="font-mono text-xs text-muted-foreground">
             {page} / {totalPages}
           </span>
-          <PageButton disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}>
+          <PageButton disabled={page === totalPages} onClick={() => updateParams({ page: page + 1 })}>
             다음
           </PageButton>
         </nav>
