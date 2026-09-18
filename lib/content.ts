@@ -49,7 +49,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
     summary:
-      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다. 기기 간 통신과 촬영 결과 공유를 맡았습니다.",
+      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다.",
     stack: [
       "Swift",
       "SwiftUI",
@@ -99,7 +99,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
     summary:
-      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다. 팀장으로 개발했고 TestFlight까지 배포했습니다.",
+      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다.",
     stack: ["Swift", "UIKit", "NMapsMap", "Firebase"],
     sections: [
       {
@@ -133,7 +133,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/drpill.png",
     period: "2024.09 — 2024.12",
     summary:
-      "약물 오남용을 줄이기 위한 복약 관리 앱입니다. 캡스톤 프로젝트 팀장을 맡았습니다.",
+      "약물 오남용을 줄이기 위한 복약 관리 앱입니다.",
     stack: ["React Native", "NestJS", "OpenCV"],
     sections: [
       {
@@ -430,7 +430,6 @@ export const about: About = {
     {
       org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
       period: "2025.06 — 2026.02",
-      note: "8개월 풀타임으로 참여했고, 미러링부스 그룹 프로젝트를 진행했습니다.",
     },
     {
       org: "카카오엔터프라이즈X구름 군장병 AI·SW 역량강화과정",
@@ -453,8 +452,7 @@ export const about: About = {
     "소프트웨어중심대학 SW멘토-멘티",
   ],
   contact: [
-    { label: "이메일", href: "mailto:daehyeon.ydh@gmail.com" },
+    { label: "daehyeon.ydh@gmail.com", href: "mailto:daehyeon.ydh@gmail.com" },
     { label: "GitHub", href: "https://github.com/YunDaeHyeon" },
-    { label: "Velog", href: "https://velog.io/@dxxh_e" },
   ],
 };

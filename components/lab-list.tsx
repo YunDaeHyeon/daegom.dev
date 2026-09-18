@@ -64,12 +64,12 @@ export function LabList({ posts }: { posts: LabPostSummary[] }) {
           <li key={post.slug} className="py-4">
             <Link href={`/lab/${post.slug}`} className="block">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                <span className="text-sm text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
+                <span className="text-base text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
                   {post.title}
                 </span>
                 <span className="flex shrink-0 items-center gap-3">
                   <LabTypeBadge type={post.type} />
-                  <span className="font-mono text-xs text-muted-foreground">
+                  <span className="font-mono text-sm text-muted-foreground">
                     {formatLabDate(post.createdAt)}
                   </span>
                 </span>
@@ -85,7 +85,7 @@ export function LabList({ posts }: { posts: LabPostSummary[] }) {
           <PageButton disabled={page === 1} onClick={() => updateParams({ page: page - 1 })}>
             이전
           </PageButton>
-          <span className="font-mono text-xs text-muted-foreground">
+          <span className="font-mono text-sm text-muted-foreground">
             {page} / {totalPages}
           </span>
           <PageButton disabled={page === totalPages} onClick={() => updateParams({ page: page + 1 })}>

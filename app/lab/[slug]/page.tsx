@@ -41,7 +41,7 @@ export default async function LabDetailPage({
           </h1>
           <div className="mt-3 flex items-center gap-3">
             <LabTypeBadge type={post.type} />
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-mono text-sm text-muted-foreground">
               {formatLabDate(post.createdAt)}
             </span>
           </div>

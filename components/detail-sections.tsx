@@ -5,16 +5,16 @@ export function DetailSections({ sections }: { sections: DetailSection[] }) {
     <div className="space-y-8">
       {sections.map((section) => (
         <div key={section.heading}>
-          <h2 className="text-sm font-semibold text-foreground">
+          <h2 className="text-base font-semibold text-foreground">
             {section.heading}
           </h2>
           <ul className="mt-3 space-y-2">
             {section.items.map((item, i) => (
               <li
                 key={i}
-                className="flex gap-2 text-sm leading-6 text-muted-foreground"
+                className="flex gap-2 text-base leading-7 text-foreground/90"
               >
-                <span aria-hidden="true" className="text-muted-foreground/50">
+                <span aria-hidden="true" className="text-muted-foreground">
                   —
                 </span>
                 <span>{item}</span>

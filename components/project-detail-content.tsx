@@ -30,7 +30,7 @@ export function ProjectDetailContent({
       <p className="mt-2 font-mono text-sm text-muted-foreground">
         {item.period}
       </p>
-      <p className="mt-6 max-w-[65ch] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+      <p className="mt-6 max-w-[65ch] text-lg font-medium leading-8 text-foreground sm:text-xl sm:leading-9">
         {item.summary}
       </p>
 
@@ -52,7 +52,7 @@ export function ProjectDetailContent({
 
       {related.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-sm font-semibold text-foreground">
+          <h2 className="text-base font-semibold text-foreground">
             관련 Decisions
           </h2>
           <ul className="mt-3 space-y-2">
@@ -60,7 +60,7 @@ export function ProjectDetailContent({
               <li key={d.slug}>
                 <Link
                   href={`/decisions/${d.slug}`}
-                  className="text-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                  className="text-base text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
                 >
                   {d.title}
                 </Link>

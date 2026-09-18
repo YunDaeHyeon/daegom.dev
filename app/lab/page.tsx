@@ -22,7 +22,7 @@ export default async function LabPage() {
         <h1 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
           Lab
         </h1>
-        <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
+        <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
           직접 구현하고 검증한 내용을 기록했습니다.
         </p>
 

@@ -15,7 +15,7 @@ colors:
   muted-dark: "#232325"
   border-dark: "#38383a"
   primary-dark: "#f5f5f7"
-  secondary-dark: "#98989d"
+  secondary-dark: "#b4b4b9"
   accent-dark: "#2997ff"
 typography:
   body:
@@ -87,7 +87,7 @@ Neutral-dominant palette with a single functional blue accent; the palette is in
 - **Ink** (`#1d1d1f` / dark: `#f5f5f7`): headings and primary body text.
 
 ### Secondary
-- **Graphite** (`#6e6e73` / dark: `#98989d`): secondary text, captions, dates, tags, status words. Verified ≥4.5:1 contrast against both background values.
+- **Graphite** (`#6e6e73` / dark: `#b4b4b9`): captions, dates, tags, status words, and other glanceable metadata — not the running body copy itself. Verified ≥4.5:1 contrast against both background values (dark: ~8.2:1). The dark value was lightened from an earlier `#98989d` (~5.9:1) after real-user feedback that long-form reading (Lab post bodies, project/decision summaries, detail-page bullets) in dim gray-on-black caused eye strain; those surfaces were also moved from Graphite to Ink so only truly secondary/glanceable text stays dimmed.
 
 ### Accent
 - **System Blue** (`#0071e3` / dark: `#2997ff`): links and interactive text only. Verified 4.5:1 (light) and 5.6:1 (dark) contrast against background.
