@@ -237,11 +237,6 @@ export const projectItems: ProjectItem[] = [
       height: 900,
       alt: "약선생 앱의 알약 인식 결과, 시작, 로그인, 약품 종류 화면",
     },
-    screenshots: [
-      { src: "/projects/drpill/shot-1.webp", width: 560, height: 1211, alt: "촬영한 알약과 90% 유사한 의약품 결과" },
-      { src: "/projects/drpill/shot-2.webp", width: 560, height: 1211, alt: "구글·애플·카카오·게스트 로그인" },
-      { src: "/projects/drpill/shot-3.webp", width: 560, height: 1211, alt: "약품 종류별 탐색" },
-    ],
     sections: [
       {
         heading: "문제 의식",
