@@ -67,10 +67,10 @@ export const projectItems: ProjectItem[] = [
       "n8n",
     ],
     thumbnail: {
-      src: "/projects/mirroring-booth/thumb.webp",
-      width: 1200,
-      height: 675,
-      alt: "미러링부스 App Store 스크린샷",
+      src: "/projects/mirroring-booth/thumb-devices.webp",
+      width: 1600,
+      height: 900,
+      alt: "미러링부스를 Mac, iPad, iPhone, Apple Watch에서 사용하는 모습",
     },
     screenshots: [
       { src: "/projects/mirroring-booth/shot-1.webp", width: 560, height: 1215, alt: "가진 기기를 자유롭게 조합" },
@@ -191,7 +191,8 @@ export const projectItems: ProjectItem[] = [
         heading: "해결",
         items: [
           "네이버 지도 위에 제휴 매장을 마커로 보여주고, 단과대·학과 기준으로 필터링할 수 있게 했습니다.",
-          "학생이 직접 할인 매장을 등록할 수 있고, 새 매장이 등록되면 푸시 알림으로 알려줍니다. 원광대학교 인근 상권에서 실기기로 테스트했고 TestFlight까지 배포했습니다.",
+          "학생이 직접 할인 매장을 등록할 수 있고, 새 매장이 등록되면 푸시 알림으로 알려줍니다.",
+          "원광대학교 인근 상권에서 실기기로 테스트했고 TestFlight까지 배포했습니다.",
         ],
       },
       {
@@ -206,10 +207,9 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "담당한 기능",
         items: [
-          "팀장을 맡았습니다.",
-          "APNs 기반 푸시 알림 시스템을 구축했습니다.",
-          "위치 기반 제휴 매장 정보를 제공하는 기능을 구현했습니다.",
-          "지오코딩 시스템을 구축했습니다. 실시간 지오코딩의 속도 저하와 오류를 직접 진단했고, 상호명 검색의 정확도가 낮다는 것을 API 응답 분석으로 확인해 주소 기반 지오코딩과 백엔드 캐싱 구조로 전환했습니다.",
+          "APNs 푸시 알림 시스템을 구축했습니다.",
+          "제휴 매장 정보를 제공하는 기능을 구현했습니다.",
+          "지오코딩 시스템을 구축했습니다. 실시간 호출 방식을 주소 기반 지오코딩과 백엔드 캐싱으로 바꿨습니다.",
         ],
       },
     ],
