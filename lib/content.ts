@@ -232,11 +232,16 @@ export const projectItems: ProjectItem[] = [
     summary: "약물 오남용 방지 및 안전한 약 복용을 위한 개인 의약품 맞춤 서비스",
     stack: ["React Native", "NestJS", "MySQL", "Flask", "OpenCV", "Roboflow", "AWS EC2"],
     thumbnail: {
-      src: "/projects/drpill/thumb.webp",
+      src: "/projects/drpill/thumb-store.webp",
       width: 1600,
-      height: 296,
-      alt: "약선생 앱 화면들",
+      height: 900,
+      alt: "약선생 앱의 알약 인식 결과, 시작, 로그인, 약품 종류 화면",
     },
+    screenshots: [
+      { src: "/projects/drpill/shot-1.webp", width: 560, height: 1211, alt: "촬영한 알약과 90% 유사한 의약품 결과" },
+      { src: "/projects/drpill/shot-2.webp", width: 560, height: 1211, alt: "구글·애플·카카오·게스트 로그인" },
+      { src: "/projects/drpill/shot-3.webp", width: 560, height: 1211, alt: "약품 종류별 탐색" },
+    ],
     sections: [
       {
         heading: "문제 의식",
