@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/container";
 import { ProfilePhoto } from "@/components/profile-photo";
 import { BadgeLink } from "@/components/badge-link";
+import { ContactBadge } from "@/components/contact-badge";
 import { DetailSections } from "@/components/detail-sections";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
@@ -35,27 +36,18 @@ export default async function Home() {
               <p className="mt-6 max-w-[65ch] text-base leading-7 text-muted-foreground">
                 막힐 땐 AI가 준 답보다 이유를, 코드보다 그 아래를 먼저 봅니다.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-base">
+              <div className="mt-10">
                 <Link
                   href="#projects"
-                  className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                  className="text-base font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
                 >
                   프로젝트 보기
                 </Link>
-                {about.contact.map((link) => {
-                  const isExternal = !link.href.startsWith("mailto:");
-                  return (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-accent"
-                    >
-                      {link.label}
-                    </a>
-                  );
-                })}
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  {about.contact.map((link) => (
+                    <ContactBadge key={link.href} link={link} />
+                  ))}
+                </div>
               </div>
             </div>
             <ProfilePhoto />
