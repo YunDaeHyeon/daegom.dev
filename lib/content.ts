@@ -1,6 +1,7 @@
 import type { Status } from "@/components/status-label";
 
 export type ExternalLink = { label: string; href: string };
+export type Media = { src: string; width: number; height: number; alt: string };
 export type DetailSection = { heading: string; items: string[] };
 
 export type ProjectItem = {
@@ -15,6 +16,10 @@ export type ProjectItem = {
    *  rendered as a small pill next to the title, separate from the plain
    *  reference links in `links`. */
   badge?: ExternalLink;
+  /** Representative image shown at the top of the detail view. */
+  thumbnail?: Media;
+  /** Screenshots shown as a horizontally scrolling strip in the detail view. */
+  screenshots?: Media[];
   links: ExternalLink[];
   relatedDecisions?: string[];
 };
@@ -52,21 +57,56 @@ export const projectItems: ProjectItem[] = [
     stack: [
       "Swift",
       "SwiftUI",
-      "UIKit",
       "Multipeer Connectivity",
+      "WatchConnectivity",
       "AVFoundation",
       "VideoToolbox",
-      "Swift Concurrency (AsyncStream)",
+      "Swift Concurrency",
+      "GitHub Actions",
       "Fastlane",
       "n8n",
     ],
+    thumbnail: {
+      src: "/projects/mirroring-booth/thumb.webp",
+      width: 1200,
+      height: 675,
+      alt: "미러링부스 App Store 스크린샷",
+    },
+    screenshots: [
+      { src: "/projects/mirroring-booth/shot-1.webp", width: 560, height: 1215, alt: "가진 기기를 자유롭게 조합" },
+      { src: "/projects/mirroring-booth/shot-2.webp", width: 560, height: 1215, alt: "후면 카메라 화질 그대로 실시간 촬영" },
+      { src: "/projects/mirroring-booth/shot-3.webp", width: 560, height: 1215, alt: "타이머 또는 리모트 촬영 방식 선택" },
+      { src: "/projects/mirroring-booth/shot-4.webp", width: 560, height: 1215, alt: "포즈 추천" },
+      { src: "/projects/mirroring-booth/shot-5.webp", width: 560, height: 1215, alt: "프레임 스타일 선택" },
+      { src: "/projects/mirroring-booth/shot-6.webp", width: 560, height: 1215, alt: "저장과 공유" },
+    ],
     sections: [
       {
-        heading: "팀 구성",
-        items: ["4인 팀 프로젝트", "App Store 배포까지 진행"],
+        heading: "문제 의식",
+        items: [
+          "후면 카메라는 화질이 좋지만 셀카를 찍을 땐 내 모습이 보이지 않아, 결국 화질이 낮은 전면 카메라를 쓰게 됩니다.",
+          "Apple Watch 리모컨은 화면이 작아 구도를 잡기 어렵고, 셔터를 누를 때 시선이 분산됩니다.",
+        ],
       },
       {
-        heading: "iOS",
+        heading: "해결",
+        items: [
+          "iPhone 후면 카메라 화면을 iPad·Mac 같은 다른 Apple 기기에 실시간으로 미러링해, 큰 화면으로 포즈를 확인하며 촬영하게 했습니다.",
+          "타이머·리모트 촬영을 지원하고, 촬영한 사진을 프레임에 합성해 저장하고 공유할 수 있습니다. App Store에 출시했습니다.",
+        ],
+      },
+      {
+        heading: "사용 기술",
+        items: [
+          "Multipeer Connectivity로 iPhone·iPad·Mac을 P2P로 연결해 영상 스트림과 촬영 명령을 주고받습니다.",
+          "Apple Watch는 Multipeer Connectivity를 지원하지 않아, WatchConnectivity로 iPhone과 1:1로 연결하고 촬영 명령만 전달합니다.",
+          "AVFoundation과 VideoToolbox(H.264)로 영상을 인코딩합니다. 지연을 줄이려고 Baseline Profile을 쓰고 B-frame을 껐습니다.",
+          "이벤트 처리는 AsyncStream으로 옮겨, 놓치면 안 되는 이벤트와 하트비트에 서로 다른 버퍼 정책을 줬습니다.",
+          "GitHub Actions, Fastlane, n8n으로 빌드·배포와 PR 리뷰를 자동화했습니다.",
+        ],
+      },
+      {
+        heading: "담당한 기능 · iOS",
         items: [
           "H.264 스트리밍을 구현했습니다. FHD 환경에서 지연 없이 전송되어 팀의 베이스 코드로 채택됐습니다.",
           "촬영 결과물을 다른 기기로 공유하는 기능을 구현했습니다.",
@@ -75,14 +115,14 @@ export const projectItems: ProjectItem[] = [
         ],
       },
       {
-        heading: "CI/CD",
+        heading: "담당한 기능 · CI/CD",
         items: [
           "Fastlane으로 빌드부터 Appbox 업로드, 설치 링크 추출까지 자동화했습니다.",
           "n8n과 GitHub REST API로 PR 자동 리뷰 파이프라인을 설계했습니다.",
         ],
       },
       {
-        heading: "문서화",
+        heading: "담당한 기능 · 문서화",
         items: ["프로젝트 전반의 문서화를 맡았습니다."],
       },
     ],
@@ -94,6 +134,10 @@ export const projectItems: ProjectItem[] = [
       {
         label: "GitHub 저장소",
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang",
+      },
+      {
+        label: "Wiki",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki",
       },
     ],
     relatedDecisions: [
@@ -112,14 +156,51 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
     summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
-    stack: ["Swift", "UIKit", "NMapsMap", "Firebase", "APNs", "Spring Boot"],
+    stack: [
+      "Swift",
+      "UIKit",
+      "SnapKit",
+      "Naver Maps",
+      "APNs · FCM",
+      "Spring Boot",
+      "MySQL",
+      "AWS EC2",
+    ],
+    thumbnail: {
+      src: "/projects/student-deals-map/thumb.webp",
+      width: 1200,
+      height: 675,
+      alt: "절약학개론 소개 배너",
+    },
+    screenshots: [
+      { src: "/projects/student-deals-map/shot-1.webp", width: 432, height: 862, alt: "지도에서 할인 매장 탐색" },
+      { src: "/projects/student-deals-map/shot-2.webp", width: 432, height: 862, alt: "마커 선택 시 매장 카드" },
+      { src: "/projects/student-deals-map/shot-3.webp", width: 432, height: 862, alt: "주변 매장 목록" },
+      { src: "/projects/student-deals-map/shot-4.webp", width: 432, height: 862, alt: "할인 상세" },
+      { src: "/projects/student-deals-map/shot-5.webp", width: 432, height: 862, alt: "지도에서 위치를 골라 매장 등록" },
+    ],
     sections: [
       {
-        heading: "팀 구성",
+        heading: "문제 의식",
         items: [
-          "4인 팀 프로젝트 (팀장)",
-          "TestFlight 배포까지 진행",
-          "팀원이 담당한 백엔드 구현에 조언을 주기도 했습니다.",
+          "대학가에는 학생 할인이 많지만 SNS, 입소문, 전단지에 흩어져 있어 학생이 한눈에 확인하기 어렵습니다.",
+          "기존 할인 앱은 프랜차이즈 중심이라 대학가 소규모 매장의 할인 정보를 담지 못했습니다.",
+        ],
+      },
+      {
+        heading: "해결",
+        items: [
+          "네이버 지도 위에 제휴 매장을 마커로 보여주고, 단과대·학과 기준으로 필터링할 수 있게 했습니다.",
+          "학생이 직접 할인 매장을 등록할 수 있고, 새 매장이 등록되면 푸시 알림으로 알려줍니다. 원광대학교 인근 상권에서 실기기로 테스트했고 TestFlight까지 배포했습니다.",
+        ],
+      },
+      {
+        heading: "사용 기술",
+        items: [
+          "UIKit과 SnapKit으로 MVC 기반의 재사용 가능한 컴포넌트 구조를 만들었습니다.",
+          "Naver Maps SDK와 Geocoding API로 지도 표시와 주소·좌표 변환을 처리합니다.",
+          "FCM을 거쳐 APNs로 신규 매장 등록 알림을 보냅니다.",
+          "Spring Boot, MySQL, AWS EC2로 구성된 백엔드 API를 사용합니다.",
         ],
       },
       {
@@ -128,7 +209,7 @@ export const projectItems: ProjectItem[] = [
           "팀장을 맡았습니다.",
           "APNs 기반 푸시 알림 시스템을 구축했습니다.",
           "위치 기반 제휴 매장 정보를 제공하는 기능을 구현했습니다.",
-          "지오코딩 시스템을 구축했습니다. 실시간 지오코딩의 속도 저하와 오류를 직접 진단했고, API 응답 분석으로 상호명 검색의 정확도가 낮다는 것을 확인해 주소 기반 지오코딩과 백엔드 캐싱 구조로 전환했습니다.",
+          "지오코딩 시스템을 구축했습니다. 실시간 지오코딩의 속도 저하와 오류를 직접 진단했고, 상호명 검색의 정확도가 낮다는 것을 API 응답 분석으로 확인해 주소 기반 지오코딩과 백엔드 캐싱 구조로 전환했습니다.",
         ],
       },
     ],
@@ -137,28 +218,64 @@ export const projectItems: ProjectItem[] = [
         label: "GitHub 저장소",
         href: "https://github.com/CampusCrew/Jeolhak-ios",
       },
+      {
+        label: "Wiki",
+        href: "https://github.com/CampusCrew/Jeolhak-ios/wiki",
+      },
     ],
   },
   {
     slug: "drpill",
     title: "DrPill (약선생)",
     icon: "/icons/drpill.png",
-    period: "2024.09 — 2024.12",
+    period: "2024.09 — 2024.11",
     summary: "약물 오남용 방지 및 안전한 약 복용을 위한 개인 의약품 맞춤 서비스",
-    stack: ["React Native", "NestJS", "Flask", "OpenCV", "Roboflow", "AWS EC2"],
+    stack: ["React Native", "NestJS", "MySQL", "Flask", "OpenCV", "Roboflow", "AWS EC2"],
+    thumbnail: {
+      src: "/projects/drpill/thumb.webp",
+      width: 1600,
+      height: 296,
+      alt: "약선생 앱 화면들",
+    },
     sections: [
       {
-        heading: "팀 구성",
-        items: ["4인 팀 캡스톤 프로젝트 (팀장)", "캡스톤디자인 경진대회 대상 수상"],
+        heading: "문제 의식",
+        items: [
+          "약물 복용량이 늘고 약물 상호작용이 복잡해지면서, 잘못 복용하거나 남용하는 문제가 생깁니다.",
+        ],
+      },
+      {
+        heading: "해결",
+        items: [
+          "카메라로 알약을 찍으면 가장 비슷한 의약품을 최대 4개까지 찾아줍니다.",
+          "관심 질환에 맞춘 의약품 리스트와 검색, 즐겨찾기, 정보 요약과 음성 안내를 제공합니다.",
+        ],
+      },
+      {
+        heading: "사용 기술",
+        items: [
+          "React Native로 앱을 만들었습니다.",
+          "NestJS와 MySQL로 의약품 검색·즐겨찾기 API를 만들었습니다.",
+          "Flask와 OpenCV로 알약 이미지 인식 서버를 만들었습니다.",
+        ],
       },
       {
         heading: "담당한 기능",
         items: [
+          "팀장으로 프로젝트를 총괄했고, 프런트엔드·백엔드·OpenCV를 맡았습니다.",
           "알약 데이터셋 전처리를 진행했습니다.",
           "Roboflow 기반으로 알약 이미지 분류·감지 시스템을 구축했습니다.",
           "일반·전문의약품 리스트와 검색 기능을 구현했습니다.",
           "의약품 즐겨찾기 기능을 구현했습니다.",
           "의약품 정보를 요약하고 음성 데이터로 제공하는 기능을 구현했습니다.",
+        ],
+      },
+      {
+        heading: "성과",
+        items: [
+          "2024 공학교육원 캡스톤디자인 경진대회 대상",
+          "2024 컴공인의날 최우수상",
+          "2024 소프트웨어 아이디어 경진대회 우수상",
         ],
       },
       {
@@ -175,6 +292,10 @@ export const projectItems: ProjectItem[] = [
       {
         label: "GitHub 저장소",
         href: "https://github.com/YunDaeHyeon/DrPill",
+      },
+      {
+        label: "시연 영상",
+        href: "https://drive.google.com/file/d/1ESfQIG-B5YsEkwGHWr4AoXe8QU4hWgoH/view?usp=sharing",
       },
     ],
   },

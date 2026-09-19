@@ -91,7 +91,7 @@ export default async function Home() {
                     {item.period}
                   </span>
                 </div>
-                <p className="mt-3 max-w-[65ch] text-lg font-medium leading-8 text-foreground sm:text-xl sm:leading-9">
+                <p className="mt-3 max-w-[65ch] text-base font-medium leading-7 text-foreground sm:text-lg sm:leading-8">
                   {item.summary}
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-2">
