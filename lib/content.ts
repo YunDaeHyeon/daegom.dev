@@ -48,15 +48,17 @@ export const projectItems: ProjectItem[] = [
     title: "미러링부스",
     icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
-    summary:
-      "Apple 기기 여러 대를 연결해 포토부스를 만드는 앱입니다.",
+    summary: "포토부스를 찾아갈 필요 없이, Apple 기기로 시작하는 나만의 포토부스",
     stack: [
       "Swift",
       "SwiftUI",
       "UIKit",
       "Multipeer Connectivity",
       "AVFoundation",
+      "VideoToolbox",
       "Swift Concurrency (AsyncStream)",
+      "Fastlane",
+      "n8n",
     ],
     sections: [
       {
@@ -64,13 +66,24 @@ export const projectItems: ProjectItem[] = [
         items: ["4인 팀 프로젝트", "App Store 배포까지 진행"],
       },
       {
-        heading: "담당한 기능",
+        heading: "iOS",
         items: [
-          "초기 스트리밍 프로토타입 구현 — FHD 환경에서 지연 없이 전송되는 안정적인 구현으로 팀 베이스 코드로 채택됨",
-          "촬영 결과물을 다른 기기로 공유하는 기능 구현",
-          "이벤트 처리 구조를 클로저에서 AsyncStream 기반으로 전환",
-          "PR 자동 리뷰 파이프라인 설계 (n8n + GitHub REST API)",
+          "H.264 스트리밍을 구현했습니다. FHD 환경에서 지연 없이 전송되어 팀의 베이스 코드로 채택됐습니다.",
+          "촬영 결과물을 다른 기기로 공유하는 기능을 구현했습니다.",
+          "이벤트 처리 구조를 클로저에서 AsyncStream 기반으로 리팩터링했습니다.",
+          "앱 UI를 구축했습니다.",
         ],
+      },
+      {
+        heading: "CI/CD",
+        items: [
+          "Fastlane으로 빌드부터 Appbox 업로드, 설치 링크 추출까지 자동화했습니다.",
+          "n8n과 GitHub REST API로 PR 자동 리뷰 파이프라인을 설계했습니다.",
+        ],
+      },
+      {
+        heading: "문서화",
+        items: ["프로젝트 전반의 문서화를 맡았습니다."],
       },
     ],
     badge: {
@@ -98,9 +111,8 @@ export const projectItems: ProjectItem[] = [
     title: "절약학개론",
     icon: "/icons/student-deals-map.png",
     period: "2025.04 — 2025.06",
-    summary:
-      "학생 할인 매장을 지도에서 찾아볼 수 있는 앱입니다.",
-    stack: ["Swift", "UIKit", "NMapsMap", "Firebase"],
+    summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
+    stack: ["Swift", "UIKit", "NMapsMap", "Firebase", "APNs", "Spring Boot"],
     sections: [
       {
         heading: "팀 구성",
@@ -113,10 +125,10 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "담당한 기능",
         items: [
-          "위치 기반 제휴 매장 정보 제공 기능",
-          "실시간 지오코딩 방식의 속도 저하·오류 문제를 직접 진단",
-          "API 응답 분석으로 상호명 기반 검색의 낮은 정확도를 확인",
-          "주소 기반 지오코딩 + 백엔드 캐싱 구조로 전환",
+          "팀장을 맡았습니다.",
+          "APNs 기반 푸시 알림 시스템을 구축했습니다.",
+          "위치 기반 제휴 매장 정보를 제공하는 기능을 구현했습니다.",
+          "지오코딩 시스템을 구축했습니다. 실시간 지오코딩의 속도 저하와 오류를 직접 진단했고, API 응답 분석으로 상호명 검색의 정확도가 낮다는 것을 확인해 주소 기반 지오코딩과 백엔드 캐싱 구조로 전환했습니다.",
         ],
       },
     ],
@@ -132,13 +144,22 @@ export const projectItems: ProjectItem[] = [
     title: "DrPill (약선생)",
     icon: "/icons/drpill.png",
     period: "2024.09 — 2024.12",
-    summary:
-      "약물 오남용을 줄이기 위한 복약 관리 앱입니다.",
-    stack: ["React Native", "NestJS", "OpenCV"],
+    summary: "약물 오남용 방지 및 안전한 약 복용을 위한 개인 의약품 맞춤 서비스",
+    stack: ["React Native", "NestJS", "Flask", "OpenCV", "Roboflow", "AWS EC2"],
     sections: [
       {
         heading: "팀 구성",
         items: ["4인 팀 캡스톤 프로젝트 (팀장)", "캡스톤디자인 경진대회 대상 수상"],
+      },
+      {
+        heading: "담당한 기능",
+        items: [
+          "알약 데이터셋 전처리를 진행했습니다.",
+          "Roboflow 기반으로 알약 이미지 분류·감지 시스템을 구축했습니다.",
+          "일반·전문의약품 리스트와 검색 기능을 구현했습니다.",
+          "의약품 즐겨찾기 기능을 구현했습니다.",
+          "의약품 정보를 요약하고 음성 데이터로 제공하는 기능을 구현했습니다.",
+        ],
       },
       {
         heading: "중단 배경",

@@ -69,7 +69,7 @@ export default async function Home() {
             {projectItems.map((item) => (
               <li key={item.slug} className="py-6 sm:py-7">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                  <h3 className="flex items-center gap-2 text-xl font-semibold text-foreground">
                     {item.icon && (
                       <Image
                         src={item.icon}
@@ -91,14 +91,14 @@ export default async function Home() {
                     {item.period}
                   </span>
                 </div>
-                <p className="mt-2 max-w-[65ch] text-base font-medium leading-7 text-foreground">
+                <p className="mt-3 max-w-[65ch] text-lg font-medium leading-8 text-foreground sm:text-xl sm:leading-9">
                   {item.summary}
                 </p>
-                <ul className="mt-3 flex flex-wrap gap-2">
+                <ul className="mt-4 flex flex-wrap gap-2">
                   {item.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="rounded-sm bg-muted px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                      className="rounded-sm bg-muted px-2.5 py-1 font-mono text-xs text-muted-foreground"
                     >
                       {tech}
                     </li>

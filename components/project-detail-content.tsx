@@ -38,7 +38,7 @@ export function ProjectDetailContent({
         {item.stack.map((tech) => (
           <li
             key={tech}
-            className="rounded-sm bg-muted px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+            className="rounded-sm bg-muted px-2.5 py-1 font-mono text-xs text-muted-foreground"
           >
             {tech}
           </li>
