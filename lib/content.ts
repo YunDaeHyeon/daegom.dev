@@ -28,6 +28,7 @@ export type EducationEntry = { school: string; major: string; period: string };
 export type ExperienceEntry = { org: string; period: string; note?: string };
 
 export type About = {
+  skills: DetailSection[];
   education: EducationEntry[];
   experience: ExperienceEntry[];
   certifications: string[];
@@ -557,6 +558,50 @@ export const decisions: Decision[] = [
 ];
 
 export const about: About = {
+  skills: [
+    {
+      heading: "Swift",
+      items: [
+        "Swift를 사용해 iOS 앱을 개발하고 배포한 경험이 있습니다.",
+        "SwiftUI, UIKit, Swift Concurrency를 프로젝트에 적용했습니다.",
+      ],
+    },
+    {
+      heading: "Architecture",
+      items: [
+        "MVI, MVVM, MVC, Clean Architecture 등의 아키텍처를 프로젝트에 적용한 경험이 있습니다.",
+        "프로젝트의 구조와 요구사항에 따라 아키텍처를 선택해 적용했습니다.",
+      ],
+    },
+    {
+      heading: "CI/CD",
+      items: [
+        "GitHub Actions와 Fastlane을 사용해 빌드 및 배포 과정을 자동화한 경험이 있습니다.",
+      ],
+    },
+    {
+      heading: "Server · Infra",
+      items: [
+        "NestJS, Flask를 사용해 API 서버를 개발한 경험이 있습니다.",
+        "AWS EC2에 서버를 직접 배포하고 운영한 경험이 있습니다.",
+      ],
+    },
+    {
+      heading: "Git",
+      items: [
+        "Git과 GitHub를 사용해 소스코드를 관리하고 협업한 경험이 있습니다.",
+        "Pull Request와 코드 리뷰를 기반으로 팀 프로젝트를 진행했습니다.",
+      ],
+    },
+    {
+      heading: "AI · 자동화",
+      items: [
+        "AI를 개발 과정에 활용한 경험이 있습니다.",
+        "CLAUDE.md 등의 문서로 작업 범위와 규칙을 정의해 사용하는 방식을 적용했습니다.",
+        "n8n을 활용해 반복적인 개발 업무를 자동화한 경험이 있습니다.",
+      ],
+    },
+  ],
   education: [
     {
       school: "원광대학교",

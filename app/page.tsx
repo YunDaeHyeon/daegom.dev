@@ -165,6 +165,29 @@ export default async function Home() {
 
           <div className="mt-10 space-y-10">
             <div>
+              <h3 className="text-base font-semibold text-foreground">
+                Stacks
+              </h3>
+              <dl className="mt-4 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+                {about.skills.map((skill) => (
+                  <div key={skill.heading}>
+                    <dt className="font-mono text-sm font-medium text-foreground">
+                      {skill.heading}
+                    </dt>
+                    {skill.items.map((item) => (
+                      <dd
+                        key={item}
+                        className="mt-2 break-keep text-base leading-7 text-muted-foreground"
+                      >
+                        {item}
+                      </dd>
+                    ))}
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div>
               <h3 className="text-base font-semibold text-foreground">학력</h3>
               <ul className="mt-4 divide-y divide-border">
                 {about.education.map((entry) => (
