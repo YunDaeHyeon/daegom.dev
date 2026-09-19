@@ -35,13 +35,27 @@ export default async function Home() {
               <p className="mt-6 max-w-[65ch] text-base leading-7 text-muted-foreground">
                 막힐 땐 AI가 준 답보다 이유를, 코드보다 그 아래를 먼저 봅니다.
               </p>
-              <div className="mt-10 flex items-center gap-8 text-base">
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-base">
                 <Link
                   href="#projects"
                   className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
                 >
                   프로젝트 보기
                 </Link>
+                {about.contact.map((link) => {
+                  const isExternal = !link.href.startsWith("mailto:");
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-accent"
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
               </div>
             </div>
             <ProfilePhoto />
@@ -105,6 +119,49 @@ export default async function Home() {
       </section>
 
       <section
+        id="lab"
+        tabIndex={-1}
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+      >
+        <Container>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+            Lab
+          </h2>
+          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
+            직접 구현하고 검증한 내용을 기록했습니다.
+          </p>
+
+          <ul className="mt-10 divide-y divide-border border-t border-border">
+            {latestLabPosts.map((post) => (
+              <li key={post.slug} className="py-4">
+                <Link href={`/lab/${post.slug}`} className="block">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                    <span className="text-base text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
+                      {post.title}
+                    </span>
+                    <span className="flex shrink-0 items-center gap-3">
+                      <LabTypeBadge type={post.type} />
+                      <span className="font-mono text-sm text-muted-foreground">
+                        {formatLabDate(post.createdAt)}
+                      </span>
+                    </span>
+                  </div>
+                  <StackTags stack={post.stack} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href="/lab"
+            className="mt-8 inline-block text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+          >
+            전체 보기 →
+          </Link>
+        </Container>
+      </section>
+
+      <section
         id="about"
         tabIndex={-1}
         className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
@@ -164,70 +221,7 @@ export default async function Home() {
                 { heading: "멘토링 활동", items: about.mentoring },
               ]}
             />
-
-            <div>
-              <h3 className="text-base font-semibold text-foreground">Contact</h3>
-              <div className="mt-4 flex flex-wrap gap-6 text-base">
-                {about.contact.map((link) => {
-                  const isExternal = !link.href.startsWith("mailto:");
-                  return (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-                    >
-                      {link.label}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
           </div>
-        </Container>
-      </section>
-
-      <section
-        id="lab"
-        tabIndex={-1}
-        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
-      >
-        <Container>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Lab
-          </h2>
-          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
-            직접 구현하고 검증한 내용을 기록했습니다.
-          </p>
-
-          <ul className="mt-10 divide-y divide-border border-t border-border">
-            {latestLabPosts.map((post) => (
-              <li key={post.slug} className="py-4">
-                <Link href={`/lab/${post.slug}`} className="block">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <span className="text-base text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
-                      {post.title}
-                    </span>
-                    <span className="flex shrink-0 items-center gap-3">
-                      <LabTypeBadge type={post.type} />
-                      <span className="font-mono text-sm text-muted-foreground">
-                        {formatLabDate(post.createdAt)}
-                      </span>
-                    </span>
-                  </div>
-                  <StackTags stack={post.stack} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            href="/lab"
-            className="mt-8 inline-block text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-          >
-            전체 보기 →
-          </Link>
         </Container>
       </section>
     </>

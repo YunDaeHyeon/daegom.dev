@@ -170,7 +170,7 @@ Corners are gently rounded, never sharp and never pill-shaped: 6px on small elem
 
 ### About
 - Flat sections in one column, matching the List Row idiom used elsewhere: 학력/경력/활동 as row lists (org/school + role/major on the left, mono period on the right, an optional muted note line beneath for 활동); 자격증/수상/멘토링 활동 as plain `DetailSections` bullet lists (see The Itemized-Detail Rule — this is the same component Work/Decision detail pages use, reused here because the content shape — flat, factual, dated — is identical).
-- **Contact** is the one deliberately louder row: full-body-size underlined links (matching the hero CTA weight), not the small muted `LinkRow` treatment used for GitHub/PR references elsewhere — this is a primary action (a recruiter needs to find it), not incidental evidence.
+- **Contact** no longer lives in About: GitHub and the email address (shown as the literal address, so it is still copyable when `mailto:` has no mail client to open) sit in the Home hero next to the primary "프로젝트 보기" CTA, in Graphite with the same underline treatment so the CTA stays the lead. About now ends after 자격증/수상/멘토링 and comes last in the scroll (Home → Projects → Lab → About).
 - No resume link renders until a real one exists; an empty/placeholder link is worse than no link.
 
 ### Lab

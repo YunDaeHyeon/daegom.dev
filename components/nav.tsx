@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 const primaryLinks = [
   { href: "#top", label: "Home" },
   { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
   { href: "#lab", label: "Lab" },
+  { href: "#about", label: "About" },
 ];
 
 export function Nav() {
