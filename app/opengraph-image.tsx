@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "윤대현 · YunDaeHyeon — iOS 개발자";
+export const alt = "윤대현 · YunDaeHyeon — Mobile App Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default async function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 30, color: "#98989d" }}>
-          iOS Developer
+          Mobile App Developer
         </div>
         <div
           style={{
@@ -47,9 +47,10 @@ export default async function OpengraphImage() {
             color: "#98989d",
             marginTop: 36,
             maxWidth: 900,
+            wordBreak: "keep-all",
           }}
         >
-          기기와 사람을 잇는 경험을 만듭니다.
+          코드가 동작하는 것과 사용자가 쓸 수 있는 것은 다르다고 생각하는 개발자입니다.
         </div>
       </div>
     ),
