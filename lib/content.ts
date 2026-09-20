@@ -93,25 +93,15 @@ export const projectItems: ProjectItem[] = [
         heading: "해결",
         items: [
           "iPhone 후면 카메라 화면을 iPad·Mac 같은 다른 Apple 기기에 실시간으로 미러링해, 큰 화면으로 포즈를 확인하며 촬영하게 했습니다.",
-          "타이머·리모트 촬영을 지원하고, 촬영한 사진을 프레임에 합성해 저장하고 공유할 수 있습니다. App Store에 출시했습니다.",
-        ],
-      },
-      {
-        heading: "사용 기술",
-        items: [
-          "Multipeer Connectivity로 iPhone·iPad·Mac을 P2P로 연결해 영상 스트림과 촬영 명령을 주고받습니다.",
-          "Apple Watch는 Multipeer Connectivity를 지원하지 않아, WatchConnectivity로 iPhone과 1:1로 연결하고 촬영 명령만 전달합니다.",
-          "AVFoundation과 VideoToolbox(H.264)로 영상을 인코딩합니다. 지연을 줄이려고 Baseline Profile을 쓰고 B-frame을 껐습니다.",
-          "이벤트 처리는 AsyncStream으로 옮겨, 놓치면 안 되는 이벤트와 하트비트에 서로 다른 버퍼 정책을 줬습니다.",
-          "GitHub Actions, Fastlane, n8n으로 빌드·배포와 PR 리뷰를 자동화했습니다.",
+          "타이머·리모트 촬영을 지원하고, 촬영한 사진을 프레임에 합성해 저장하고 공유할 수 있습니다.",
         ],
       },
       {
         heading: "담당한 기능 · iOS",
         items: [
-          "H.264 스트리밍을 구현했습니다. FHD 환경에서 지연 없이 전송되어 팀의 베이스 코드로 채택됐습니다.",
+          "H.264 스트리밍을 구현했습니다.",
           "촬영 결과물을 다른 기기로 공유하는 기능을 구현했습니다.",
-          "이벤트 처리 구조를 클로저에서 AsyncStream 기반으로 리팩터링했습니다.",
+          "이벤트 처리 구조를 클로저 콜백에서 AsyncStream 기반으로 리팩터링했습니다.",
           "앱 UI를 구축했습니다.",
         ],
       },
@@ -125,6 +115,10 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "담당한 기능 · 문서화",
         items: ["프로젝트 전반의 문서화를 맡았습니다."],
+      },
+      {
+        heading: "성과",
+        items: ["App Store에 출시했습니다."],
       },
     ],
     badge: {
@@ -155,7 +149,7 @@ export const projectItems: ProjectItem[] = [
     slug: "student-deals-map",
     title: "절약학개론",
     icon: "/icons/student-deals-map.png",
-    period: "2025.04 — 2025.06",
+    period: "2025.03 — 2025.06",
     summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
     stack: [
       "Swift",
@@ -197,20 +191,11 @@ export const projectItems: ProjectItem[] = [
         ],
       },
       {
-        heading: "사용 기술",
-        items: [
-          "UIKit과 SnapKit으로 MVC 기반의 재사용 가능한 컴포넌트 구조를 만들었습니다.",
-          "Naver Maps SDK와 Geocoding API로 지도 표시와 주소·좌표 변환을 처리합니다.",
-          "FCM을 거쳐 APNs로 신규 매장 등록 알림을 보냅니다.",
-          "Spring Boot, MySQL, AWS EC2로 구성된 백엔드 API를 사용합니다.",
-        ],
-      },
-      {
         heading: "담당한 기능",
         items: [
           "APNs 푸시 알림 시스템을 구축했습니다.",
           "제휴 매장 정보를 제공하는 기능을 구현했습니다.",
-          "지오코딩 시스템을 구축했습니다. 실시간 호출 방식을 주소 기반 지오코딩과 백엔드 캐싱으로 바꿨습니다.",
+          "지오코딩 시스템을 구축했습니다.",
         ],
       },
     ],
@@ -253,17 +238,8 @@ export const projectItems: ProjectItem[] = [
         ],
       },
       {
-        heading: "사용 기술",
-        items: [
-          "React Native로 앱을 만들었습니다.",
-          "NestJS와 MySQL로 의약품 검색·즐겨찾기 API를 만들었습니다.",
-          "Flask와 OpenCV로 알약 이미지 인식 서버를 만들었습니다.",
-        ],
-      },
-      {
         heading: "담당한 기능",
         items: [
-          "팀장으로 프로젝트를 총괄했고, 프런트엔드·백엔드·OpenCV를 맡았습니다.",
           "알약 데이터셋 전처리를 진행했습니다.",
           "Roboflow 기반으로 알약 이미지 분류·감지 시스템을 구축했습니다.",
           "일반·전문의약품 리스트와 검색 기능을 구현했습니다.",
@@ -277,15 +253,6 @@ export const projectItems: ProjectItem[] = [
           "2024 공학교육원 캡스톤디자인 경진대회 대상",
           "2024 컴공인의날 최우수상",
           "2024 소프트웨어 아이디어 경진대회 우수상",
-        ],
-      },
-      {
-        heading: "중단 배경",
-        items: [
-          "발표 심사위원으로부터 서비스가 유사 처방 행위에 해당할 수 있다는 지적을 받음",
-          "개발 전 법적 검토가 없었음을 인정",
-          "관련 내용을 직접 조사해 팀과 공유",
-          "실사용 단계로 넘어가지 않고 프로젝트 중단을 판단",
         ],
       },
     ],
