@@ -191,16 +191,20 @@ export default async function Home() {
               <h3 className="text-base font-semibold text-foreground">학력</h3>
               <ul className="mt-4 divide-y divide-border">
                 {about.education.map((entry) => (
-                  <li
-                    key={entry.school}
-                    className="flex flex-col gap-1 py-4 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between"
-                  >
-                    <span className="text-base text-foreground">
-                      {entry.school} · {entry.major}
-                    </span>
-                    <span className="font-mono text-sm text-muted-foreground">
-                      {entry.period}
-                    </span>
+                  <li key={entry.school} className="py-4 first:pt-0">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <span className="text-base text-foreground">
+                        {entry.school} · {entry.major}
+                      </span>
+                      <span className="font-mono text-sm text-muted-foreground">
+                        {entry.period}
+                      </span>
+                    </div>
+                    {entry.note && (
+                      <p className="mt-1 text-base text-muted-foreground">
+                        {entry.note}
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>

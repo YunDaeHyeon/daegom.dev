@@ -24,7 +24,7 @@ export type ProjectItem = {
   relatedDecisions?: string[];
 };
 
-export type EducationEntry = { school: string; major: string; period: string };
+export type EducationEntry = { school: string; major: string; period: string; note?: string };
 export type ExperienceEntry = { org: string; period: string; note?: string };
 
 export type About = {
