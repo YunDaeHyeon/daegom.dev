@@ -574,6 +574,7 @@ export const about: About = {
       school: "원광대학교",
       major: "컴퓨터소프트웨어공학과",
       period: "2020.03 — 2026.02",
+      note: "졸업",
     },
   ],
   experience: [
@@ -584,6 +585,7 @@ export const about: About = {
     {
       org: "네이버 부스트캠프 웹·모바일 10기 (iOS)",
       period: "2025.06 — 2026.02",
+      note: "수료",
     },
     {
       org: "카카오엔터프라이즈X구름 군장병 AI·SW 역량강화과정",
