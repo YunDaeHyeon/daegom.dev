@@ -165,23 +165,32 @@ export default async function Home() {
               <h3 className="text-base font-semibold text-foreground">
                 Stacks
               </h3>
-              <dl className="mt-4 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-                {about.skills.map((skill) => (
-                  <div key={skill.heading}>
-                    <dt className="font-mono text-sm font-medium text-foreground">
-                      {skill.heading}
-                    </dt>
-                    {skill.items.map((item) => (
-                      <dd
-                        key={item}
-                        className="mt-2 break-keep text-base leading-7 text-muted-foreground"
-                      >
-                        {item}
-                      </dd>
-                    ))}
+              <div className="mt-4 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+                {about.skills.map((group) => (
+                  <div key={group.heading}>
+                    <h4 className="font-mono text-sm font-medium text-muted-foreground">
+                      {group.heading}
+                    </h4>
+                    <dl className="mt-3 space-y-5">
+                      {group.entries.map((entry) => (
+                        <div key={entry.name}>
+                          <dt className="text-base font-medium text-foreground">
+                            {entry.name}
+                          </dt>
+                          {entry.items.map((item) => (
+                            <dd
+                              key={item}
+                              className="mt-1 break-keep text-base leading-7 text-muted-foreground"
+                            >
+                              {item}
+                            </dd>
+                          ))}
+                        </div>
+                      ))}
+                    </dl>
                   </div>
                 ))}
-              </dl>
+              </div>
             </div>
 
             <div>

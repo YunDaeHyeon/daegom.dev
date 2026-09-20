@@ -27,8 +27,11 @@ export type ProjectItem = {
 export type EducationEntry = { school: string; major: string; period: string; note?: string };
 export type ExperienceEntry = { org: string; period: string; note?: string };
 
+export type SkillEntry = { name: string; items: string[] };
+export type SkillGroup = { heading: string; entries: SkillEntry[] };
+
 export type About = {
-  skills: DetailSection[];
+  skills: SkillGroup[];
   education: EducationEntry[];
   experience: ExperienceEntry[];
   certifications: string[];
@@ -527,45 +530,98 @@ export const decisions: Decision[] = [
 export const about: About = {
   skills: [
     {
-      heading: "Swift",
-      items: [
-        "Swift를 사용해 iOS 앱을 개발하고 배포한 경험이 있습니다.",
-        "SwiftUI, UIKit, Swift Concurrency를 프로젝트에 적용했습니다.",
+      heading: "Programming Language",
+      entries: [
+        {
+          name: "Swift",
+          items: [
+            "Swift를 사용해 iOS 앱을 개발하고 App Store에 배포한 경험이 있습니다.",
+            "개발 문서를 읽고 원하는 기능을 직접 구현할 수 있습니다.",
+          ],
+        },
+        {
+          name: "Java",
+          items: [
+            "Java를 활용해 RESTful API 서버를 개발하고 구축한 경험이 있습니다.",
+            "객체지향 프로그래밍 개념을 이해하고 코드에 반영할 수 있습니다.",
+          ],
+        },
+        {
+          name: "JavaScript",
+          items: [
+            "JavaScript 기반의 크로스 플랫폼(React Native) 앱을 구현한 경험이 있습니다.",
+          ],
+        },
       ],
     },
     {
-      heading: "Architecture",
-      items: [
-        "MVI, MVVM, MVC, Clean Architecture 등의 아키텍처를 프로젝트에 적용한 경험이 있습니다.",
-        "프로젝트의 구조와 요구사항에 따라 아키텍처를 선택해 적용했습니다.",
+      heading: "Framework / Library",
+      entries: [
+        {
+          name: "Spring Boot",
+          items: [
+            "Spring Boot 기반으로 API를 구축하고 데이터 연동을 처리한 경험이 있습니다.",
+          ],
+        },
+        {
+          name: "React Native",
+          items: ["React Native로 모바일 앱을 개발한 경험이 있습니다."],
+        },
       ],
     },
     {
-      heading: "CI/CD",
-      items: [
-        "GitHub Actions와 Fastlane을 사용해 빌드 및 배포 과정을 자동화한 경험이 있습니다.",
+      heading: "Server & Database",
+      entries: [
+        {
+          name: "MySQL",
+          items: [
+            "관계형 데이터베이스 모델링, 쿼리 작성, 데이터 CRUD 관리를 수행할 수 있습니다.",
+          ],
+        },
+        {
+          name: "AWS EC2",
+          items: [
+            "AWS EC2 인스턴스에 서버를 직접 배포하고 운영한 경험이 있습니다.",
+          ],
+        },
       ],
     },
     {
-      heading: "Server · Infra",
-      items: [
-        "NestJS, Flask를 사용해 API 서버를 개발한 경험이 있습니다.",
-        "AWS EC2에 서버를 직접 배포하고 운영한 경험이 있습니다.",
+      heading: "협업 Tool & DevOps",
+      entries: [
+        {
+          name: "Git / GitHub",
+          items: [
+            "Git과 GitHub으로 소스코드를 관리하고, PR 기반 코드 리뷰를 바탕으로 팀 협업을 진행할 수 있습니다.",
+          ],
+        },
+        {
+          name: "Notion",
+          items: [
+            "프로젝트 요구사항 작성, 데일리 스크럼, 협업 문서화 등 팀의 일정과 이슈를 관리할 수 있습니다.",
+          ],
+        },
+        {
+          name: "GitHub Actions / Fastlane",
+          items: [
+            "GitHub Actions와 Fastlane으로 TestFlight 빌드와 배포 과정을 자동화할 수 있습니다.",
+          ],
+        },
       ],
     },
     {
-      heading: "Git",
-      items: [
-        "Git과 GitHub를 사용해 소스코드를 관리하고 협업한 경험이 있습니다.",
-        "Pull Request와 코드 리뷰를 기반으로 팀 프로젝트를 진행했습니다.",
-      ],
-    },
-    {
-      heading: "AI · 자동화",
-      items: [
-        "AI를 개발 과정에 활용한 경험이 있습니다.",
-        "CLAUDE.md 등의 문서로 작업 범위와 규칙을 정의해 사용하는 방식을 적용했습니다.",
-        "n8n을 활용해 반복적인 개발 업무를 자동화한 경험이 있습니다.",
+      heading: "AI & Automation",
+      entries: [
+        {
+          name: "n8n",
+          items: ["n8n으로 반복적인 업무를 자동화할 수 있습니다."],
+        },
+        {
+          name: "Claude Code",
+          items: [
+            "CLAUDE.md 등 컨텍스트 정의 문서를 활용해 AI를 개발 생산성 향상에 적극 활용할 수 있습니다.",
+          ],
+        },
       ],
     },
   ],
@@ -601,7 +657,6 @@ export const about: About = {
   ],
   awards: [
     "공학교육원 캡스톤디자인 경진대회 대상 (2024)",
-    "대학일자리플러스센터 기업분석 면접경진대회 대상 (2025)",
   ],
   mentoring: [
     "소프트웨어중심대학 SW길잡이 멘토단",
