@@ -14,39 +14,16 @@ export function ProjectDetailContent({
 }) {
   return (
     <>
-      {(item.thumbnail || (item.screenshots && item.screenshots.length > 0)) && (
+      {item.thumbnail && (
         <div className="mb-8 pt-4">
-          {item.thumbnail && (
-            <Image
-              src={item.thumbnail.src}
-              alt={item.thumbnail.alt}
-              width={item.thumbnail.width}
-              height={item.thumbnail.height}
-              sizes="(min-width: 768px) 640px, 100vw"
-              className="h-auto w-full rounded-md border border-border"
-            />
-          )}
-
-          {item.screenshots && item.screenshots.length > 0 && (
-            <ul
-              aria-label="스크린샷"
-              className="mt-3 flex snap-x gap-3 overflow-x-auto pb-2"
-            >
-              {item.screenshots.map((shot) => (
-                <li key={shot.src} className="shrink-0 snap-start">
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    sizes="220px"
-                    className="h-[340px] w-auto rounded-md border border-border"
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-
+          <Image
+            src={item.thumbnail.src}
+            alt={item.thumbnail.alt}
+            width={item.thumbnail.width}
+            height={item.thumbnail.height}
+            sizes="(min-width: 768px) 640px, 100vw"
+            className="h-auto w-full rounded-md border border-border"
+          />
         </div>
       )}
       <h1 className="flex items-center gap-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -80,6 +57,26 @@ export function ProjectDetailContent({
         ))}
       </ul>
       <LinkRow links={item.links} />
+
+      {item.screenshots && item.screenshots.length > 0 && (
+        <ul
+          aria-label="스크린샷"
+          className="mt-8 flex snap-x gap-3 overflow-x-auto pb-2"
+        >
+          {item.screenshots.map((shot) => (
+            <li key={shot.src} className="shrink-0 snap-start">
+              <Image
+                src={shot.src}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                sizes="220px"
+                className="h-[340px] w-auto rounded-md border border-border"
+              />
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className="mt-10">
         <DetailSections sections={item.sections} />
