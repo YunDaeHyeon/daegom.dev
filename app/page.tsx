@@ -29,12 +29,9 @@ export default async function Home() {
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
                 윤대현 · YunDaeHyeon
               </h1>
-              <p className="mt-3 text-sm text-muted-foreground">iOS Developer</p>
-              <p className="mt-8 max-w-[65ch] text-lg leading-8 text-foreground">
-                기기와 사람을 잇는 경험을 만듭니다.
-              </p>
-              <p className="mt-6 max-w-[65ch] text-base leading-7 text-muted-foreground">
-                막힐 땐 AI가 준 답보다 이유를, 코드보다 그 아래를 먼저 봅니다.
+              <p className="mt-3 text-sm text-muted-foreground">Mobile App Developer</p>
+              <p className="mt-8 max-w-[65ch] break-keep text-lg leading-8 text-foreground">
+                코드가 동작하는 것과 사용자가 쓸 수 있는 것은 다르다고 생각하는 개발자입니다.
               </p>
               <div className="mt-10">
                 <Link
