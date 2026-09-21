@@ -61,6 +61,7 @@ jobs:
           FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}
           FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}"
+          REVALIDATE_SECRET=${{ secrets.REVALIDATE_SECRET }}
           ENVEOF
           scp -i ~/.ssh/deploy_key /tmp/env.local ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/daegom-portfolio/.env.local
           rm -f /tmp/env.local
