@@ -8,6 +8,7 @@
 
 | 섹션 | 내용 | 데이터 |
 |---|---|---|
+| Highlights | 핵심 수치와 그 근거가 되는 기록으로 가는 링크 | `lib/content.ts` |
 | Projects | 참여한 프로젝트, 담당한 기능, 성과. 클릭하면 모달로 열림 | `lib/content.ts` |
 | Decisions | 프로젝트 안에서 내린 판단의 기록 | `lib/content.ts` |
 | Lab | 공부하고 실험한 글 (Velog·Notion에서 이전) | Firestore + S3 |
@@ -24,7 +25,9 @@ flowchart LR
   U -. 본문 이미지 .-> S[("S3<br/>lab images")]
 ```
 
-Projects와 Decisions는 코드에 두었고, 글이 많은 Lab만 Firestore에서 읽습니다. Lab 목록은 `revalidate = 3600`으로 1시간마다 갱신합니다.
+Projects와 Decisions는 코드에 두었고, 글이 많은 Lab만 Firestore에서 읽습니다.
+
+`/lab`은 분류·페이지를 검색 파라미터로 받아 서버에서 렌더링합니다. 목록이 클라이언트에서만 그려지면 JS 없이 열어본 크롤러나 링크 미리보기에 빈 페이지로 보이기 때문입니다. 검색 파라미터를 읽는 페이지는 세그먼트의 `revalidate`가 적용되지 않으므로, Firestore 조회 자체를 `unstable_cache(revalidate: 3600)`로 감싸 요청마다 119건을 다시 읽지 않게 했습니다.
 
 ### 모달 라우팅
 
@@ -68,8 +71,9 @@ app/
   @modal/               가로채기 라우트 (모달)
 components/             Modal · DetailSections · Nav 등
 lib/
-  content.ts            Projects · Decisions · About 데이터
+  content.ts            Highlights · Projects · Decisions · About 데이터
   lab.ts                Firestore에서 Lab 글 조회
+  metadata.ts           페이지별 제목·설명·OG 이미지 구성
 deploy/                 nginx 설정 · 원격 배포 스크립트
 ```
 
