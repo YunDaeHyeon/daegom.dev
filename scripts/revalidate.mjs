@@ -18,9 +18,14 @@ const res = await fetch(`${site}/api/revalidate`, {
   headers: { authorization: `Bearer ${secret}` },
 });
 
-const body = await res.text();
+const HINTS = {
+  401: "REVALIDATE_SECRET이 서버와 다릅니다. .env.local과 GitHub Secret이 같은 값인지 확인하세요.",
+  404: "서버에 /api/revalidate가 없습니다. 이 기능이 담긴 커밋이 아직 배포되지 않았습니다.",
+  503: "서버에 REVALIDATE_SECRET이 비어 있습니다. GitHub Secret을 추가한 뒤 다시 배포하세요.",
+};
+
 if (!res.ok) {
-  console.error(`실패 (${res.status}): ${body}`);
+  console.error(`실패 (${res.status}): ${HINTS[res.status] ?? "예상하지 못한 응답입니다."}`);
   process.exit(1);
 }
-console.log(`${site} 갱신 완료: ${body}`);
+console.log(`${site} 갱신 완료: ${await res.text()}`);
