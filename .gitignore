@@ -43,6 +43,7 @@ next-env.d.ts
 .claude/
 .agents/
 .codex/
+portfoli-handoff.md
 
 # Impeccable local-only config (build-path choice etc. is machine-specific)
 .impeccable/config.local.json
