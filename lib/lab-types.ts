@@ -13,7 +13,7 @@ export type LabPostSummary = {
   slug: string;
   title: string;
   type: LabType;
-  source: "velog" | "notion";
+  source: "velog" | "notion" | "admin";
   createdAt: string;
   dateApprox: boolean;
   pinned: boolean;

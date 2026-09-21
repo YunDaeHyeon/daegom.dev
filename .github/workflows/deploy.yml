@@ -26,6 +26,10 @@ jobs:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.FIREBASE_WEB_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_WEB_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.FIREBASE_WEB_APP_ID }}
 
       - name: Set up SSH key
         run: |
@@ -61,7 +65,8 @@ jobs:
           FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}
           FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}"
-          REVALIDATE_SECRET=${{ secrets.REVALIDATE_SECRET }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           ENVEOF
           scp -i ~/.ssh/deploy_key /tmp/env.local ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/daegom-portfolio/.env.local
           rm -f /tmp/env.local
