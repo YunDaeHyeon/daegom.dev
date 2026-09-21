@@ -337,7 +337,7 @@ export const decisions: Decision[] = [
     date: "2025.05",
     status: "SHIPPED",
     summary:
-      "매장 목록이 느렸습니다. 원인을 네트워크 속도가 아니라 같은 데이터를 반복해서 요청하는 구조로 정의했고, 한 번 받은 값을 저장해 재사용하도록 바꿨습니다.",
+      "반복적인 외부 API 호출로 인한 매장 목록 지연을 DB 캐싱으로 개선했습니다.",
     sections: [
       {
         heading: "문제",
@@ -386,7 +386,7 @@ export const decisions: Decision[] = [
     date: "2026.02.06",
     status: "SHIPPED",
     summary:
-      "App Store 심사에서 세 번 반려됐습니다. 심사 기준에 맞추는 수정으로 끝내지 않고, 우리에게는 의도된 동작이 사용자에게는 오류로 보인다는 문제로 다시 정의했습니다.",
+      "반복된 심사 반려 원인을 사용자 관점의 UX 문제로 재정의하여 App Store 최종 승인을 받았습니다.",
     sections: [
       {
         heading: "반려 사유",
@@ -427,7 +427,7 @@ export const decisions: Decision[] = [
     date: "2026.01",
     status: "SHIPPED",
     summary:
-      "비디오와 사진을 같은 방식으로 전송하지 않았습니다. 실시간 스트림은 손실을 감수하고, 완전한 결과물이 필요한 사진은 신뢰성을 우선했습니다.",
+      "데이터 특성에 맞춰 전송 프로토콜과 인코딩 전략을 분리해 실시간성과 신뢰성을 확보했습니다.",
     sections: [
       {
         heading: "판단",
@@ -499,7 +499,7 @@ export const decisions: Decision[] = [
     date: "2026.01.27",
     status: "SHIPPED",
     summary:
-      "렌더링 방식도, 공유 방식도 바꿔봤지만 크래시는 그대로였습니다. 그래서 원인이 코드 밖에 있을 수 있다고 봤습니다.",
+      "지속적인 크래시 원인을 추적해 렌더링 로직이 아닌 Xcode 디버그 옵션과 Metal 검증 레이어 간 충돌임을 규명했습니다.",
     sections: [
       {
         heading: "시도한 것",
@@ -554,7 +554,7 @@ export const decisions: Decision[] = [
     date: "2026.01.19",
     status: "SHIPPED",
     summary:
-      "리모트 기기 연결이 암호화 설정 불일치로 실패했습니다. 설정을 바꿔도 안 된다고 결론 내리고 구조를 늘리려 했지만, 실제로는 엉뚱한 세션의 값을 바꿔놓고 확인하고 있었습니다.",
+      "실험 대상을 재검증해 세션 간 암호화 설정 어긋남을 파악하고, 구조 추가 없이 연결 실패를 해결했습니다.",
     sections: [
       {
         heading: "증상",
@@ -606,7 +606,7 @@ export const decisions: Decision[] = [
     date: "2026.01.04",
     status: "IN PROGRESS",
     summary:
-      "Fastlane으로 빌드부터 Appbox 업로드까지 자동화하다 프로비저닝 프로파일 오류를 만났습니다. 원인을 파고드니, 팀이 Ad-hoc이라 여겼던 배포 방식이 실은 개발용 배포였다는 걸 알게 됐습니다.",
+      "잘못 파악했던 배포 방식을 바로잡고, 목적별 Lane을 분리해 테스트·배포 파이프라인을 자동화했습니다.",
     sections: [
       {
         heading: "시도",
@@ -621,8 +621,6 @@ export const decisions: Decision[] = [
         items: [
           "내부 테스터용 레인은 명령 한 줄로 Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 완료",
           "공식 배포용 레인을 따로 두어 App Store 배포용 IPA 빌드와 TestFlight 업로드까지 자동화",
-          "두 배포의 목적과 필요한 권한이 다르므로 하나의 레인으로 합치지 않고 분리",
-          "저장소 push만으로 배포까지 이어지는 완전 자동화는 다음 과제로 남김",
         ],
       },
     ],
@@ -641,7 +639,7 @@ export const decisions: Decision[] = [
     date: "2026.01.03",
     status: "SHIPPED",
     summary:
-      "MultipeerConnectivity 기반 Browser의 콜백 구조를 AsyncStream으로 리팩터링했습니다. 다중 구독이 필요한 이벤트 하나는 통일성보다 안전한 리팩터링을 우선해 의도적으로 남겨뒀습니다.",
+      "콜백 구조를 AsyncStream으로 개편하되, 다중 구독 이벤트는 Combine을 유지해 리팩터링 안전성을 지켰습니다.",
     sections: [
       {
         heading: "판단",
@@ -668,7 +666,7 @@ export const decisions: Decision[] = [
     date: "2026.01",
     status: "SHIPPED",
     summary:
-      "AI에게 전체 코드를 보여줬더니 지금 변경과 상관없는 리뷰가 나왔습니다. PR의 변경사항만 전달하도록 범위를 좁혔고, 그래도 남는 부분은 사람이 판단하기로 했습니다.",
+      "AI 리뷰 범위를 Diff로 한정하고 1차 검토용으로 역할 정의해 코드 리뷰 병목을 개선했습니다.",
     sections: [
       {
         heading: "배경",
@@ -715,7 +713,7 @@ export const decisions: Decision[] = [
     date: "2025.12.18",
     status: "DISCONTINUED",
     summary:
-      "위치에 AR 콘텐츠를 고정하는 기능을 3주 동안 검증했습니다. 기술적으로 되는 것과 서비스에 필요한 수준 사이 차이가 컸고, 더 만들기 전에 중단했습니다.",
+      "국내 환경 제약과 정밀도 한계를 확인하고, 3주 만에 AR 위치 고정 개발을 조기 중단했습니다.",
     sections: [
       {
         heading: "검증한 것",
