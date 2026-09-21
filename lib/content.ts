@@ -133,10 +133,8 @@ export const projectItems: ProjectItem[] = [
         heading: "성과",
         items: [
           "App Store에 출시했습니다. 심사에서 세 번 반려된 뒤, 개발자에게는 의도된 동작이 사용자에게는 오류로 보인다는 점을 확인하고 리모트 연결 상태와 타임아웃 처리를 다시 정의해 4차 심사에서 승인받았습니다. (2026.02.06)",
+          "TestFlight 외부 테스트에서 팀원을 제외한 테스터 25명이 설치했고, iPhone·iPad·Mac과 iOS 17부터 26까지 걸친 환경에서 크래시 리포트는 0건이었습니다.",
           "내부 AppBox 배포와 TestFlight 외부 테스트로 사용자 피드백을 모아, 사용성·연결·UI 문제를 PR 단위로 수정했습니다.",
-          // TODO(확인필요: 이력서의 'TestFlight 25명 설치, 충돌 0건'을 뒷받침할 기록이 팀 위키에 없다.
-          //   위키에는 '내부·외부 합쳐 약 10명 이상 피드백 수집'으로만 적혀 있다.
-          //   App Store Connect의 설치 수·크래시 수를 확인한 뒤 문장을 넣을지 결정한다)
         ],
       },
     ],
@@ -491,9 +489,25 @@ export const decisions: Decision[] = [
       {
         heading: "판단과 발견",
         items: [
-          "렌더링·공유 방식을 모두 바꿔도 실패 → 원인이 이미지 처리 코드 밖에 있다는 단서로 해석",
-          "AI에게 크래시 로그의 MTLDebugBuffer를 질의 → Metal 엔진이 아닌 Xcode 디버그 전용 검증 레이어임을 확인",
-          "Debug·Release 양쪽과 커뮤니티 사례를 교차 확인해 운영 환경에는 영향 없다는 결론 도출",
+          "렌더링 경로와 공유 경로를 모두 바꿔도 같은 크래시가 재현됨 → 원인이 이미지 처리 코드 밖에 있다는 단서로 해석",
+          "크래시 로그의 MTLDebugBuffer를 조사해, Metal 엔진에 실제로 존재하는 객체가 아니라 Metal API Validation을 켰을 때만 끼어드는 Xcode 디버그 전용 검증 래퍼임을 확인",
+          "즉 이미지 자체가 잘못된 것이 아니라, 검증 레이어가 만든 텍스처와 실제 버퍼의 resourceOptions가 어긋나 assertion이 걸리는 상황으로 정리",
+        ],
+      },
+      {
+        heading: "확인한 것",
+        items: [
+          "검증 옵션을 끈 상태에서 Debug와 Release 양쪽 모두 크래시가 재현되지 않는 것을 확인",
+          "같은 증상을 겪은 외부 사례들과 대조해, 디버그 전용 옵션이라는 해석이 맞는지 교차 확인",
+          "TestFlight 외부 테스트에서 테스터 25명이 설치한 기간 동안 크래시 리포트 0건",
+          // TODO(확인필요: Lab 원문의 '시도 요약'은 6가지로 적혀 있고 본문은 5-1~5-9까지 이어진다.
+          //   이력서·이 기록은 7가지 기준이므로, Lab 원문의 요약 목록을 7가지로 맞출지 결정 필요)
+        ],
+      },
+      {
+        heading: "남긴 것",
+        items: [
+          "옵션을 끈 뒤에도 남는 AlphaPremulLast 경고는 별개 문제로 보고, 렌더링 포맷에서 알파 채널을 제거해 따로 해결",
         ],
       },
     ],
@@ -502,6 +516,7 @@ export const decisions: Decision[] = [
         label: "PR #220",
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
       },
+      { label: "전체 기록", href: "/lab/공유-기능-구현-시-발생한-문제-정리" },
     ],
     relatedProject: "mirroring-booth",
   },
