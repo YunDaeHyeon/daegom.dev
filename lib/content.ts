@@ -139,6 +139,7 @@ export const projectItems: ProjectItem[] = [
       },
     ],
     relatedDecisions: [
+      "ar-anchor-validation",
       "video-transfer-mode-tradeoff",
       "choosing-which-feedback-to-take",
       "relentless-troubleshooting",
@@ -427,6 +428,7 @@ export const decisions: Decision[] = [
       },
     ],
     links: [{ label: "전체 기록", href: "/lab/Fastlane으로-자동-배포-구현기" }],
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "browser-refactor-hybrid-decision",
@@ -523,7 +525,8 @@ export const decisions: Decision[] = [
         ],
       },
     ],
-    links: [],
+    links: [{ label: "전체 기록", href: "/lab/Google-ARCore-API-검증기" }],
+    relatedProject: "mirroring-booth",
   },
 ];
 

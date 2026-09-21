@@ -7,7 +7,8 @@ import { ContactBadge } from "@/components/contact-badge";
 import { DetailSections } from "@/components/detail-sections";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
-import { projectItems, about } from "@/lib/content";
+import { StatusLabel } from "@/components/status-label";
+import { projectItems, decisions, about } from "@/lib/content";
 import { getAllLabPosts, formatLabDate } from "@/lib/lab";
 
 export const revalidate = 3600;
@@ -101,6 +102,44 @@ export default async function Home() {
                     </li>
                   ))}
                 </ul>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <section
+        id="decisions"
+        tabIndex={-1}
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+      >
+        <Container>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+            Decisions
+          </h2>
+          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
+            프로젝트에서 무엇을 기준으로 판단했고, 무엇을 포기했는지 남겼습니다.
+          </p>
+
+          <ul className="mt-10 divide-y divide-border border-t border-border">
+            {decisions.map((decision) => (
+              <li key={decision.slug} className="py-5">
+                <Link href={`/decisions/${decision.slug}`} className="block">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                    <span className="text-base font-medium text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
+                      {decision.title}
+                    </span>
+                    <span className="flex shrink-0 items-center gap-3">
+                      <StatusLabel status={decision.status} />
+                      <span className="font-mono text-sm text-muted-foreground">
+                        {decision.date}
+                      </span>
+                    </span>
+                  </div>
+                  <p className="mt-2 max-w-[70ch] break-keep text-base leading-7 text-muted-foreground">
+                    {decision.summary}
+                  </p>
+                </Link>
               </li>
             ))}
           </ul>
