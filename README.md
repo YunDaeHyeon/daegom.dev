@@ -28,17 +28,6 @@ Projects와 Decisions는 코드에 두었고, 글이 많은 Lab만 Firestore에�
 
 `/lab`은 분류·페이지를 검색 파라미터로 받아 서버에서 렌더링합니다. 목록이 클라이언트에서만 그려지면 JS 없이 열어본 크롤러나 링크 미리보기에 빈 페이지로 보이기 때문입니다. 검색 파라미터를 읽는 페이지는 세그먼트의 `revalidate`가 적용되지 않으므로, Firestore 조회 자체를 `unstable_cache(revalidate: 3600)`로 감싸 요청마다 119건을 다시 읽지 않게 했습니다.
 
-### 새 글이 바로 보이게 하기
-
-목록 조회는 1시간 캐시하지만, 글을 올린 직후에는 기다리지 않아도 됩니다. `POST /api/revalidate`가 목록 캐시와 홈·`/lab` 페이지를 즉시 무효화합니다.
-
-```bash
-npm run revalidate                          # https://daegom.dev 갱신
-SITE_URL=http://localhost:3000 npm run revalidate
-```
-
-인증값(`REVALIDATE_SECRET`)은 로컬 `.env.local`과 GitHub Secrets에 같은 값을 둡니다. 배포 때 워크플로가 EC2의 `.env.local`로 옮깁니다.
-
 ### 모달 라우팅
 
 프로젝트 상세는 홈에서 클릭하면 모달로, URL로 직접 들어오면 전체 페이지로 열립니다. Next.js의 Intercepting Route로 같은 콘텐츠 컴포넌트를 재사용합니다.
@@ -101,7 +90,6 @@ npm run dev
 | `FIREBASE_PROJECT_ID` | Firebase 프로젝트 ID |
 | `FIREBASE_CLIENT_EMAIL` | 서비스 계정 이메일 |
 | `FIREBASE_PRIVATE_KEY` | 서비스 계정 비공개 키 (줄바꿈은 `\n`) |
-| `REVALIDATE_SECRET` | Lab 목록 캐시를 즉시 갱신하는 요청의 인증값. 비어 있으면 갱신 요청을 모두 거절 |
 
 ## 만들면서 겪은 문제
 
