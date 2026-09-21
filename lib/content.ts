@@ -9,6 +9,8 @@ export type ProjectItem = {
   title: string;
   icon?: string;
   period: string;
+  /** 팀 규모와 맡은 역할. 기간 옆에 함께 표시된다. */
+  role?: string;
   summary: string;
   stack: string[];
   sections: DetailSection[];
@@ -57,6 +59,7 @@ export const projectItems: ProjectItem[] = [
     title: "미러링부스",
     icon: "/icons/mirroring-booth.png",
     period: "2025.11 — 2026.02",
+    role: "4인 팀 · iOS",
     summary: "포토부스를 찾아갈 필요 없이, Apple 기기로 시작하는 나만의 포토부스",
     stack: [
       "Swift",
@@ -154,6 +157,7 @@ export const projectItems: ProjectItem[] = [
     title: "절약학개론",
     icon: "/icons/student-deals-map.png",
     period: "2025.03 — 2025.06",
+    role: "4인 팀 · 팀장 · iOS · 백엔드",
     summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
     stack: [
       "Swift",
@@ -191,15 +195,37 @@ export const projectItems: ProjectItem[] = [
         items: [
           "네이버 지도 위에 제휴 매장을 마커로 보여주고, 단과대·학과 기준으로 필터링할 수 있게 했습니다.",
           "학생이 직접 할인 매장을 등록할 수 있고, 새 매장이 등록되면 푸시 알림으로 알려줍니다.",
-          "원광대학교 인근 상권에서 실기기로 테스트했고 TestFlight까지 배포했습니다.",
+          "원광대학교 인근 상권에서 실기기로 테스트했습니다.",
         ],
       },
       {
-        heading: "담당한 기능",
+        heading: "담당한 기능 · iOS",
         items: [
           "APNs 푸시 알림 시스템을 구축했습니다.",
           "제휴 매장 정보를 제공하는 기능을 구현했습니다.",
-          "지오코딩 시스템을 구축했습니다.",
+        ],
+      },
+      {
+        heading: "담당한 기능 · 백엔드",
+        items: [
+          "Spring Boot로 매장·할인 정보를 제공하는 API 서버를 직접 구현하고 AWS EC2에 배포했습니다.",
+          "MySQL로 매장·할인·사용자 데이터를 모델링했습니다.",
+          "지오코딩 시스템을 구축했습니다. 초기 매장 약 100곳의 좌표는 백엔드에서 한 번만 변환해 저장하고, 이후에는 신규 등록 시에만 변환합니다.",
+          "매장 목록을 불러올 때 매장마다 호출되던 외부 이미지 API를 image_url 컬럼에 저장해 재사용하도록 바꿨습니다.",
+        ],
+      },
+      {
+        heading: "담당한 기능 · 팀 리딩",
+        items: [
+          "이슈를 '문제 현상 - 원인 추적 - 해결책' 3단계 양식으로 표준화해, 프론트엔드와 백엔드 사이에서 반복되던 소통 오류를 줄였습니다.",
+          "구현에 들어가기 전에 스펙과 API 구조를 파트끼리 함께 검토하는 절차를 마련했습니다.",
+        ],
+      },
+      {
+        heading: "성과",
+        items: [
+          "제휴 매장 50개를 조회할 때 발생하던 이미지 API 호출을 50회에서 9회로 줄였습니다. (82% 감소, 평균 응답 속도 35% 개선)",
+          "TestFlight로 배포해 초기 테스터 약 10명과 계획대로 테스트를 진행했고, '맞춤형 정보 필터링'에서 긍정적인 피드백을 받았습니다.",
         ],
       },
     ],
@@ -212,13 +238,16 @@ export const projectItems: ProjectItem[] = [
         label: "Wiki",
         href: "https://github.com/CampusCrew/Jeolhak-ios/wiki",
       },
+      // TODO(확인필요: 백엔드 저장소 URL. 직접 구현했다고 적었으므로 코드 근거 링크가 필요하다)
     ],
+    relatedDecisions: ["store-image-api-caching"],
   },
   {
     slug: "drpill",
     title: "DrPill (약선생)",
     icon: "/icons/drpill.png",
     period: "2024.09 — 2024.11",
+    role: "4인 팀 · 팀장 · 풀스택",
     summary: "약물 오남용 방지 및 안전한 약 복용을 위한 개인 의약품 맞춤 서비스",
     stack: ["React Native", "NestJS", "MySQL", "Flask", "OpenCV", "Roboflow", "AWS EC2"],
     thumbnail: {
@@ -274,6 +303,50 @@ export const projectItems: ProjectItem[] = [
 ];
 
 export const decisions: Decision[] = [
+  {
+    slug: "store-image-api-caching",
+    title: "네트워크가 느린 게 아니라, 같은 걸 50번 물어보고 있었습니다",
+    date: "2025-05",
+    status: "SHIPPED",
+    summary:
+      "매장 목록이 느렸습니다. 원인을 네트워크 속도가 아니라 같은 데이터를 반복해서 요청하는 구조로 정의했고, 한 번 받은 값을 저장해 재사용하도록 바꿨습니다.",
+    sections: [
+      {
+        heading: "문제",
+        items: [
+          "제휴 매장 50개를 조회할 때 매장마다 외부 이미지 API를 호출해, 한 화면에 호출이 50번 발생",
+          "지도에서 반경 검색을 하려면 매장별 좌표가 미리 있어야 하는데, 조회 시점에 실시간으로 주소를 좌표로 바꾸면서 지연이 발생",
+        ],
+      },
+      {
+        heading: "기준과 판단",
+        items: [
+          "이미지 URL은 매장마다 거의 바뀌지 않는 값이라고 보고, 매번 조회할 대상이 아니라 한 번 받아 저장할 대상으로 판단",
+          "image_url 컬럼에 저장해 재사용하고, 값이 없을 때만 외부 API를 호출하도록 변경",
+          "좌표도 같은 기준을 적용해, 초기 매장 약 100곳은 백엔드에서 한 번만 변환해 저장하고 이후에는 신규 등록 시에만 변환",
+        ],
+      },
+      {
+        heading: "트레이드오프",
+        items: [
+          "저장한 값이 원본과 어긋날 수 있다는 점을 감수하는 대신, 조회 경로에서 외부 의존을 걷어내는 쪽을 선택",
+          "좌표 변환 비용을 조회 시점에서 등록 시점으로 옮겨, 자주 일어나는 작업 대신 드물게 일어나는 작업이 비용을 지게 함",
+        ],
+      },
+      {
+        heading: "결과",
+        items: [
+          "매장 50개 조회 시 이미지 API 호출이 50회에서 9회로 감소 (82%)",
+          "평균 응답 속도 35% 개선",
+          // TODO(확인필요: 개선 전후 응답 시간(ms)과 어떻게 측정했는지. 현재 값은 비율만 있고 측정 방법이 없다)
+        ],
+      },
+    ],
+    links: [
+      // TODO(확인필요: 이 작업의 백엔드 PR 또는 트러블슈팅 문서 링크)
+    ],
+    relatedProject: "student-deals-map",
+  },
   {
     slug: "video-transfer-mode-tradeoff",
     title: "실시간성과 완전성, 같은 방식으로 보낼 수 없었습니다",

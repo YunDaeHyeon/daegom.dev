@@ -41,6 +41,7 @@ export function ProjectDetailContent({
       </h1>
       <p className="mt-2 font-mono text-sm text-muted-foreground">
         {item.period}
+        {item.role && <span className="ml-3">{item.role}</span>}
       </p>
       <p className="mt-6 max-w-[65ch] text-lg font-medium leading-8 text-foreground sm:text-xl sm:leading-9">
         {item.summary}
