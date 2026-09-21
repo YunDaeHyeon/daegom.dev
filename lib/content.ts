@@ -557,12 +557,14 @@ export const decisions: Decision[] = [
     sections: [
       {
         heading: "배경",
-        items: ["이벤트 처리 방식을 클로저에서 AsyncStream으로 전환하는 작업"],
+        items: [
+          "Browser의 이벤트 처리 방식을 클로저에서 AsyncStream으로 옮기는 후속 작업 (PR #287)",
+        ],
       },
       {
         heading: "판단",
         items: [
-          "두 개의 콜백은 다른 컴포넌트와의 결합도가 높아 이번 범위에서 의도적으로 제외",
+          "콜백 8개를 AsyncStream으로 옮기고, 다른 컴포넌트와 결합도가 높은 onRemoteModeCommand·onSelectedTimerModeCommand 두 개는 이번 PR 범위에서 의도적으로 제외",
           "이벤트 성격별로 버퍼 정책을 다르게 설계 (놓치면 안 되는 이벤트는 무제한, 하트비트는 최신 1개만 유지)",
           "동료의 '하트비트 처리 로직 공통화' 제안은 화면별로 실제 동작이 달라 복잡도만 늘어난다고 판단해 거절",
           "같은 프로젝트의 다른 PR에서는 동료 제안(공유 옵션 캡슐화)을 그 자리에서 수용",
@@ -638,33 +640,52 @@ export const decisions: Decision[] = [
   },
   {
     slug: "browser-advertiser-encryption-mismatch",
-    title: "설정이 아니라 놓친 코드 한 줄이었습니다",
-    date: "2026-01-16",
+    title: "안 된다고 결론 내린 그 실험이 틀렸습니다",
+    date: "2026-01-19",
     status: "SHIPPED",
     summary:
-      "미러링·리모트 기기 간 세션 암호화 설정이 계속 어긋나는 문제를 겪었습니다. 설정값을 두 번 바꿔가며 실패한 뒤에야, 진짜 원인이 코드에서 빠뜨린 한 줄이었다는 걸 알았습니다.",
+      "리모트 기기 연결이 암호화 설정 불일치로 실패했습니다. 설정을 바꿔도 안 된다고 결론 내리고 구조를 늘리려 했지만, 실제로는 엉뚱한 세션의 값을 바꿔놓고 확인하고 있었습니다.",
     sections: [
       {
-        heading: "시도",
+        heading: "증상",
         items: [
-          "remoteSession의 암호화를 .required에서 .none으로 바꿔 재연결 → 이유를 알 수 없는 암호화 오류 재발",
-          "명령 세션을 하나 더 분리하는 2단계 구조로 변경 → 연결은 되지만 관리할 세션이 늘고 체감 지연도 커짐",
-          "동료의 PR 피드백('remote session이 꼭 .required여야 했나요?')을 계기로 처음부터 다시 의심",
+          "리모트 기기 연결 시 `incompatible encryption preference` 경고와 함께 연결 실패",
+          "Browser는 `.required`인 remoteSession으로 명령을 보내는데, Advertiser는 `.none`인 commandSession으로 받고 있어 설정이 어긋난 상태",
         ],
       },
       {
-        heading: "판단",
+        heading: "잘못 내린 결론",
         items: [
-          "확신 없이 넘어가지 않기 위해 PR을 Draft로 돌리고, develop에서 별도 테스트 브랜치를 파서 원인을 격리해 재현하기로 결정",
-          "테스트 브랜치에서 remoteSession을 다시 .none으로 되돌리고, Browser의 didReceive 핸들러에 remoteSession 분기가 빠져있었다는 것을 발견",
-          "설정값이 아니라 수신 핸들러 코드 누락이 처음부터 진짜 원인이었음을 확인",
+          "암호화 설정을 `.none`으로 바꿔 확인했지만 해결되지 않아, 설정으로는 안 되는 문제라고 판단",
+          "리모트 전용 명령 세션을 하나 더 두는 2단계 구조를 대안으로 검토 — 연결은 되지만 관리할 세션이 늘어남",
+        ],
+      },
+      {
+        heading: "다시 의심한 계기",
+        items: [
+          "동료의 PR 피드백('remote session이 꼭 .required여야 했나요?')을 받고, 구조를 늘리기 전에 앞선 결론부터 다시 확인하기로 결정",
+          "확신 없이 병합하지 않기 위해 PR을 Draft로 돌리고 별도 테스트 브랜치에서 원인을 격리",
+        ],
+      },
+      {
+        heading: "진짜 원인",
+        items: [
+          "앞서 '`.none`으로 바꿔도 안 된다'고 확인했던 실험에서, 실제로 값을 바꾼 대상은 다른 세션이었음",
+          "대상을 맞춰 remoteSession의 `encryptionPreference`를 `.none`으로 두자 그대로 해결 — 세션을 추가할 필요가 없었음",
+        ],
+      },
+      {
+        heading: "남긴 것",
+        items: [
+          "실패한 실험으로 가설을 버리려면 실험 자체가 맞았는지를 먼저 확인해야 한다는 것",
+          "구조를 늘리는 결정은 기존 가정을 다시 검증한 뒤에 내릴 것",
         ],
       },
     ],
     links: [
       {
-        label: "PR #111",
-        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/111",
+        label: "PR #116",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/116",
       },
     ],
     relatedProject: "mirroring-booth",
@@ -716,8 +737,8 @@ export const decisions: Decision[] = [
         heading: "판단",
         items: [
           "프로토콜 추출을 통한 완전한 테스트 가능 구조도 검토했지만, 이번 범위에는 과한 대규모 리팩터링이라 보류",
-          "대부분의 콜백은 AsyncStream(BrowserEvents enum)으로 점진 이전",
-          "다중 구독이 필요한 onStartTransferCommand 하나는 Combine을 그대로 유지",
+          "클로저로 되어 있던 콜백은 AsyncStream(BrowserEvents enum)으로 점진 이전",
+          "원래 Combine으로 되어 있던 onStartTransferCommand 하나는, 두 곳에서 동시에 구독해야 해서 AsyncStream으로 바꾸면 코드 중복이 생긴다고 보고 Combine을 그대로 유지",
         ],
       },
       {
