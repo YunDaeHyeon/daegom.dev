@@ -461,13 +461,13 @@ export const decisions: Decision[] = [
     slug: "defining-ai-review-scope",
     title: "AI에게 어디까지 맡기고, 어디부터 정의할 것인가요?",
     date: "2026-01",
-    status: "IN PROGRESS",
+    status: "SHIPPED",
     summary:
       "AI에게 전체 코드를 보여줬더니 지금 변경과 상관없는 리뷰가 나왔습니다. PR의 변경사항만 전달하도록 범위를 좁혔고, 그래도 남는 부분은 사람이 판단하기로 했습니다.",
     sections: [
       {
         heading: "배경",
-        items: ["PR이 하루 최대 12건까지 쌓이며 리뷰 부담이 커짐"],
+        items: ["PR이 하루 6~12건 이상 쌓이며 리뷰가 병목이 됨"],
       },
       {
         heading: "시도",
@@ -485,12 +485,22 @@ export const decisions: Decision[] = [
           "맥락이 필요한 판단은 사람이 최종 결정하도록 기준을 세우고 문서로 남김",
         ],
       },
+      {
+        heading: "운영 방식과 결과",
+        items: [
+          "AI의 지적은 실제 코드와 대조해 반영 여부를 정하고, 반영하지 않은 건은 그 사유를 PR에 남김 (PR #301)",
+          "AI 지적의 절반 이상을 실제 코드에 반영 (체감)",
+          "팀원이 리뷰에 들이는 시간도 절반 이상 줄었다고 느낌 (체감)",
+          // TODO(확인필요: 반영률·리뷰 시간은 실측이 아닌 체감치다. GitHub API로 AI 리뷰 코멘트 수 대비 반영 건수를 집계할지 결정 필요)
+        ],
+      },
     ],
     links: [
       {
-        label: "PR #220",
-        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/220",
+        label: "PR #301 (미반영 사유 기록)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/301",
       },
+      { label: "전체 기록", href: "/lab/n8n으로-PR-자동-리뷰-플로우-구축하기" },
     ],
     relatedProject: "mirroring-booth",
   },
