@@ -309,6 +309,10 @@ export const projectItems: ProjectItem[] = [
         label: "트러블슈팅 기록",
         href: "https://github.com/CampusCrew/Jeolhak-ios/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94%EC%8A%88%ED%8C%85-%EC%A0%95%EB%A6%AC",
       },
+      {
+        label: "시연 영상",
+        href: "https://drive.google.com/drive/folders/1FFyjuyi4RfuE5bqI1uN_Gfv-uP1HG-TX?usp=sharing",
+      },
       // TODO(확인필요: 백엔드 저장소 URL. 직접 구현했다고 적었으므로 코드 근거 링크가 필요하다)
     ],
     relatedDecisions: ["store-image-api-caching"],
@@ -367,7 +371,7 @@ export const projectItems: ProjectItem[] = [
       },
       {
         label: "시연 영상",
-        href: "https://drive.google.com/file/d/1ESfQIG-B5YsEkwGHWr4AoXe8QU4hWgoH/view?usp=sharing",
+        href: "https://drive.google.com/file/d/1jL2s_DuCjwJEPm3Y-DkzjX0lqVQCDgpo/view?usp=sharing",
       },
     ],
   },
