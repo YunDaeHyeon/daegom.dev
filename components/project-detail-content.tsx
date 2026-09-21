@@ -84,21 +84,27 @@ export function ProjectDetailContent({
       </div>
 
       {related.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-base font-semibold text-foreground">
-            관련 Decisions
+        <div className="mt-10">
+          <h2 className="text-lg font-semibold text-foreground">
+            관련 기록
           </h2>
-          <ul className="mt-3 space-y-2">
-            {related.map((d) => (
-              <li key={d.slug}>
-                <Link
-                  href={`/decisions/${d.slug}`}
-                  className="text-base text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  {d.title}
-                </Link>
-              </li>
-            ))}
+          <ul className="mt-4 divide-y divide-border border-t border-border">
+            {[...related]
+              .sort((a, b) => a.date.localeCompare(b.date))
+              .map((d) => (
+                <li key={d.slug} className="py-3.5">
+                  <Link href={`/decisions/${d.slug}`} className="block">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <span className="text-base text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
+                        {d.title}
+                      </span>
+                      <span className="font-mono text-sm text-muted-foreground">
+                        {d.date}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
       )}

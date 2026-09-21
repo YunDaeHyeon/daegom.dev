@@ -121,8 +121,8 @@ export const projectItems: ProjectItem[] = [
         heading: "담당한 기능 · CI/CD",
         items: [
           "Fastlane으로 내부 테스터 배포를 자동화했습니다. 명령 한 줄로 Development IPA 빌드부터 AppBox 업로드, 설치 링크 전송까지 처리합니다.",
-          "공식 배포용 레인도 만들어 App Store 배포용 IPA 빌드와 TestFlight 업로드를 자동화했습니다. 저장소에 push하는 것만으로 배포까지 이어지는 완전 자동화는 다음 과제로 남겼습니다.",
-          "n8n과 GitHub REST API로 PR 1차 리뷰를 자동화했습니다.",
+          "공식 배포용 레인도 만들어 App Store 배포용 IPA 빌드와 TestFlight 업로드를 자동화했습니다.",
+          "n8n과 GitHub REST API로 PR 리뷰를 자동화했습니다.",
         ],
       },
       {
@@ -132,9 +132,8 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "성과",
         items: [
-          "App Store에 출시했습니다. 심사에서 세 번 반려된 뒤, 개발자에게는 의도된 동작이 사용자에게는 오류로 보인다는 점을 확인하고 리모트 연결 상태와 타임아웃 처리를 다시 정의해 4차 심사에서 승인받았습니다. (2026.02.06)",
-          "TestFlight 외부 테스트에서 팀원을 제외한 테스터 25명이 설치했고, iPhone·iPad·Mac과 iOS 17부터 26까지 걸친 환경에서 크래시 리포트는 0건이었습니다.",
-          "내부 AppBox 배포와 TestFlight 외부 테스트로 사용자 피드백을 모아, 사용성·연결·UI 문제를 PR 단위로 수정했습니다.",
+          "App Store에 출시했습니다.",
+          "외부 테스트에서 25명이 다양한 환경으로 설치했으며, 크래시 리포트는 0건이었습니다.",
         ],
       },
     ],
@@ -230,8 +229,8 @@ export const projectItems: ProjectItem[] = [
         items: [
           "Spring Boot로 매장·할인 정보를 제공하는 API 서버를 직접 구현하고 AWS EC2에 배포했습니다.",
           "MySQL로 매장 데이터를 모델링하고, JPA Native Query로 반경 300m 이내 매장을 검색하도록 했습니다.",
-          "지오코딩 시스템을 구축했습니다. 확보한 매장 약 100곳의 좌표는 백엔드에서 한 번만 변환해 저장하고, 이후에는 사용자가 매장을 등록·수정할 때만 변환합니다.",
-          "매장마다 호출되던 네이버 검색 API의 썸네일 이미지를 image_url 컬럼에 저장해 재사용하고, 값이 없을 때만 호출하도록 바꿨습니다.",
+          "지오코딩 시스템을 구축했습니다.",
+          "매번 요청하던 네이버 API의 썸네일을 image_url에 캐싱하여 사용하고, 데이터가 없는 경우에만 외부 API를 호출하도록 개선했습니다.",
         ],
       },
       {
@@ -334,7 +333,7 @@ export const projectItems: ProjectItem[] = [
 export const decisions: Decision[] = [
   {
     slug: "store-image-api-caching",
-    title: "네트워크가 느린 게 아니라, 같은 걸 50번 물어보고 있었습니다",
+    title: "지오코딩·이미지 API 캐싱 트러블슈팅",
     date: "2025.05",
     status: "SHIPPED",
     summary:
@@ -383,7 +382,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "app-store-review-reframing",
-    title: "의도된 동작과 버그의 차이는 보는 사람이 정합니다",
+    title: "App Store 심사 대응 기록",
     date: "2026.02.06",
     status: "SHIPPED",
     summary:
@@ -423,7 +422,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "video-transfer-mode-tradeoff",
-    title: "실시간성과 완전성, 같은 방식으로 보낼 수 없었습니다",
+    title: "프로토타입 기술 스택 및 구현 방식",
     // 프로토타입 단계의 판단이다. 프로토타입 병합 PR #27이 2026.01.06에 머지됐다.
     date: "2026.01",
     status: "SHIPPED",
@@ -460,7 +459,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "choosing-which-feedback-to-take",
-    title: "제안을 가려 받는 것도 판단입니다",
+    title: "Browser 콜백 AsyncStream 전환 (PR #287)",
     date: "2026.02.04",
     status: "SHIPPED",
     summary:
@@ -496,7 +495,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "relentless-troubleshooting",
-    title: "바꿔도 사라지지 않은 크래시",
+    title: "공유 기능 구현 시 발생한 문제 정리",
     date: "2026.01.27",
     status: "SHIPPED",
     summary:
@@ -551,7 +550,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "browser-advertiser-encryption-mismatch",
-    title: "안 된다고 결론 내린 그 실험이 틀렸습니다",
+    title: "Browser·Advertiser 암호화 불일치 해결",
     date: "2026.01.19",
     status: "SHIPPED",
     summary:
@@ -603,7 +602,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "fastlane-lane-misunderstanding",
-    title: "우리가 Ad-hoc이라 불렀던 건 사실 개발용 배포였습니다",
+    title: "Fastlane으로 자동 배포 구현기",
     date: "2026.01.04",
     status: "IN PROGRESS",
     summary:
@@ -638,7 +637,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "browser-refactor-hybrid-decision",
-    title: "전부 통일하는 대신, 하나만 남겨뒀습니다",
+    title: "Browser 리팩터링 일지",
     date: "2026.01.03",
     status: "SHIPPED",
     summary:
@@ -665,7 +664,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "defining-ai-review-scope",
-    title: "AI에게 어디까지 맡기고, 어디부터 정의할 것인가요?",
+    title: "n8n으로 PR 자동 리뷰 플로우 구축하기",
     date: "2026.01",
     status: "SHIPPED",
     summary:
@@ -712,7 +711,7 @@ export const decisions: Decision[] = [
   },
   {
     slug: "ar-anchor-validation",
-    title: "만들고 나서가 아니라, 만들기 전에 확인한 3주",
+    title: "Google ARCore API 검증기",
     date: "2025.12.18",
     status: "DISCONTINUED",
     summary:
