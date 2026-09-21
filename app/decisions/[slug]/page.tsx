@@ -1,11 +1,29 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { DecisionDetailContent } from "@/components/decision-detail-content";
 import { decisions, projectItems } from "@/lib/content";
+import { pageMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return decisions.map((item) => ({ slug: item.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const decision = decisions.find((d) => d.slug === slug);
+  if (!decision) return {};
+
+  return pageMetadata({
+    title: `${decision.title} — 윤대현`,
+    description: decision.summary,
+    type: "article",
+  });
 }
 
 export default async function DecisionDetailPage({

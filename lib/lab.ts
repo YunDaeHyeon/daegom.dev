@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import type { QueryDocumentSnapshot } from "firebase-admin/firestore";
 import { getDb } from "@/lib/firebase-admin";
@@ -33,7 +34,10 @@ export const getAllLabPosts = unstable_cache(fetchAllLabPosts, ["lab-posts"], {
   tags: ["lab-posts"],
 });
 
-export async function getLabPostBySlug(slug: string): Promise<LabPost | null> {
+/** 같은 요청 안에서 generateMetadata와 페이지가 각각 호출하므로 중복 조회를 막는다. */
+export const getLabPostBySlug = cache(async function getLabPostBySlug(
+  slug: string
+): Promise<LabPost | null> {
   const db = getDb();
   const doc = await db.collection("labPosts").doc(slug.normalize("NFC")).get();
   if (!doc.exists) return null;
@@ -50,4 +54,4 @@ export async function getLabPostBySlug(slug: string): Promise<LabPost | null> {
     content: data.content,
     sourceUrl: data.sourceUrl ?? null,
   };
-}
+});
