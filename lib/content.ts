@@ -557,12 +557,20 @@ export const decisions: Decision[] = [
       {
         heading: "결론",
         items: [
-          "`bundle exec fastlane dev_ipa` 한 줄로 빌드→업로드→설치 링크 추출까지 완료",
-          "main 브랜치 push만으로 완전 자동배포하는 것은 다음 과제로 남김",
+          "내부 테스터용 레인은 명령 한 줄로 Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 완료",
+          "공식 배포용 레인을 따로 두어 App Store 배포용 IPA 빌드와 TestFlight 업로드까지 자동화",
+          "두 배포의 목적과 필요한 권한이 다르므로 하나의 레인으로 합치지 않고 분리",
+          "저장소 push만으로 배포까지 이어지는 완전 자동화는 다음 과제로 남김",
         ],
       },
     ],
-    links: [{ label: "전체 기록", href: "/lab/Fastlane으로-자동-배포-구현기" }],
+    links: [
+      { label: "전체 기록", href: "/lab/Fastlane으로-자동-배포-구현기" },
+      {
+        label: "Fastlane 설정 가이드",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki/Fastlane-%EC%84%A4%EC%A0%95-%EA%B0%80%EC%9D%B4%EB%93%9C",
+      },
+    ],
     relatedProject: "mirroring-booth",
   },
   {
