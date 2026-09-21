@@ -42,14 +42,6 @@ export type About = {
   contact: ExternalLink[];
 };
 
-/** 이력서에 적은 수치와 그 근거 페이지를 잇는 항목. */
-export type Highlight = {
-  metric: string;
-  label: string;
-  href: string;
-  linkLabel: string;
-};
-
 export type Decision = {
   slug: string;
   title: string;
@@ -60,44 +52,6 @@ export type Decision = {
   links: ExternalLink[];
   relatedProject?: string;
 };
-
-export const highlights: Highlight[] = [
-  {
-    metric: "4차 승인",
-    label:
-      "App Store 심사에서 세 번 반려된 뒤, 심사 문구에 맞추는 대신 문제를 다시 정의해 승인받았습니다.",
-    href: "/decisions/app-store-review-reframing",
-    linkLabel: "심사 대응 기록",
-  },
-  {
-    metric: "25명 · 0건",
-    label:
-      "TestFlight 테스터 25명이 설치한 기간 동안 크래시 리포트는 0건이었습니다.",
-    href: "/decisions/relentless-troubleshooting",
-    linkLabel: "크래시 추적 기록",
-  },
-  {
-    metric: "50 → 9회",
-    label:
-      "매장 50개를 조회할 때 발생하던 이미지 API 호출을 82% 줄이고, 평균 응답 속도를 35% 개선했습니다.",
-    href: "/decisions/store-image-api-caching",
-    linkLabel: "판단 과정",
-  },
-  {
-    metric: "3주",
-    label:
-      "AR 기획을 3주 동안 검증하고, 서비스에 필요한 정확도를 확보할 수 없다고 판단해 더 만들기 전에 접었습니다.",
-    href: "/decisions/ar-anchor-validation",
-    linkLabel: "검증 기록",
-  },
-  {
-    metric: "하루 6~12건",
-    label:
-      "쌓이는 PR 리뷰를 AI 1차 검토로 자동화하고, 반영하지 않은 지적은 사유를 PR에 남겼습니다.",
-    href: "/decisions/defining-ai-review-scope",
-    linkLabel: "역할을 나눈 기준",
-  },
-];
 
 export const projectItems: ProjectItem[] = [
   {
@@ -372,66 +326,6 @@ export const projectItems: ProjectItem[] = [
       {
         label: "시연 영상",
         href: "https://drive.google.com/file/d/1jL2s_DuCjwJEPm3Y-DkzjX0lqVQCDgpo/view?usp=sharing",
-      },
-    ],
-  },
-  {
-    slug: "daegom-dev",
-    title: "daegom.dev",
-    period: "2026.09 — 진행 중",
-    role: "1인 · 기획 · 구현 · 배포",
-    summary: "지금 보고 계신 이 사이트. 흩어져 있던 기록을 한곳에 모으고 직접 배포해 운영합니다.",
-    stack: [
-      "Next.js 16",
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS v4",
-      "Firestore",
-      "AWS EC2",
-      "AWS S3",
-      "Nginx",
-      "pm2",
-      "GitHub Actions",
-    ],
-    sections: [
-      {
-        heading: "문제 의식",
-        items: [
-          "프로젝트에서 내린 판단이 팀 저장소 위키, Notion, Velog에 흩어져 있어 한 번에 보여줄 수 없었습니다.",
-          "링크를 받은 사람이 여러 곳을 돌아다녀야 해서, 무엇을 맡았고 왜 그렇게 했는지가 잘 전달되지 않았습니다.",
-        ],
-      },
-      {
-        heading: "해결",
-        items: [
-          "프로젝트와 판단 기록, 실험 노트를 한 사이트에 모았습니다. Velog·Notion에 있던 글 119편을 Firestore로 옮기고 본문 이미지는 S3에 올렸습니다.",
-          "목록에서 누르면 모달로, URL로 바로 들어오면 전체 페이지로 열립니다. Intercepting Route로 같은 콘텐츠 컴포넌트를 두 경로가 함께 씁니다.",
-        ],
-      },
-      {
-        heading: "담당한 기능 · 배포 운영",
-        items: [
-          "모달 라우팅이 서버 렌더링을 요구해 정적 호스팅을 쓸 수 없었기 때문에, EC2에 Node 프로세스를 pm2로 상시 띄우고 Nginx로 프록시했습니다.",
-          "main에 push하면 GitHub Actions가 빌드 → rsync → 원격 배포 스크립트 → 헬스체크까지 수행합니다.",
-        ],
-      },
-      {
-        heading: "겪은 문제",
-        items: [
-          "배포 직후 /lab만 500을 냈습니다. Turbopack 프로덕션 빌드가 외부 패키지를 해시가 붙은 이름(firebase-admin-<hash>)으로 컴파일하는데, 그 이름이 런타임에 resolve되지 않는 것이 원인이었습니다.",
-          "같은 오류가 Node 20에서도 재현됐습니다. firebase-admin이 Node 22 이상을 요구하고, 미달이면 하위 의존성이 경고 없이 빠지기 때문이었습니다.",
-          "빌드를 webpack으로 고정하고, 배포 스크립트에서 Node 22를 강제하며, pm2를 fork 모드 한 개로 고정해 해결했습니다. 되돌리면 재발하는 문제라 원인과 함께 설정 파일에 기록해 뒀습니다.",
-        ],
-      },
-    ],
-    links: [
-      {
-        label: "GitHub 저장소",
-        href: "https://github.com/YunDaeHyeon/daegom.dev",
-      },
-      {
-        label: "배포 runbook",
-        href: "https://github.com/YunDaeHyeon/daegom.dev/blob/main/deploy/README.md",
       },
     ],
   },

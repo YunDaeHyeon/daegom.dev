@@ -8,7 +8,6 @@
 
 | 섹션 | 내용 | 데이터 |
 |---|---|---|
-| Highlights | 핵심 수치와 그 근거가 되는 기록으로 가는 링크 | `lib/content.ts` |
 | Projects | 참여한 프로젝트, 담당한 기능, 성과. 클릭하면 모달로 열림 | `lib/content.ts` |
 | Decisions | 프로젝트 안에서 내린 판단의 기록 | `lib/content.ts` |
 | Lab | 공부하고 실험한 글 (Velog·Notion에서 이전) | Firestore + S3 |
@@ -71,7 +70,7 @@ app/
   @modal/               가로채기 라우트 (모달)
 components/             Modal · DetailSections · Nav 등
 lib/
-  content.ts            Highlights · Projects · Decisions · About 데이터
+  content.ts            Projects · Decisions · About 데이터
   lab.ts                Firestore에서 Lab 글 조회
   metadata.ts           페이지별 제목·설명·OG 이미지 구성
 deploy/                 nginx 설정 · 원격 배포 스크립트

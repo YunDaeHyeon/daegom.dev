@@ -7,8 +7,7 @@ import { ContactBadge } from "@/components/contact-badge";
 import { DetailSections } from "@/components/detail-sections";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
-import { StatusLabel } from "@/components/status-label";
-import { highlights, projectItems, decisions, about } from "@/lib/content";
+import { projectItems, about } from "@/lib/content";
 import { getAllLabPosts, formatLabDate } from "@/lib/lab";
 
 export const revalidate = 3600;
@@ -50,43 +49,6 @@ export default async function Home() {
             </div>
             <ProfilePhoto />
           </div>
-        </Container>
-      </section>
-
-      <section
-        id="highlights"
-        tabIndex={-1}
-        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
-      >
-        <Container>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Highlights
-          </h2>
-          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
-            맡은 일에서 무엇이 달라졌는지, 그 판단 과정을 함께 남겼습니다.
-          </p>
-
-          <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {highlights.map((item) => (
-              <li
-                key={item.href}
-                className="flex flex-col border-t border-border pt-5"
-              >
-                <p className="text-2xl font-semibold tracking-tight text-foreground">
-                  {item.metric}
-                </p>
-                <p className="mt-2 break-keep text-base leading-7 text-muted-foreground">
-                  {item.label}
-                </p>
-                <Link
-                  href={item.href}
-                  className="mt-auto inline-block self-start pt-4 text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  {item.linkLabel} →
-                </Link>
-              </li>
-            ))}
-          </ul>
         </Container>
       </section>
 
@@ -139,44 +101,6 @@ export default async function Home() {
                     </li>
                   ))}
                 </ul>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      <section
-        id="decisions"
-        tabIndex={-1}
-        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
-      >
-        <Container>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Decisions
-          </h2>
-          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
-            프로젝트에서 무엇을 기준으로 판단했고, 무엇을 포기했는지 남겼습니다.
-          </p>
-
-          <ul className="mt-10 divide-y divide-border border-t border-border">
-            {decisions.map((decision) => (
-              <li key={decision.slug} className="py-5">
-                <Link href={`/decisions/${decision.slug}`} className="block">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <span className="text-base font-medium text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-border">
-                      {decision.title}
-                    </span>
-                    <span className="flex shrink-0 items-center gap-3">
-                      <StatusLabel status={decision.status} />
-                      <span className="font-mono text-sm text-muted-foreground">
-                        {decision.date}
-                      </span>
-                    </span>
-                  </div>
-                  <p className="mt-2 max-w-[70ch] break-keep text-base leading-7 text-muted-foreground">
-                    {decision.summary}
-                  </p>
-                </Link>
               </li>
             ))}
           </ul>
@@ -238,25 +162,26 @@ export default async function Home() {
 
           <div className="mt-10 space-y-10">
             <div>
-              <h3 className="text-base font-semibold text-foreground">
-                Stacks
-              </h3>
-              <div className="mt-4 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+              <h3 className="text-lg font-semibold text-foreground">Stacks</h3>
+              <ul className="mt-6 divide-y divide-border border-t border-border">
                 {about.skills.map((group) => (
-                  <div key={group.heading}>
-                    <h4 className="font-mono text-sm font-medium text-muted-foreground">
+                  <li
+                    key={group.heading}
+                    className="grid gap-x-10 gap-y-4 py-7 sm:grid-cols-[minmax(150px,200px)_1fr]"
+                  >
+                    <h4 className="font-mono text-sm font-medium uppercase tracking-[0.04em] text-muted-foreground">
                       {group.heading}
                     </h4>
-                    <dl className="mt-3 space-y-5">
+                    <dl className="space-y-6">
                       {group.entries.map((entry) => (
                         <div key={entry.name}>
-                          <dt className="text-base font-medium text-foreground">
+                          <dt className="text-base font-semibold text-foreground">
                             {entry.name}
                           </dt>
                           {entry.items.map((item) => (
                             <dd
                               key={item}
-                              className="mt-1 break-keep text-base leading-7 text-muted-foreground"
+                              className="mt-1.5 max-w-[60ch] break-keep text-base leading-7 text-foreground/80"
                             >
                               {item}
                             </dd>
@@ -264,16 +189,16 @@ export default async function Home() {
                         </div>
                       ))}
                     </dl>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             <div>
-              <h3 className="text-base font-semibold text-foreground">학력</h3>
-              <ul className="mt-4 divide-y divide-border">
+              <h3 className="text-lg font-semibold text-foreground">학력</h3>
+              <ul className="mt-6 divide-y divide-border border-t border-border">
                 {about.education.map((entry) => (
-                  <li key={entry.school} className="py-4 first:pt-0">
+                  <li key={entry.school} className="py-5">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                       <span className="text-base text-foreground">
                         {entry.school} · {entry.major}
@@ -283,7 +208,7 @@ export default async function Home() {
                       </span>
                     </div>
                     {entry.note && (
-                      <p className="mt-1 text-base text-muted-foreground">
+                      <p className="mt-1 text-base text-foreground/80">
                         {entry.note}
                       </p>
                     )}
@@ -293,10 +218,10 @@ export default async function Home() {
             </div>
 
             <div>
-              <h3 className="text-base font-semibold text-foreground">활동</h3>
-              <ul className="mt-4 divide-y divide-border">
+              <h3 className="text-lg font-semibold text-foreground">활동</h3>
+              <ul className="mt-6 divide-y divide-border border-t border-border">
                 {about.experience.map((entry) => (
-                  <li key={entry.org} className="py-4 first:pt-0">
+                  <li key={entry.org} className="py-5">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                       <span className="text-base text-foreground">
                         {entry.org}
@@ -306,7 +231,7 @@ export default async function Home() {
                       </span>
                     </div>
                     {entry.note && (
-                      <p className="mt-1 text-base text-muted-foreground">
+                      <p className="mt-1 text-base text-foreground/80">
                         {entry.note}
                       </p>
                     )}
@@ -316,6 +241,7 @@ export default async function Home() {
             </div>
 
             <DetailSections
+              headingClassName="text-lg"
               sections={[
                 { heading: "자격증", items: about.certifications },
                 { heading: "수상", items: about.awards },
