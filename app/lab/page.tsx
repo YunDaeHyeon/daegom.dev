@@ -1,13 +1,14 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { LabList } from "@/components/lab-list";
 import { getAllLabPosts } from "@/lib/lab";
 
-export const revalidate = 3600;
-
-export default async function LabPage() {
-  const posts = await getAllLabPosts();
+export default async function LabPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string; page?: string }>;
+}) {
+  const [posts, params] = await Promise.all([getAllLabPosts(), searchParams]);
 
   return (
     <main className="py-16 sm:py-24">
@@ -27,9 +28,7 @@ export default async function LabPage() {
         </p>
 
         <div className="mt-10">
-          <Suspense fallback={null}>
-            <LabList posts={posts} />
-          </Suspense>
+          <LabList posts={posts} params={params} />
         </div>
       </Container>
     </main>

@@ -1,61 +1,62 @@
-"use client";
-
-import { useMemo } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LAB_TYPE_LABELS, formatLabDate, type LabPostSummary, type LabType } from "@/lib/lab-types";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
 
-const PAGE_SIZE = 10;
+export const PAGE_SIZE = 10;
 
-export function LabList({ posts }: { posts: LabPostSummary[] }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+/** `?type=&page=`를 서버에서 해석한다. 값이 없거나 범위를 벗어나면 기본값으로 떨어진다. */
+export function resolveLabQuery(
+  posts: LabPostSummary[],
+  params: { type?: string; page?: string }
+) {
+  const availableTypes = (Object.keys(LAB_TYPE_LABELS) as LabType[]).filter((t) =>
+    posts.some((p) => p.type === t)
+  );
 
-  const availableTypes = useMemo(() => {
-    const set = new Set(posts.map((p) => p.type));
-    return (Object.keys(LAB_TYPE_LABELS) as LabType[]).filter((t) => set.has(t));
-  }, [posts]);
-
-  const typeParam = searchParams.get("type");
   const filter: LabType | "all" =
-    typeParam && (availableTypes as string[]).includes(typeParam) ? (typeParam as LabType) : "all";
+    params.type && (availableTypes as string[]).includes(params.type)
+      ? (params.type as LabType)
+      : "all";
 
   const filtered = filter === "all" ? posts : posts.filter((p) => p.type === filter);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
-  const pageParam = Number(searchParams.get("page"));
-  const page = Number.isFinite(pageParam) && pageParam >= 1 && pageParam <= totalPages ? pageParam : 1;
+  const requested = Number(params.page);
+  const page =
+    Number.isInteger(requested) && requested >= 1 && requested <= totalPages ? requested : 1;
 
-  function updateParams(next: { type?: LabType | "all"; page?: number }) {
-    const params = new URLSearchParams(searchParams.toString());
-    if (next.type !== undefined) {
-      if (next.type === "all") params.delete("type");
-      else params.set("type", next.type);
-      params.delete("page");
-    }
-    if (next.page !== undefined) {
-      if (next.page <= 1) params.delete("page");
-      else params.set("page", String(next.page));
-    }
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-  }
+  return { availableTypes, filter, filtered, totalPages, page };
+}
 
+function hrefFor(filter: LabType | "all", page: number) {
+  const params = new URLSearchParams();
+  if (filter !== "all") params.set("type", filter);
+  if (page > 1) params.set("page", String(page));
+  const query = params.toString();
+  return query ? `/lab?${query}` : "/lab";
+}
+
+export function LabList({
+  posts,
+  params,
+}: {
+  posts: LabPostSummary[];
+  params: { type?: string; page?: string };
+}) {
+  const { availableTypes, filter, filtered, totalPages, page } = resolveLabQuery(posts, params);
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        <FilterButton active={filter === "all"} onClick={() => updateParams({ type: "all" })}>
+        <FilterLink active={filter === "all"} href={hrefFor("all", 1)}>
           전체 ({posts.length})
-        </FilterButton>
+        </FilterLink>
         {availableTypes.map((t) => (
-          <FilterButton key={t} active={filter === t} onClick={() => updateParams({ type: t })}>
+          <FilterLink key={t} active={filter === t} href={hrefFor(t, 1)}>
             {LAB_TYPE_LABELS[t]} ({posts.filter((p) => p.type === t).length})
-          </FilterButton>
+          </FilterLink>
         ))}
       </div>
 
@@ -82,34 +83,35 @@ export function LabList({ posts }: { posts: LabPostSummary[] }) {
 
       {totalPages > 1 && (
         <nav className="mt-8 flex items-center justify-center gap-4" aria-label="페이지네이션">
-          <PageButton disabled={page === 1} onClick={() => updateParams({ page: page - 1 })}>
+          <PageLink disabled={page === 1} href={hrefFor(filter, page - 1)}>
             이전
-          </PageButton>
+          </PageLink>
           <span className="font-mono text-sm text-muted-foreground">
             {page} / {totalPages}
           </span>
-          <PageButton disabled={page === totalPages} onClick={() => updateParams({ page: page + 1 })}>
+          <PageLink disabled={page === totalPages} href={hrefFor(filter, page + 1)}>
             다음
-          </PageButton>
+          </PageLink>
         </nav>
       )}
     </div>
   );
 }
 
-function FilterButton({
+function FilterLink({
   active,
-  onClick,
+  href,
   children,
 }: {
   active: boolean;
-  onClick: () => void;
+  href: string;
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <Link
+      href={href}
+      scroll={false}
+      aria-current={active ? "page" : undefined}
       className={`rounded-full border px-3 py-1 text-[11px] font-medium transition-colors ${
         active
           ? "border-accent text-accent"
@@ -117,27 +119,37 @@ function FilterButton({
       }`}
     >
       {children}
-    </button>
+    </Link>
   );
 }
 
-function PageButton({
+function PageLink({
   disabled,
-  onClick,
+  href,
   children,
 }: {
   disabled: boolean;
-  onClick: () => void;
+  href: string;
   children: React.ReactNode;
 }) {
+  if (disabled) {
+    return (
+      <span
+        aria-disabled="true"
+        className="text-sm text-muted-foreground opacity-40"
+      >
+        {children}
+      </span>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      disabled={disabled}
-      onClick={onClick}
-      className="text-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent disabled:pointer-events-none disabled:text-muted-foreground disabled:opacity-40 disabled:no-underline"
+    <Link
+      href={href}
+      scroll={false}
+      className="text-sm text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
     >
       {children}
-    </button>
+    </Link>
   );
 }
