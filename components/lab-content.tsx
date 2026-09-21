@@ -1,6 +1,14 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+
+// 본문은 원시 HTML을 허용(rehype-raw)하므로, 그대로 두면 <script>나 onerror 같은 코드가
+// 공개 페이지와 글 관리 화면에서 실행될 수 있다. 기존 글이 쓰는 태그만 남기고 나머지는 걸러낸다.
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames ?? []), "center", "u", "small"],
+};
 
 // Velog's own editor renders bold/italic emphasis leniently, allowing the
 // delimiters to sit directly against punctuation (e.g. `즉**, 다른**`).
@@ -51,7 +59,7 @@ export function LabContent({ markdown }: { markdown: string }) {
         [&_th]:border [&_th]:border-border [&_th]:bg-muted [&_th]:px-3 [&_th]:py-2 [&_th]:text-left
         [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-2"
     >
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}>
         {normalized}
       </ReactMarkdown>
     </div>

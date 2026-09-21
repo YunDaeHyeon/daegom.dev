@@ -7,7 +7,7 @@ import { getAdminAuth } from "@/lib/firebase-admin";
 const OWNER_EMAIL = "daehyeon.ydh@gmail.com";
 
 const COOKIE_NAME = "studio_session";
-const SESSION_MS = 5 * 24 * 60 * 60 * 1000;
+const SESSION_MS = 24 * 60 * 60 * 1000;
 const COOKIE_PATH = "/studio";
 
 function isOwner(token: DecodedIdToken): boolean {
@@ -55,6 +55,21 @@ export async function openStudioSession(idToken: string): Promise<boolean> {
   return true;
 }
 
+/** 로그아웃. 쿠키를 지우는 데서 끝내지 않고 서버에서 세션을 폐기해, 쿠키가 복사됐더라도 쓸 수 없게 한다. */
 export async function closeStudioSession(): Promise<void> {
-  (await cookies()).set(COOKIE_NAME, "", { path: COOKIE_PATH, maxAge: 0 });
+  const store = await cookies();
+  const cookie = store.get(COOKIE_NAME)?.value;
+
+  if (cookie) {
+    try {
+      const auth = getAdminAuth();
+      const decoded = await auth.verifySessionCookie(cookie);
+      // 이후 이 계정으로 발급된 모든 세션(다른 기기 포함)이 검증 단계에서 거절된다.
+      await auth.revokeRefreshTokens(decoded.sub);
+    } catch {
+      // 이미 만료됐거나 유효하지 않은 쿠키면 지울 것만 지운다.
+    }
+  }
+
+  store.set(COOKIE_NAME, "", { path: COOKIE_PATH, maxAge: 0 });
 }

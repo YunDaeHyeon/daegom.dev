@@ -69,6 +69,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           ENVEOF
           scp -i ~/.ssh/deploy_key /tmp/env.local ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/daegom-portfolio/.env.local
+          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'chmod 600 ~/daegom-portfolio/.env.local'
           rm -f /tmp/env.local
 
       - name: Install prod dependencies & restart on EC2

@@ -104,9 +104,14 @@ export async function saveExistingPost(input: PostDraft): Promise<Result<{ slug:
 }
 
 /** 삭제 전에 사본을 labTrash에 남겨 실수로 지워도 되돌릴 수 있게 한다. */
-export async function deletePost(slug: string): Promise<Result> {
+export async function deletePost(rawSlug: string): Promise<Result> {
+  const slug = rawSlug.normalize("NFC");
+  if (!isUsableSlug(slug) || /[\/\\?#%\[\]\s]/.test(slug)) {
+    return { ok: false, error: "글 주소가 올바르지 않습니다." };
+  }
+
   const db = getDb();
-  const ref = db.collection("labPosts").doc(slug.normalize("NFC"));
+  const ref = db.collection("labPosts").doc(slug);
   const snapshot = await ref.get();
   if (!snapshot.exists) return { ok: false, error: "삭제하려는 글을 찾을 수 없습니다." };
 
