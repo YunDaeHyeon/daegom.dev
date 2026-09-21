@@ -8,7 +8,7 @@ import { DetailSections } from "@/components/detail-sections";
 import { LabTypeBadge } from "@/components/lab-type-badge";
 import { StackTags } from "@/components/stack-tags";
 import { StatusLabel } from "@/components/status-label";
-import { projectItems, decisions, about } from "@/lib/content";
+import { highlights, projectItems, decisions, about } from "@/lib/content";
 import { getAllLabPosts, formatLabDate } from "@/lib/lab";
 
 export const revalidate = 3600;
@@ -50,6 +50,43 @@ export default async function Home() {
             </div>
             <ProfilePhoto />
           </div>
+        </Container>
+      </section>
+
+      <section
+        id="highlights"
+        tabIndex={-1}
+        className="scroll-mt-20 border-t border-border py-16 focus:outline-none sm:py-24"
+      >
+        <Container>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+            Highlights
+          </h2>
+          <p className="mt-2 max-w-[65ch] text-base text-muted-foreground">
+            맡은 일에서 무엇이 달라졌는지, 그 판단 과정을 함께 남겼습니다.
+          </p>
+
+          <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {highlights.map((item) => (
+              <li
+                key={item.href}
+                className="flex flex-col border-t border-border pt-5"
+              >
+                <p className="text-2xl font-semibold tracking-tight text-foreground">
+                  {item.metric}
+                </p>
+                <p className="mt-2 break-keep text-base leading-7 text-muted-foreground">
+                  {item.label}
+                </p>
+                <Link
+                  href={item.href}
+                  className="mt-auto inline-block self-start pt-4 text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
+                >
+                  {item.linkLabel} →
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 

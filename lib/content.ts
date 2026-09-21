@@ -42,6 +42,14 @@ export type About = {
   contact: ExternalLink[];
 };
 
+/** 이력서에 적은 수치와 그 근거 페이지를 잇는 항목. */
+export type Highlight = {
+  metric: string;
+  label: string;
+  href: string;
+  linkLabel: string;
+};
+
 export type Decision = {
   slug: string;
   title: string;
@@ -52,6 +60,44 @@ export type Decision = {
   links: ExternalLink[];
   relatedProject?: string;
 };
+
+export const highlights: Highlight[] = [
+  {
+    metric: "4차 승인",
+    label:
+      "App Store 심사에서 세 번 반려된 뒤, 심사 문구에 맞추는 대신 문제를 다시 정의해 승인받았습니다.",
+    href: "/decisions/app-store-review-reframing",
+    linkLabel: "심사 대응 기록",
+  },
+  {
+    metric: "25명 · 0건",
+    label:
+      "TestFlight 테스터 25명이 설치한 기간 동안 크래시 리포트는 0건이었습니다.",
+    href: "/decisions/relentless-troubleshooting",
+    linkLabel: "크래시 추적 기록",
+  },
+  {
+    metric: "50 → 9회",
+    label:
+      "매장 50개를 조회할 때 발생하던 이미지 API 호출을 82% 줄이고, 평균 응답 속도를 35% 개선했습니다.",
+    href: "/decisions/store-image-api-caching",
+    linkLabel: "판단 과정",
+  },
+  {
+    metric: "3주",
+    label:
+      "AR 기획을 3주 동안 검증하고, 서비스에 필요한 정확도를 확보할 수 없다고 판단해 더 만들기 전에 접었습니다.",
+    href: "/decisions/ar-anchor-validation",
+    linkLabel: "검증 기록",
+  },
+  {
+    metric: "하루 6~12건",
+    label:
+      "쌓이는 PR 리뷰를 AI 1차 검토로 자동화하고, 반영하지 않은 지적은 사유를 PR에 남겼습니다.",
+    href: "/decisions/defining-ai-review-scope",
+    linkLabel: "역할을 나눈 기준",
+  },
+];
 
 export const projectItems: ProjectItem[] = [
   {
