@@ -103,9 +103,15 @@ export const projectItems: ProjectItem[] = [
         ],
       },
       {
+        heading: "담당한 기능 · 기획 검증",
+        items: [
+          "AR로 특정 위치에 콘텐츠를 고정하는 초기 기획을 3주 동안 검증했고, 서비스에 필요한 수준의 정확도를 확보할 수 없다고 판단해 팀과 함께 기획 전환에 합의했습니다. (2025.12)",
+        ],
+      },
+      {
         heading: "담당한 기능 · iOS",
         items: [
-          "H.264 스트리밍을 구현했습니다.",
+          "후면 카메라 영상을 H.264로 하드웨어 인코딩해 iPad·Mac으로 실시간 전송하는 스트리밍 모듈을 구현했습니다.",
           "촬영 결과물을 다른 기기로 공유하는 기능을 구현했습니다.",
           "이벤트 처리 구조를 클로저 콜백에서 AsyncStream 기반으로 리팩터링했습니다.",
           "앱 UI를 구축했습니다.",
@@ -114,8 +120,9 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "담당한 기능 · CI/CD",
         items: [
-          "Fastlane으로 빌드부터 Appbox 업로드, 설치 링크 추출까지 자동화했습니다.",
-          "n8n과 GitHub REST API로 PR 자동 리뷰 파이프라인을 설계했습니다.",
+          "Fastlane으로 내부 테스터 배포를 자동화했습니다. 명령 한 줄로 Development IPA 빌드부터 AppBox 업로드, 설치 링크 전송까지 처리합니다.",
+          "공식 배포용 레인도 만들어 App Store 배포용 IPA 빌드와 TestFlight 업로드를 자동화했습니다. 저장소에 push하는 것만으로 배포까지 이어지는 완전 자동화는 다음 과제로 남겼습니다.",
+          "n8n과 GitHub REST API로 PR 1차 리뷰를 자동화했습니다.",
         ],
       },
       {
@@ -124,7 +131,13 @@ export const projectItems: ProjectItem[] = [
       },
       {
         heading: "성과",
-        items: ["App Store에 출시했습니다."],
+        items: [
+          "App Store에 출시했습니다. 심사에서 세 번 반려된 뒤, 개발자에게는 의도된 동작이 사용자에게는 오류로 보인다는 점을 확인하고 리모트 연결 상태와 타임아웃 처리를 다시 정의해 4차 심사에서 승인받았습니다. (2026.02.06)",
+          "내부 AppBox 배포와 TestFlight 외부 테스트로 사용자 피드백을 모아, 사용성·연결·UI 문제를 PR 단위로 수정했습니다.",
+          // TODO(확인필요: 이력서의 'TestFlight 25명 설치, 충돌 0건'을 뒷받침할 기록이 팀 위키에 없다.
+          //   위키에는 '내부·외부 합쳐 약 10명 이상 피드백 수집'으로만 적혀 있다.
+          //   App Store Connect의 설치 수·크래시 수를 확인한 뒤 문장을 넣을지 결정한다)
+        ],
       },
     ],
     badge: {
@@ -140,9 +153,18 @@ export const projectItems: ProjectItem[] = [
         label: "Wiki",
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki",
       },
+      {
+        label: "App Store 심사 대응 기록",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki/App-Store-%EC%8B%AC%EC%82%AC-%EB%8C%80%EC%9D%91-%EA%B8%B0%EB%A1%9D",
+      },
+      {
+        label: "사용자 피드백 대응",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki/%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%BC%EB%93%9C%EB%B0%B1-%EB%8C%80%EC%9D%91",
+      },
     ],
     relatedDecisions: [
       "ar-anchor-validation",
+      "app-store-review-reframing",
       "video-transfer-mode-tradeoff",
       "choosing-which-feedback-to-take",
       "relentless-troubleshooting",
@@ -346,6 +368,46 @@ export const decisions: Decision[] = [
       // TODO(확인필요: 이 작업의 백엔드 PR 또는 트러블슈팅 문서 링크)
     ],
     relatedProject: "student-deals-map",
+  },
+  {
+    slug: "app-store-review-reframing",
+    title: "의도된 동작과 버그의 차이는 보는 사람이 정합니다",
+    date: "2026-02-06",
+    status: "SHIPPED",
+    summary:
+      "App Store 심사에서 세 번 반려됐습니다. 심사 기준에 맞추는 수정으로 끝내지 않고, 우리에게는 의도된 동작이 사용자에게는 오류로 보인다는 문제로 다시 정의했습니다.",
+    sections: [
+      {
+        heading: "반려 사유",
+        items: [
+          "1차 (2026.01.31): Apple Watch 앱 아이콘 배경이 검정이라 원형으로 보이지 않음, Watch를 탭해도 미러링이 시작되지 않음",
+          "2차 (2026.02.04): Watch 화면이 '연결 대기 중'으로 표시되지만 미러링 기기 목록에 나타나지 않음",
+          "3차 (2026.02.05): 소명 후 최종 반려. Watch를 리모트로 연결할 때 '연결 대기 중'이 무한 로딩",
+        ],
+      },
+      {
+        heading: "판단",
+        items: [
+          "2차까지는 '미러링 기기로서의 Watch 연결' 문제로 이해하고 소명했지만, 실제 지적은 '리모트 컨트롤러로서의 연결' 문제였음을 3차에서 확인",
+          "Watch는 리모트 전용이라는 팀의 전제는 사용자에게 드러나 있지 않았고, 목록에 보이는데 연결되지 않는 상태는 사용자 입장에서 버그로 읽힌다고 판단",
+          "심사 문구에 맞춘 수정이 아니라 '리모트 연결 상태와 타임아웃을 어떻게 드러낼 것인가'로 문제를 다시 정의",
+        ],
+      },
+      {
+        heading: "결과",
+        items: [
+          "WatchConnectivity 연결 흐름과 '연결 대기 중' 상태의 타임아웃·에러 처리를 보완",
+          "4차 심사에서 승인, 2026.02.06 App Store 배포",
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "App Store 심사 대응 기록",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki/App-Store-%EC%8B%AC%EC%82%AC-%EB%8C%80%EC%9D%91-%EA%B8%B0%EB%A1%9D",
+      },
+    ],
+    relatedProject: "mirroring-booth",
   },
   {
     slug: "video-transfer-mode-tradeoff",
