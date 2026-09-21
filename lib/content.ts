@@ -371,6 +371,66 @@ export const projectItems: ProjectItem[] = [
       },
     ],
   },
+  {
+    slug: "daegom-dev",
+    title: "daegom.dev",
+    period: "2026.09 — 진행 중",
+    role: "1인 · 기획 · 구현 · 배포",
+    summary: "지금 보고 계신 이 사이트. 흩어져 있던 기록을 한곳에 모으고 직접 배포해 운영합니다.",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Firestore",
+      "AWS EC2",
+      "AWS S3",
+      "Nginx",
+      "pm2",
+      "GitHub Actions",
+    ],
+    sections: [
+      {
+        heading: "문제 의식",
+        items: [
+          "프로젝트에서 내린 판단이 팀 저장소 위키, Notion, Velog에 흩어져 있어 한 번에 보여줄 수 없었습니다.",
+          "링크를 받은 사람이 여러 곳을 돌아다녀야 해서, 무엇을 맡았고 왜 그렇게 했는지가 잘 전달되지 않았습니다.",
+        ],
+      },
+      {
+        heading: "해결",
+        items: [
+          "프로젝트와 판단 기록, 실험 노트를 한 사이트에 모았습니다. Velog·Notion에 있던 글 119편을 Firestore로 옮기고 본문 이미지는 S3에 올렸습니다.",
+          "목록에서 누르면 모달로, URL로 바로 들어오면 전체 페이지로 열립니다. Intercepting Route로 같은 콘텐츠 컴포넌트를 두 경로가 함께 씁니다.",
+        ],
+      },
+      {
+        heading: "담당한 기능 · 배포 운영",
+        items: [
+          "모달 라우팅이 서버 렌더링을 요구해 정적 호스팅을 쓸 수 없었기 때문에, EC2에 Node 프로세스를 pm2로 상시 띄우고 Nginx로 프록시했습니다.",
+          "main에 push하면 GitHub Actions가 빌드 → rsync → 원격 배포 스크립트 → 헬스체크까지 수행합니다.",
+        ],
+      },
+      {
+        heading: "겪은 문제",
+        items: [
+          "배포 직후 /lab만 500을 냈습니다. Turbopack 프로덕션 빌드가 외부 패키지를 해시가 붙은 이름(firebase-admin-<hash>)으로 컴파일하는데, 그 이름이 런타임에 resolve되지 않는 것이 원인이었습니다.",
+          "같은 오류가 Node 20에서도 재현됐습니다. firebase-admin이 Node 22 이상을 요구하고, 미달이면 하위 의존성이 경고 없이 빠지기 때문이었습니다.",
+          "빌드를 webpack으로 고정하고, 배포 스크립트에서 Node 22를 강제하며, pm2를 fork 모드 한 개로 고정해 해결했습니다. 되돌리면 재발하는 문제라 원인과 함께 설정 파일에 기록해 뒀습니다.",
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "GitHub 저장소",
+        href: "https://github.com/YunDaeHyeon/daegom.dev",
+      },
+      {
+        label: "배포 runbook",
+        href: "https://github.com/YunDaeHyeon/daegom.dev/blob/main/deploy/README.md",
+      },
+    ],
+  },
 ];
 
 export const decisions: Decision[] = [
