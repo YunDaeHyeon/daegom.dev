@@ -437,7 +437,7 @@ export const decisions: Decision[] = [
   {
     slug: "store-image-api-caching",
     title: "네트워크가 느린 게 아니라, 같은 걸 50번 물어보고 있었습니다",
-    date: "2025-05",
+    date: "2025.05",
     status: "SHIPPED",
     summary:
       "매장 목록이 느렸습니다. 원인을 네트워크 속도가 아니라 같은 데이터를 반복해서 요청하는 구조로 정의했고, 한 번 받은 값을 저장해 재사용하도록 바꿨습니다.",
@@ -486,7 +486,7 @@ export const decisions: Decision[] = [
   {
     slug: "app-store-review-reframing",
     title: "의도된 동작과 버그의 차이는 보는 사람이 정합니다",
-    date: "2026-02-06",
+    date: "2026.02.06",
     status: "SHIPPED",
     summary:
       "App Store 심사에서 세 번 반려됐습니다. 심사 기준에 맞추는 수정으로 끝내지 않고, 우리에게는 의도된 동작이 사용자에게는 오류로 보인다는 문제로 다시 정의했습니다.",
@@ -526,7 +526,8 @@ export const decisions: Decision[] = [
   {
     slug: "video-transfer-mode-tradeoff",
     title: "실시간성과 완전성, 같은 방식으로 보낼 수 없었습니다",
-    date: "2026-02-25",
+    // 프로토타입 단계의 판단이다. 프로토타입 병합 PR #27이 2026.01.06에 머지됐다.
+    date: "2026.01",
     status: "SHIPPED",
     summary:
       "비디오와 사진을 같은 방식으로 전송하지 않았습니다. 실시간 스트림은 손실을 감수하고, 완전한 결과물이 필요한 사진은 신뢰성을 우선했습니다.",
@@ -541,16 +542,28 @@ export const decisions: Decision[] = [
       },
       {
         heading: "결론",
-        items: ["데이터 성격에 따라 전송 방식과 인코딩 설정을 다르게 가져가는 것으로 역할을 분리해 확정"],
+        items: [
+          "데이터 성격에 따라 전송 방식과 인코딩 설정을 다르게 가져가는 것으로 역할을 분리해 확정",
+          "프로토타입 단계에서 4인이 각자 검증한 내용을 모아 기본 구조를 잡는 PR로 병합 (PR #27)",
+          // TODO(확인필요: 이력서에는 이 모듈이 '팀 베이스 코드로 채택'이라고 적혀 있다.
+          //   PR #27은 4인 짝 프로그래밍 결과를 함께 병합한 PR이라 그 문장을 그대로 뒷받침하지는 못한다.
+          //   어느 구현이 베이스로 남았는지 확인되면 문장을 보강할 것)
+        ],
       },
     ],
-    links: [{ label: "전체 기록", href: "/lab/프로토타입-기술-스택-및-구현-방식" }],
+    links: [
+      { label: "전체 기록", href: "/lab/프로토타입-기술-스택-및-구현-방식" },
+      {
+        label: "PR #27 (프로토타입 병합)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/27",
+      },
+    ],
     relatedProject: "mirroring-booth",
   },
   {
     slug: "choosing-which-feedback-to-take",
     title: "제안을 가려 받는 것도 판단입니다",
-    date: "2026-02-04",
+    date: "2026.02.04",
     status: "SHIPPED",
     summary:
       "클로저를 AsyncStream으로 옮겼습니다. 동료가 준 개선 제안은 근거를 따져 하나는 받아들이고, 하나는 그대로 뒀습니다.",
@@ -586,7 +599,7 @@ export const decisions: Decision[] = [
   {
     slug: "relentless-troubleshooting",
     title: "바꿔도 사라지지 않은 크래시",
-    date: "2026-01-27",
+    date: "2026.01.27",
     status: "SHIPPED",
     summary:
       "렌더링 방식도, 공유 방식도 바꿔봤지만 크래시는 그대로였습니다. 그래서 원인이 코드 밖에 있을 수 있다고 봤습니다.",
@@ -641,7 +654,7 @@ export const decisions: Decision[] = [
   {
     slug: "browser-advertiser-encryption-mismatch",
     title: "안 된다고 결론 내린 그 실험이 틀렸습니다",
-    date: "2026-01-19",
+    date: "2026.01.19",
     status: "SHIPPED",
     summary:
       "리모트 기기 연결이 암호화 설정 불일치로 실패했습니다. 설정을 바꿔도 안 된다고 결론 내리고 구조를 늘리려 했지만, 실제로는 엉뚱한 세션의 값을 바꿔놓고 확인하고 있었습니다.",
@@ -693,7 +706,7 @@ export const decisions: Decision[] = [
   {
     slug: "fastlane-lane-misunderstanding",
     title: "우리가 Ad-hoc이라 불렀던 건 사실 개발용 배포였습니다",
-    date: "2026-01-04",
+    date: "2026.01.04",
     status: "IN PROGRESS",
     summary:
       "Fastlane으로 빌드부터 Appbox 업로드까지 자동화하다 프로비저닝 프로파일 오류를 만났습니다. 원인을 파고드니, 팀이 Ad-hoc이라 여겼던 배포 방식이 실은 개발용 배포였다는 걸 알게 됐습니다.",
@@ -728,7 +741,7 @@ export const decisions: Decision[] = [
   {
     slug: "browser-refactor-hybrid-decision",
     title: "전부 통일하는 대신, 하나만 남겨뒀습니다",
-    date: "2026-01-03",
+    date: "2026.01.03",
     status: "SHIPPED",
     summary:
       "MultipeerConnectivity 기반 Browser의 콜백 구조를 AsyncStream으로 리팩터링했습니다. 다중 구독이 필요한 이벤트 하나는 통일성보다 안전한 리팩터링을 우선해 의도적으로 남겨뒀습니다.",
@@ -755,7 +768,7 @@ export const decisions: Decision[] = [
   {
     slug: "defining-ai-review-scope",
     title: "AI에게 어디까지 맡기고, 어디부터 정의할 것인가요?",
-    date: "2026-01",
+    date: "2026.01",
     status: "SHIPPED",
     summary:
       "AI에게 전체 코드를 보여줬더니 지금 변경과 상관없는 리뷰가 나왔습니다. PR의 변경사항만 전달하도록 범위를 좁혔고, 그래도 남는 부분은 사람이 판단하기로 했습니다.",
@@ -802,7 +815,7 @@ export const decisions: Decision[] = [
   {
     slug: "ar-anchor-validation",
     title: "만들고 나서가 아니라, 만들기 전에 확인한 3주",
-    date: "2025-12-18",
+    date: "2025.12.18",
     status: "DISCONTINUED",
     summary:
       "위치에 AR 콘텐츠를 고정하는 기능을 3주 동안 검증했습니다. 기술적으로 되는 것과 서비스에 필요한 수준 사이 차이가 컸고, 더 만들기 전에 중단했습니다.",
