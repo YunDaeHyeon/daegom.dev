@@ -770,31 +770,11 @@ export const about: About = {
         },
         {
           name: "Java",
-          items: [
-            "Java를 활용해 RESTful API 서버를 개발하고 구축한 경험이 있습니다.",
-            "객체지향 프로그래밍 개념을 이해하고 코드에 반영할 수 있습니다.",
-          ],
+          items: ["Java로 기본적인 알고리즘 문제를 해결할 수 있습니다."],
         },
         {
           name: "JavaScript",
-          items: [
-            "JavaScript 기반의 크로스 플랫폼(React Native) 앱을 구현한 경험이 있습니다.",
-          ],
-        },
-      ],
-    },
-    {
-      heading: "Framework / Library",
-      entries: [
-        {
-          name: "Spring Boot",
-          items: [
-            "Spring Boot 기반으로 API를 구축하고 데이터 연동을 처리한 경험이 있습니다.",
-          ],
-        },
-        {
-          name: "React Native",
-          items: ["React Native로 모바일 앱을 개발한 경험이 있습니다."],
+          items: ["JavaScript로 기본적인 알고리즘 문제를 해결할 수 있습니다."],
         },
       ],
     },
