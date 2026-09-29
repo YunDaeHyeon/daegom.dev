@@ -633,7 +633,7 @@ export const decisions: Decision[] = [
       {
         heading: "결론",
         items: [
-          "내부 테스터용 레인은 명령 한 줄로 Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 완료",
+          "내부 테스터용 레인은 명령 한Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 완료",
           "공식 배포용 레인을 따로 두어 App Store 배포용 IPA 빌드와 TestFlight 업로드까지 자동화",
         ],
       },
@@ -870,7 +870,7 @@ export const about: About = {
       school: "원광대학교",
       major: "컴퓨터소프트웨어공학과",
       period: "2020.03 — 2026.02",
-      note: "졸업",
+      note: "졸업 · 학점 4.17/4.5",
     },
   ],
   experience: [
@@ -900,8 +900,8 @@ export const about: About = {
     "원광대학교 공학교육원 캡스톤디자인 경진대회 대상 (2024)",
   ],
   mentoring: [
-    "소프트웨어중심대학 SW멘토-멘티",
-    "원광대학교 교수학습개발센터 WK-전공튜터링 팀장 (2020-1·2020-2·2021-2학기, 장학금 2회)",
+    "원광대학교 소프트웨어중심대학 SW멘토-멘티",
+    "원광대학교 교수학습개발센터 WK-전공튜터링 팀장 (2020, 2021)",
   ],
   contact: [
     { label: "daehyeon.ydh@gmail.com", href: "mailto:daehyeon.ydh@gmail.com" },
