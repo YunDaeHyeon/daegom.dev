@@ -248,7 +248,7 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "한계",
         items: [
-          "학생이 정보를 채워야 유지되는 구조에서 초기 데이터와 사용자를 모을 방법이 없었고, 캡스톤 대회에서는 입상하지 못했습니다.",
+          "사용자 참여에 의존하는 구조에서 초기 데이터와 유저 확보 방안을 묻는 질문에 답하지 못해 서비스 확장에 한계를 겪었습니다.",
         ],
       },
     ],
@@ -633,7 +633,7 @@ export const decisions: Decision[] = [
       {
         heading: "결론",
         items: [
-          "내부 테스터용 레인은 명령 한Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 완료",
+          "내부 테스터용 레인은 Development IPA 빌드 → AppBox 업로드 → 설치 링크 전송까지 처리",
           "공식 배포용 레인을 따로 두어 App Store 배포용 IPA 빌드와 TestFlight 업로드까지 자동화",
         ],
       },
