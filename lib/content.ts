@@ -177,7 +177,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.03 — 2025.06",
     role: "4인 팀 · 팀장 · iOS · Spring Boot",
-    summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
+    summary: "대학생이 직접 지역 할인 정보를 찾고 등록할 수 있는 서비스",
     stack: [
       "Swift",
       "UIKit",
@@ -243,6 +243,12 @@ export const projectItems: ProjectItem[] = [
         items: [
           "제휴 매장 50개를 조회할 때 발생하던 이미지 API 호출을 50회에서 9회로 줄였습니다. (82% 감소)",
           "TestFlight로 배포해 초기 테스터 약 10명과 계획대로 테스트를 진행했고, '맞춤형 정보 필터링'에서 긍정적인 피드백을 받았습니다.",
+        ],
+      },
+      {
+        heading: "한계",
+        items: [
+          "학생이 정보를 채워야 유지되는 구조에서 초기 데이터와 사용자를 모을 방법이 없었고, 캡스톤 대회에서는 입상하지 못했습니다.",
         ],
       },
     ],
