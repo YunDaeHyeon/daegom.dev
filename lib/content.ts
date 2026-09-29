@@ -652,28 +652,38 @@ export const decisions: Decision[] = [
   {
     slug: "browser-refactor-hybrid-decision",
     title: "Browser 리팩터링 일지",
-    date: "2026.01.03",
+    date: "2026.02",
     status: "SHIPPED",
     summary:
-      "콜백 구조를 AsyncStream으로 개편하되, 다중 구독 이벤트는 Combine을 유지해 리팩터링 안전성을 지켰습니다.",
+      "콜백 구조를 AsyncStream으로 개편하고, 다중 구독 이벤트는 1차에서 Combine을 유지했다가 후속 PR에서 옮겼습니다.",
     sections: [
       {
         heading: "판단",
         items: [
           "프로토콜 추출을 통한 완전한 테스트 가능 구조도 검토했지만, 이번 범위에는 과한 대규모 리팩터링이라 보류",
           "클로저로 되어 있던 콜백은 AsyncStream(BrowserEvents enum)으로 점진 이전",
-          "원래 Combine으로 되어 있던 onStartTransferCommand 하나는, 두 곳에서 동시에 구독해야 해서 AsyncStream으로 바꾸면 코드 중복이 생긴다고 보고 Combine을 그대로 유지",
+          "원래 Combine으로 되어 있던 onStartTransferCommand는 두 곳에서 동시에 구독해야 해서, 코드 중복을 피하려고 1차(PR #275)에서는 Combine을 유지했고 후속(PR #287)에서 AsyncStream으로 옮김",
         ],
       },
       {
         heading: "근거",
         items: [
           "이벤트 손실이 있으면 안 된다는 이유로 버퍼 정책을 기본값 unbounded로 설정",
-          "'통일성'보다 '코드 중복 방지와 안전한 리팩터링'을 우선한 절충",
+          "1차에서는 '통일성'보다 '코드 중복 방지와 안전한 리팩터링'을 우선한 절충",
         ],
       },
     ],
-    links: [{ label: "전체 기록", href: "/lab/Browser-리팩터링-일지" }],
+    links: [
+      {
+        label: "PR #275 (1차 리팩터링)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/275",
+      },
+      {
+        label: "PR #287 (onStartTransferCommand 이전)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/287",
+      },
+      { label: "전체 기록", href: "/lab/Browser-리팩터링-일지" },
+    ],
     relatedProject: "mirroring-booth",
   },
   {
