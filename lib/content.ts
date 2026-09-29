@@ -795,15 +795,15 @@ export const about: About = {
           name: "Java",
           items: ["Java로 기본적인 알고리즘 문제를 해결할 수 있습니다."],
         },
-        {
-          name: "JavaScript",
-          items: ["JavaScript로 기본적인 알고리즘 문제를 해결할 수 있습니다."],
-        },
       ],
     },
     {
       heading: "Server & Database",
       entries: [
+        {
+          name: "Spring Boot",
+          items: ["개발 문서를 참고해 기본적인 API를 작성할 수 있습니다."],
+        },
         {
           name: "MySQL",
           items: [
@@ -846,7 +846,9 @@ export const about: About = {
       entries: [
         {
           name: "n8n",
-          items: ["n8n으로 반복적인 업무를 자동화할 수 있습니다."],
+          items: [
+            "PR 리뷰에서 반복되는 검토를 AI로 자동화하고, AI가 판단할 범위를 직접 설계한 경험이 있습니다.",
+          ],
         },
         {
           name: "Claude Code",
