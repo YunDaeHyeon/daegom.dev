@@ -105,7 +105,7 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "담당한 기능 · 기획 검증",
         items: [
-          "AR로 특정 위치에 콘텐츠를 고정하는 초기 기획을 3주 동안 검증했고, 서비스에 필요한 수준의 정확도를 확보할 수 없다고 판단해 팀과 함께 기획 전환에 합의했습니다. (2025.12)",
+          "AR로 특정 위치에 콘텐츠를 고정하는 초기 기획을 2주 동안 검증했고, 서비스에 필요한 수준의 정확도를 확보할 수 없다고 판단해 팀과 함께 기획 전환에 합의했습니다. (2025.12)",
         ],
       },
       {
@@ -176,7 +176,7 @@ export const projectItems: ProjectItem[] = [
     title: "절약학개론",
     icon: "/icons/student-deals-map.png",
     period: "2025.03 — 2025.06",
-    role: "4인 팀 · 팀장 · iOS · 백엔드",
+    role: "4인 팀 · 팀장 · iOS · Spring Boot",
     summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
     stack: [
       "Swift",
@@ -225,12 +225,9 @@ export const projectItems: ProjectItem[] = [
         ],
       },
       {
-        heading: "담당한 기능 · 백엔드",
+        heading: "담당한 기능 · 서버 구조 설계",
         items: [
-          "Spring Boot로 매장·할인 정보를 제공하는 API 서버를 직접 구현하고 AWS EC2에 배포했습니다.",
-          "MySQL로 매장 데이터를 모델링하고, JPA Native Query로 반경 300m 이내 매장을 검색하도록 했습니다.",
-          "지오코딩 시스템을 구축했습니다.",
-          "매번 요청하던 네이버 API의 썸네일을 image_url에 캐싱하여 사용하고, 데이터가 없는 경우에만 외부 API를 호출하도록 개선했습니다.",
+          "앱에서 반복되던 지연의 원인을 데이터 조회 방식에서 찾고, 좌표와 이미지 URL을 서버에 저장하는 구조를 설계했습니다.",
         ],
       },
       {
@@ -244,7 +241,7 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "성과",
         items: [
-          "제휴 매장 50개를 조회할 때 발생하던 이미지 API 호출을 50회에서 9회로 줄였습니다. (82% 감소, 평균 응답 속도 35% 개선)",
+          "제휴 매장 50개를 조회할 때 발생하던 이미지 API 호출을 50회에서 9회로 줄였습니다. (82% 감소)",
           "TestFlight로 배포해 초기 테스터 약 10명과 계획대로 테스트를 진행했고, '맞춤형 정보 필터링'에서 긍정적인 피드백을 받았습니다.",
         ],
       },
@@ -266,7 +263,6 @@ export const projectItems: ProjectItem[] = [
         label: "시연 영상",
         href: "https://drive.google.com/drive/folders/1FFyjuyi4RfuE5bqI1uN_Gfv-uP1HG-TX?usp=sharing",
       },
-      // TODO(확인필요: 백엔드 저장소 URL. 직접 구현했다고 적었으므로 코드 근거 링크가 필요하다)
     ],
     relatedDecisions: ["store-image-api-caching"],
   },
@@ -294,7 +290,7 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "해결",
         items: [
-          "카메라로 알약을 찍으면 가장 비슷한 의약품을 최대 4개까지 찾아줍니다.",
+          "카메라로 알약을 촬영하면 가장 비슷한 의약품을 최대 4개까지 검색합니다.",
           "관심 질환에 맞춘 의약품 리스트와 검색, 즐겨찾기, 정보 요약과 음성 안내를 제공합니다.",
         ],
       },
@@ -312,8 +308,6 @@ export const projectItems: ProjectItem[] = [
         heading: "성과",
         items: [
           "2024 공학교육원 캡스톤디자인 경진대회 대상",
-          "2024 컴공인의날 최우수상",
-          "2024 소프트웨어 아이디어 경진대회 우수상",
         ],
       },
     ],
@@ -367,8 +361,6 @@ export const decisions: Decision[] = [
         heading: "결과",
         items: [
           "매장 50개 조회 시 이미지 API 호출이 50회에서 9회로 감소 (82%)",
-          "평균 응답 속도 35% 개선",
-          // TODO(확인필요: 개선 전후 응답 시간(ms)과 어떻게 측정했는지. 현재 값은 비율만 있고 측정 방법이 없다)
         ],
       },
     ],
@@ -386,7 +378,7 @@ export const decisions: Decision[] = [
     date: "2026.02.06",
     status: "SHIPPED",
     summary:
-      "반복된 심사 반려 원인을 사용자 관점의 UX 문제로 재정의하여 App Store 최종 승인을 받았습니다.",
+      "팀이 반복된 심사 반려 원인을 사용자 관점의 UX 문제로 다시 정의해 App Store 승인을 받은 기록입니다.",
     sections: [
       {
         heading: "반려 사유",
@@ -399,16 +391,24 @@ export const decisions: Decision[] = [
       {
         heading: "판단",
         items: [
-          "2차까지는 '미러링 기기로서의 Watch 연결' 문제로 이해하고 소명했지만, 실제 지적은 '리모트 컨트롤러로서의 연결' 문제였음을 3차에서 확인",
-          "Watch는 리모트 전용이라는 팀의 전제는 사용자에게 드러나 있지 않았고, 목록에 보이는데 연결되지 않는 상태는 사용자 입장에서 버그로 읽힌다고 판단",
-          "심사 문구에 맞춘 수정이 아니라 '리모트 연결 상태와 타임아웃을 어떻게 드러낼 것인가'로 문제를 다시 정의",
+          "팀은 2차까지 '미러링 기기로서의 Watch 연결' 문제로 이해하고 소명했지만, 실제 지적은 '리모트 컨트롤러로서의 연결' 문제였음을 3차에서 확인",
+          "Watch는 리모트 전용이라는 팀의 전제는 사용자에게 드러나 있지 않았고, 목록에 보이는데 연결되지 않는 상태는 사용자 입장에서 버그로 읽힌다고 팀이 판단",
+          "팀은 심사 문구에 맞춘 수정이 아니라 '리모트 연결 상태와 타임아웃을 어떻게 드러낼 것인가'로 문제를 다시 정의",
         ],
       },
       {
         heading: "결과",
         items: [
-          "WatchConnectivity 연결 흐름과 '연결 대기 중' 상태의 타임아웃·에러 처리를 보완",
+          "팀이 WatchConnectivity 연결 흐름과 '연결 대기 중' 상태의 타임아웃·에러 처리를 보완",
           "4차 심사에서 승인, 2026.02.06 App Store 배포",
+        ],
+      },
+      {
+        heading: "내가 맡은 것",
+        items: [
+          "PR #301: 기기 연결 화면에서 뒤로 가기 시 세션이 정리되지 않아 재연결이 안 되고 상태가 꼬이던 버그 수정 (2026.02.05 머지)",
+          "PR #309: 하트비트 타임아웃 이벤트를 두 화면이 동시에 받아 연결 끊김 알림이 중복되고 화면 이동이 충돌하던 버그 수정 (2026.02.05, 4차 심사 제출 전 머지)",
+          "PR #313: README에 심사 대응 과정 정리",
         ],
       },
     ],
@@ -416,6 +416,18 @@ export const decisions: Decision[] = [
       {
         label: "App Store 심사 대응 기록",
         href: "https://github.com/boostcampwm2025/iOS03-dolAwang/wiki/App-Store-%EC%8B%AC%EC%82%AC-%EB%8C%80%EC%9D%91-%EA%B8%B0%EB%A1%9D",
+      },
+      {
+        label: "PR #301 (연결 화면 세션 정리)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/301",
+      },
+      {
+        label: "PR #309 (타임아웃 이벤트 중복 처리)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/309",
+      },
+      {
+        label: "PR #313 (README 심사 대응 정리)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/313",
       },
     ],
     relatedProject: "mirroring-booth",
@@ -670,12 +682,14 @@ export const decisions: Decision[] = [
     sections: [
       {
         heading: "배경",
-        items: ["PR이 하루 6~12건 이상 쌓이며 리뷰가 병목이 됨"],
+        items: [
+          "개발이 몰린 2026.01.07~02.05 동안 PR이 평일 하루 평균 약 6건, 가장 많은 날(2026.01.15) 14건 올라오며 리뷰가 병목이 됨 (GitHub 전체 PR 146건 집계)",
+        ],
       },
       {
         heading: "시도",
         items: [
-          "AWS EC2에 n8n을 셀프호스팅해 PR 자동 리뷰 파이프라인을 설계",
+          "AWS EC2에 n8n을 셀프호스팅해 PR 자동 리뷰 파이프라인을 설계하고, 2026.01.20 PR #146부터 적용",
           "1차: 전체 코드를 매번 AI가 읽어들이도록 구성 → 의도와 무관한 지적이 발생",
           "2차: GitHub REST API로 PR의 변경사항(diff)만 추출해 그 범위 안에서 리뷰하도록 변경",
         ],
@@ -691,17 +705,20 @@ export const decisions: Decision[] = [
       {
         heading: "운영 방식과 결과",
         items: [
-          "AI의 지적은 실제 코드와 대조해 반영 여부를 정하고, 반영하지 않은 건은 그 사유를 PR에 남김 (PR #301)",
-          "AI 지적의 절반 이상을 실제 코드에 반영 (체감)",
-          "팀원이 리뷰에 들이는 시간도 절반 이상 줄었다고 느낌 (체감)",
-          // TODO(확인필요: 반영률·리뷰 시간은 실측이 아닌 체감치다. GitHub API로 AI 리뷰 코멘트 수 대비 반영 건수를 집계할지 결정 필요)
+          "AI의 지적은 실제 코드와 대조해 반영 여부를 정하고, 반영하지 않은 건은 그 사유를 PR에 남김",
+          "팀원도 AI 지적을 근거와 대조해 판단: 촬영 버튼에 이미 디바운싱(중복 입력 방지)이 있어 AI가 지적한 Key issue는 걱정하지 않아도 된다는 판단을 남김 (PR #297)",
+          "PR당 리뷰 시간 평균 30분 이상 → 10분 내외 (리뷰하며 직접 측정)",
         ],
       },
     ],
     links: [
       {
-        label: "PR #301 (미반영 사유 기록)",
-        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/301",
+        label: "PR #146 (AI 1차 리뷰 첫 적용)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/146",
+      },
+      {
+        label: "PR #297 (팀원의 미반영 판단)",
+        href: "https://github.com/boostcampwm2025/iOS03-dolAwang/pull/297",
       },
       { label: "전체 기록", href: "/lab/n8n으로-PR-자동-리뷰-플로우-구축하기" },
     ],
@@ -713,7 +730,7 @@ export const decisions: Decision[] = [
     date: "2025.12.18",
     status: "DISCONTINUED",
     summary:
-      "국내 환경 제약과 정밀도 한계를 확인하고, 3주 만에 AR 위치 고정 개발을 조기 중단했습니다.",
+      "국내 환경 제약과 정밀도 한계를 확인하고, 2주 만에 AR 위치 고정 개발을 조기 중단했습니다.",
     sections: [
       {
         heading: "검증한 것",
@@ -741,7 +758,7 @@ export const decisions: Decision[] = [
         heading: "결론",
         items: [
           "구현 방식을 바꿔서 넘을 수 있는 문제가 아니라, 이 기술이 국내에서 제한적으로만 지원된다는 환경의 문제로 판단",
-          "서비스 수준의 위치 고정을 보장할 수 없다고 보고, 더 만들기 전에 3주 만에 중단하고 기획부터 다시 시작 (2025.12.18 팀 합의)",
+          "서비스 수준의 위치 고정을 보장할 수 없다고 보고, 더 만들기 전에 2주 만에 중단하고 기획부터 다시 시작 (2025.12.18 팀 합의)",
         ],
       },
     ],
@@ -868,7 +885,6 @@ export const about: About = {
     "공학교육원 캡스톤디자인 경진대회 대상 (2024)",
   ],
   mentoring: [
-    "소프트웨어중심대학 SW길잡이 멘토단",
     "소프트웨어중심대학 SW멘토-멘티",
   ],
   contact: [
