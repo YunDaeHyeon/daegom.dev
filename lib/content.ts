@@ -313,7 +313,7 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "성과",
         items: [
-          "2024 공학교육원 캡스톤디자인 경진대회 대상",
+          "원광대학교 공학교육원 캡스톤디자인 경진대회 대상 (2024)",
         ],
       },
     ],
@@ -896,10 +896,12 @@ export const about: About = {
     "프로그래밍기능사",
   ],
   awards: [
-    "공학교육원 캡스톤디자인 경진대회 대상 (2024)",
+    "기업분석 및 면접경진대회 대상 (2025.05)",
+    "원광대학교 공학교육원 캡스톤디자인 경진대회 대상 (2024)",
   ],
   mentoring: [
     "소프트웨어중심대학 SW멘토-멘티",
+    "원광대학교 교수학습개발센터 WK-전공튜터링 팀장 (2020-1·2020-2·2021-2학기, 장학금 2회)",
   ],
   contact: [
     { label: "daehyeon.ydh@gmail.com", href: "mailto:daehyeon.ydh@gmail.com" },
