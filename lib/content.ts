@@ -177,7 +177,7 @@ export const projectItems: ProjectItem[] = [
     icon: "/icons/student-deals-map.png",
     period: "2025.03 — 2025.06",
     role: "4인 팀 · 팀장 · iOS · Spring Boot",
-    summary: "대학생이 직접 지역 할인 정보를 찾고 등록할 수 있는 서비스",
+    summary: "대학생을 위한 위치 기반 지역 대학가 할인 정보 제공 플랫폼",
     stack: [
       "Swift",
       "UIKit",
